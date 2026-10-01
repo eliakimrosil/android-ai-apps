@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PH VAT Calculator</string>
+    <string name="vat_title">BIR 12% Value-Added Tax</string>
+    <string name="enter_amount">Enter Amount (₱)</string>
+    <string name="inclusive_label">VAT Inclusive</string>
+    <string name="exclusive_label">VAT Exclusive</string>
+    <string name="senior_pwd_label">Senior Citizen / PWD (20% Off + VAT Exempt)</string>
+    <string name="vatable_sales">Vatable Sales (Net)</string>
+    <string name="vat_amount">12% VAT Amount</string>
+    <string name="discount_amount">Senior / PWD 20% Discount</string>
+    <string name="total_amount">Total Amount Payable</string>
+    <string name="clear">Clear</string>
+    <string name="copy">Copy Summary</string>
+</resources>
