@@ -1,0 +1,113 @@
+plugins {
+    id 'base'
+}
+
+ext {
+    sdkDir = file("${System.getProperty('user.home')}/.android-sdk/platforms/android-33")
+    androidJar = file("${sdkDir}/android.jar")
+    debugKeystore = file("${System.getProperty('user.home')}/.android/debug.keystore")
+    buildDir = file("build")
+    genDir = file("${buildDir}/gen")
+    intermediatesDir = file("${buildDir}/intermediates")
+    classesDir = file("${intermediatesDir}/classes")
+    outputsDir = file("${buildDir}/outputs")
+    targetSerial = System.getenv('ANDROID_SERIAL') ?: '127.0.0.1:5555'
+}
+
+task compileResources(type: Exec) {
+    description = 'Compiles Android resources using AAPT2'
+    group = 'build'
+
+    doFirst {
+        genDir.mkdirs()
+        intermediatesDir.mkdirs()
+        outputsDir.mkdirs()
+    }
+
+    commandLine 'bash', '-c', """
+        aapt2 compile --dir src/main/res -o ${intermediatesDir}/compiled_res.zip && \\
+        aapt2 link --manifest src/main/AndroidManifest.xml -I ${androidJar} \\
+            ${intermediatesDir}/compiled_res.zip -o ${intermediatesDir}/resources.apk \\
+            --java ${genDir}
+    """
+}
+
+task compileJava(type: Exec) {
+    description = 'Compiles Java source code against android.jar'
+    group = 'build'
+    dependsOn compileResources
+
+    doFirst {
+        classesDir.mkdirs()
+    }
+
+    commandLine 'bash', '-c', """
+        javac --release 8 -cp ${androidJar} -d ${classesDir} \$(find src/main/java ${genDir} -name "*.java")
+    """
+}
+
+task dex(type: Exec) {
+    description = 'Converts compiled bytecode into DEX format using D8'
+    group = 'build'
+    dependsOn compileJava
+
+    commandLine 'bash', '-c', """
+        d8 --lib ${androidJar} --output ${intermediatesDir}/ \$(find ${classesDir} -name "*.class")
+    """
+}
+
+task packageApk(type: Exec) {
+    description = 'Packages DEX and resources into an unaligned APK'
+    group = 'build'
+    dependsOn dex
+
+    commandLine 'python3', '-c', """
+import shutil, zipfile, os
+shutil.copyfile("${intermediatesDir}/resources.apk", "${intermediatesDir}/unaligned.apk")
+with zipfile.ZipFile("${intermediatesDir}/unaligned.apk", "a") as z:
+    z.write("${intermediatesDir}/classes.dex", "classes.dex")
+"""
+}
+
+task signApk(type: Exec) {
+    description = 'Signs the APK using apksigner with debug keystore'
+    group = 'build'
+    dependsOn packageApk
+
+    commandLine 'bash', '-c', """
+        apksigner sign --ks ${debugKeystore} --ks-pass pass:android \\
+            --ks-key-alias androiddebugkey --key-pass pass:android \\
+            --out ${outputsDir}/${rootProject.name}-debug.apk ${intermediatesDir}/unaligned.apk
+    """
+}
+
+task assembleDebug {
+    description = 'Builds and packages the debug APK'
+    group = 'build'
+    dependsOn signApk
+
+    doLast {
+        println ">>> Build Successful! APK generated at: ${outputsDir}/${rootProject.name}-debug.apk"
+    }
+}
+
+task installDebug(type: Exec) {
+    description = 'Installs the debug APK onto the connected Android device'
+    group = 'install'
+    dependsOn assembleDebug
+
+    commandLine 'bash', '-c', """
+        adb -s ${targetSerial} install -r -g ${outputsDir}/${rootProject.name}-debug.apk
+    """
+}
+
+task launchApp(type: Exec) {
+    description = 'Launches the main activity on the device'
+    group = 'install'
+    dependsOn installDebug
+
+    commandLine 'bash', '-c', """
+        PKG=\$(sed -n 's/.*package="\\([^"]*\\)".*/\\1/p' src/main/AndroidManifest.xml | head -n1)
+        adb -s ${targetSerial} shell am start -n "\${PKG}/.MainActivity"
+    """
+}

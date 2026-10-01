@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#022C22" />
+    <!-- Background Decor -->
+    
+        <!-- Circular Mint Elevation Disc -->
+        <path
+            fill="#064E3B"
+            d="M54,16a38,38 0 1 1 0,76a38,38 0 1 1 0,-76" />
+        <!-- Subtle Division Axis -->
+        <path
+            stroke="#047857"
+            stroke-width="1.5"
+            d="M24,54h60" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Angled Receipt Card with Perforated Edge -->
+        <path
+            fill="#047857"
+            d="M30,22h48v56l-4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3z" />
+        <!-- Dynamic Split Arrows -->
+        <!-- Top Right Split Arrow -->
+        <path
+            fill="#34D399"
+            d="M40,38h14v-4l8,7 -8,7v-4h-14z" />
+        <!-- Bottom Left Split Arrow -->
+        <path
+            fill="#A7F3D0"
+            d="M68,54h-14v-4l-8,7 8,7v-4h14z" />
+        <!-- Golden Tip Percentage Badge -->
+        <path
+            fill="#F59E0B"
+            d="M66,24a8,8 0 1 1 0,16a8,8 0 1 1 0,-16" />
+        <path
+            fill="#FEF3C7"
+            d="M63,30h6v3h-6z M65,34h2v2h-2z" />
+        
+</svg>

@@ -1,0 +1,1 @@
+Welcome to IronPulse v1.0.0! Initial release featuring 100% offline logging, built-in PPL, Upper/Lower, and 5x5 routines, automatic rest timer with vibration cues, and complete local volume tracking.

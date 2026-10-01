@@ -1,0 +1,31 @@
+Tired of bloated workout trackers demanding monthly subscriptions, forcing account creation, and freezing in basement gyms with zero reception? 
+
+IronPulse is built specifically for dedicated lifters who want a lightning-fast, distraction-free gym tracker and workout log that just works—anytime, anywhere.
+
+Whether you are running a classic strength split or sculpting muscle, IronPulse provides an intuitive, streamlined interface that keeps you focused on your lift, not your phone screen. No paywalls, no forced logins, and 100% offline reliability.
+
+KEY FEATURES:
+
+✓ Proven Workout Programs & Custom Splits
+Jump right into structured routines including Push Pull Legs (PPL), Upper/Lower, 5x5 Strength, or design your own fully customized split routines tailored to your training goals.
+
+✓ Streamlined Active Workout Logger
+Log weights, reps, and sets in seconds. View previous weights at a glance to ensure consistent progressive overload without breaking your rhythm between sets.
+
+✓ Built-in Smart Rest Timer
+Optimize recovery with an automatic rest countdown. Receive tactile vibration alerts when your rest ends so you never miss your next heavy set—even with your headphones on.
+
+✓ Volume & History Vault
+Review complete workout logs, total completed sets, and estimated tonnage lifted over time. Track your muscle-building progress with clean, easy-to-read metrics.
+
+✓ 100% Offline & Private by Design
+Works flawlessly in airplane mode, dead zones, and basement gyms. All data stays strictly on your device. Zero logins, zero cloud syncing, and zero tracking.
+
+WHY CHOOSE IRONPULSE OVER OTHER WORKOUT APPS?
+
+• No Subscriptions & No Hidden Paywalls: All core logging features are open and unrestricted.
+• Instant Startup: Opens in milliseconds so you can begin tracking immediately.
+• Distraction-Free UI: Built with modern Material 3 design principles for low-light gym visibility and clean usability.
+• Zero Battery & Data Drain: No background network requests or tracking analytics running in the gym.
+
+Take control of your training, master progressive overload, and build real strength with IronPulse. Download now and start lifting uninterrupted!

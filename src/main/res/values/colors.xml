@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6750A4</color>
+    <color name="colorPrimaryDark">#141218</color>
+    <color name="colorAccent">#D0BCFF</color>
+    <color name="windowBackground">#141218</color>
+    <color name="cardBackground">#211F26</color>
+    <color name="cardStroke">#49454F</color>
+    <color name="textPrimary">#E6E1E5</color>
+    <color name="textSecondary">#CAC4D0</color>
+    <color name="btnColor">#D0BCFF</color>
+    <color name="btnTextColor">#381E72</color>
+</resources>
