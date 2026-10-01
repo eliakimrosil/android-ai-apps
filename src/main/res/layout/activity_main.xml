@@ -1,0 +1,872 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:scrollbars="none">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="18dp">
+
+        <!-- Top Header Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.01" />
+
+                <TextView
+                    android:id="@+id/tv_device_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Snapdragon 8+ Gen 1 • Hardware H.264"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Status Pill Badge -->
+            <TextView
+                android:id="@+id/tv_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/badge_status_offline"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:text="@string/status_offline"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.04" />
+        </LinearLayout>
+
+        <!-- Stream Mode Selector Chips (Horizontal Scrollable) -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tab_rtsp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset_selected"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:text="📡 RTSP (OBS / PC)"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tab_youtube"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:text="🔴 YouTube (RTMP)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tab_facebook"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:text="🔵 Facebook Live"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tab_custom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="9dp"
+                    android:paddingBottom="9dp"
+                    android:text="⚙️ Custom RTMP"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Hero Card: Target Stream Endpoint & Live Info -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_hero"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- RTSP View Section -->
+            <LinearLayout
+                android:id="@+id/layout_rtsp_target"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LOCAL RTSP SERVER URL"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.06"
+                    android:layout_marginBottom="8dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/code_box"
+                    android:padding="12dp">
+
+                    <TextView
+                        android:id="@+id/tv_rtsp_url"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="rtsp://0.0.0.0:8554/live"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:typeface="monospace"
+                        android:textIsSelectable="true" />
+
+                    <Button
+                        android:id="@+id/btn_copy_url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/btn_secondary"
+                        android:text="@string/copy"
+                        android:textColor="@color/primary"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp" />
+
+                    <Button
+                        android:id="@+id/btn_share_url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="6dp"
+                        android:background="@drawable/btn_secondary"
+                        android:text="@string/share"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_network_tip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Connect OBS, VLC, or MPV to this URL on the same Wi-Fi/Hotspot."
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- RTMP (YouTube / Facebook / Custom) View Section -->
+            <LinearLayout
+                android:id="@+id/layout_rtmp_target"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!-- Server URL Row (Visible and editable for YouTube, Facebook, Custom) -->
+                <TextView
+                    android:id="@+id/tv_rtmp_server_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STREAM / SERVER URL"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.06"
+                    android:layout_marginBottom="6dp" />
+
+                <EditText
+                    android:id="@+id/et_rtmp_url"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/code_box"
+                    android:text="rtmp://a.rtmp.youtube.com/live2"
+                    android:textColor="@color/text_primary"
+                    android:textSize="13sp"
+                    android:typeface="monospace"
+                    android:singleLine="true"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tv_rtmp_stream_key_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STREAM KEY"
+                    android:textColor="@color/secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.06"
+                    android:layout_marginBottom="6dp" />
+
+                <!-- Stream Key Input Box -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/code_box"
+                    android:padding="8dp">
+
+                    <EditText
+                        android:id="@+id/et_stream_key"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:hint="Paste stream key here..."
+                        android:textColorHint="@color/text_tertiary"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:typeface="monospace"
+                        android:singleLine="true"
+                        android:paddingStart="8dp" />
+
+                    <Button
+                        android:id="@+id/btn_paste_key"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/btn_secondary"
+                        android:text="Paste"
+                        android:textColor="@color/secondary"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_rtmp_hint"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Both rtmp:// and rtmps:// are fully supported!"
+                    android:textColor="@color/text_tertiary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Real-time Live Stats Grid (Visible during streaming) -->
+            <LinearLayout
+                android:id="@+id/layout_stats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="14dp"
+                android:weightSum="4">
+
+                <!-- Target / Status -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/stat_box"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Status"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_stat_clients"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Idle"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- FPS -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/stat_box"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stats_fps"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_stat_fps"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Bitrate -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/stat_box"
+                    android:padding="8dp"
+                    android:layout_marginEnd="4dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stats_bitrate"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_stat_bitrate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="0.0M"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Uptime -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:background="@drawable/stat_box"
+                    android:padding="8dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stats_uptime"
+                        android:textColor="@color/text_tertiary"
+                        android:textSize="10sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tv_stat_uptime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="00:00"
+                        android:textColor="@color/text_primary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Main Stream Control Button -->
+        <Button
+            android:id="@+id/btn_stream_action"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/btn_start"
+            android:text="@string/start_stream"
+            android:textColor="@color/on_primary"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.03"
+            android:elevation="4dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Quick Presets for Gamers -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/presets_title"
+            android:textColor="@color/text_secondary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.04"
+            android:layout_marginBottom="8dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/chip_preset_ultra"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="⚡ 1080p 60fps (10M)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_preset_balanced"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset_selected"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="🎮 720p 60fps (6M)"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_preset_esports"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="🚀 720p 120fps (12M)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/chip_preset_fast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/chip_preset"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="📶 720p 30fps (3.5M)"
+                    android:textColor="@color/text_primary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Floating Facecam Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_surface"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🎮 FLOATING FACECAM"
+                        android:textColor="@color/primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:letterSpacing="0.04" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Floats over games &amp; streams live face"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switch_floating_camera"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Facecam quick controls row (shows when enabled) -->
+            <LinearLayout
+                android:id="@+id/layout_camera_status_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/code_box"
+                android:padding="10dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/tv_camera_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Facecam Active • 1:1 • Front • Mirrored • 0°"
+                    android:textColor="@color/live_green"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="8dp" />
+
+                <!-- Action buttons row -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btn_toggle_camera_facing"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_secondary"
+                        android:text="📷 Front"
+                        android:textColor="@color/primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="4dp" />
+
+                    <Button
+                        android:id="@+id/btn_toggle_camera_flip"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_secondary"
+                        android:text="⇄ Mirror"
+                        android:textColor="@color/primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:layout_marginEnd="4dp" />
+
+                    <Button
+                        android:id="@+id/btn_toggle_camera_rotate"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_secondary"
+                        android:text="↻ 0°"
+                        android:textColor="@color/primary"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Configuration Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_surface"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_title"
+                android:textColor="@color/secondary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.04"
+                android:layout_marginBottom="14dp" />
+
+
+            <!-- Orientation Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_orientation"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+                <Spinner
+                    android:id="@+id/spinner_orientation"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/code_box"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
+            </LinearLayout>
+
+            <!-- Resolution Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_resolution"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+                <Spinner
+                    android:id="@+id/spinner_resolution"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/code_box"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
+            </LinearLayout>
+
+            <!-- Frame Rate Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_fps"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+                <Spinner
+                    android:id="@+id/spinner_fps"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/code_box"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
+            </LinearLayout>
+
+            <!-- Bitrate Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_bitrate"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+                <Spinner
+                    android:id="@+id/spinner_bitrate"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/code_box"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
+            </LinearLayout>
+
+            <!-- Audio Source Row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+                <TextView
+                    android:layout_width="95dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/setting_audio"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+                <Spinner
+                    android:id="@+id/spinner_audio"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/code_box"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp" />
+            </LinearLayout>
+
+            <!-- Port Row (RTSP Only) -->
+            <LinearLayout
+                android:id="@+id/layout_port_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/setting_port"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="13sp" />
+                <EditText
+                    android:id="@+id/et_port"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/code_box"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="8554"
+                    android:textColor="@color/text_primary"
+                    android:inputType="number"
+                    android:gravity="center"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Guide Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_surface"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Streaming Setup Guide"
+                android:textColor="@color/secondary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.04"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔴 YouTube Live (RTMP / RTMPS):"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="1. Open YouTube Studio > Go Live.\n2. Stream URL defaults to rtmp://a.rtmp.youtube.com/live2 (or rtmps://).\n3. Copy the Stream Key and tap Paste. Tap Start Streaming to go live!"
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🔵 Facebook Live Direct Streaming:"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="1. Go to facebook.com/live/producer.\n2. Copy the Stream Key under Streaming software.\n3. Paste in the app and tap Start Streaming."
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📡 OBS Studio (via RTSP):"
+                android:textColor="@color/text_primary"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="Add VLC Video Source > Paste the RTSP URL. OBS can relay your stream to any platform with overlays."
+                android:textColor="@color/text_secondary"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

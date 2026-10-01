@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/camera_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_floating_camera"
+    android:clipToOutline="true">
+
+    <TextureView
+        android:id="@+id/camera_texture_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Close / Dismiss Overlay (Top-Right Corner) -->
+    <TextView
+        android:id="@+id/btn_close_camera"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="6dp"
+        android:background="@drawable/btn_camera_action"
+        android:clickable="true"
+        android:focusable="false"
+        android:gravity="center"
+        android:text="✕"
+        android:textColor="@color/stop_red"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- Minimal Overlay Action Pill (Fades automatically when inactive) -->
+    <LinearLayout
+        android:id="@+id/layout_camera_controls"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="6dp"
+        android:background="@drawable/bg_camera_pill"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp">
+
+        <!-- Switch Front / Back Camera -->
+        <TextView
+            android:id="@+id/btn_switch_camera"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:background="@drawable/btn_camera_action"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="📷"
+            android:textColor="@color/text_primary"
+            android:textSize="11sp" />
+
+        <!-- Flip / Mirror Horizontal -->
+        <TextView
+            android:id="@+id/btn_flip_camera"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/btn_camera_action"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="⇄"
+            android:textColor="@color/primary"
+            android:textSize="13sp"
+            android:textStyle="bold" />
+
+        <!-- Rotate 90 Degrees -->
+        <TextView
+            android:id="@+id/btn_rotate_camera"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/btn_camera_action"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="↻"
+            android:textColor="@color/primary"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Size Toggle (S/M/L) -->
+        <TextView
+            android:id="@+id/btn_resize_camera"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="2dp"
+            android:background="@drawable/btn_camera_action"
+            android:clickable="true"
+            android:focusable="false"
+            android:gravity="center"
+            android:text="📐"
+            android:textColor="@color/text_primary"
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</FrameLayout>

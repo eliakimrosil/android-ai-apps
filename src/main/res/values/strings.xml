@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ScreenStream RTSP</string>
+    <string name="app_tagline">Ultra Low-Latency Screen &amp; Game Streaming</string>
+
+    <string name="status_offline">OFFLINE</string>
+    <string name="status_live">● LIVE</string>
+    <string name="status_ready">SERVER READY</string>
+
+    <string name="start_stream">Start Streaming</string>
+    <string name="stop_stream">Stop Stream</string>
+    <string name="copy">Copy</string>
+    <string name="copied">URL copied to clipboard</string>
+    <string name="share">Share</string>
+
+    <string name="stats_clients">Clients</string>
+    <string name="stats_fps">FPS</string>
+    <string name="stats_bitrate">Bitrate</string>
+    <string name="stats_uptime">Uptime</string>
+
+    <string name="presets_title">Gaming Presets</string>
+    <string name="preset_ultra">Ultra (1080p60 12M)</string>
+    <string name="preset_balanced">Balanced (720p60 6M)</string>
+    <string name="preset_fast">Fast (720p30 3.5M)</string>
+    <string name="preset_esports">120 FPS Gaming</string>
+
+    <string name="settings_title">Stream Configuration</string>
+    <string name="setting_orientation">Orientation</string>
+    <string name="setting_resolution">Resolution</string>
+    <string name="setting_fps">Target FPS</string>
+    <string name="setting_bitrate">Bitrate</string>
+    <string name="setting_audio">Audio Source</string>
+    <string name="setting_port">RTSP Port</string>
+
+    <string name="audio_game">Internal Game Audio</string>
+    <string name="audio_mic">Microphone</string>
+    <string name="audio_none">Mute (No Audio)</string>
+
+    <string name="guide_title">How to Connect / Watch</string>
+    <string name="guide_obs_title">OBS Studio</string>
+    <string name="guide_obs_desc">Add Source &gt; VLC Video Source (or Media Source) &gt; Paste RTSP URL &gt; Uncheck \'Use hardware decoding\' if needed.</string>
+    <string name="guide_mpv_title">MPV (Ultra Low Latency &lt;80ms)</string>
+    <string name="guide_vlc_title">VLC Player</string>
+    <string name="guide_vlc_desc">Media &gt; Open Network Stream &gt; Paste RTSP URL &gt; Play.</string>
+
+    <string name="notification_channel_name">Screen Streaming Service</string>
+    <string name="notification_channel_desc">Shows ongoing RTSP screen capture session</string>
+    <string name="notification_streaming_title">Streaming Screen Live</string>
+    <string name="notification_stop">Stop Stream</string>
+</resources>
