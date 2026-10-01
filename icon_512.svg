@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#060D1A" />
+    <!-- Background Decor -->
+    
+        <!-- Hexagonal Shield Guard Backdrop -->
+        <path
+            fill="#0B192E"
+            stroke="#0284C7"
+            stroke-width="2"
+            d="M54,12L88,28L88,68L54,94L20,68L20,28Z" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Battery Terminal Cap -->
+        <path
+            fill="#38BDF8"
+            d="M48,22h12v4h-12z" />
+        <!-- Battery Outer Chamber -->
+        <path
+            fill="#0C4A6E"
+            stroke="#38BDF8"
+            stroke-width="2"
+            d="M34,26h40a4,4 0 0 1 4,4v48a4,4 0 0 1 -4,4h-40a4,4 0 0 1 -4,-4v-48a4,4 0 0 1 4,-4z" />
+        <!-- 80% Safe Charging Level Fill (Cyan) -->
+        <path
+            fill="#0284C7"
+            d="M36,42h36v32h-36z" />
+        <!-- 80% Safe Cutoff Notch Marker (Green & Amber) -->
+        <path
+            fill="#22C55E"
+            d="M30,41h8v3h-8z M70,41h8v3h-8z" />
+        <!-- High-Voltage Lightning Bolt -->
+        <path
+            fill="#FDE047"
+            d="M56,31L43,50h10L47,72L63,48h-10z" />
+        
+</svg>
