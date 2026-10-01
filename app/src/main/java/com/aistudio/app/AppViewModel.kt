@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.UUID
 
 class AppViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -58,7 +59,7 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             FamilyMemberProfile(
                 name = "Me (Self)",
                 relationship = RelationshipCategory.SELF,
-                avatarEmoji = "🧑‍💻",
+                avatarEmoji = "🧑💻",
                 sizes = SizeMeasurements(
                     shoeUs = "10.5",
                     shoeEu = "44.5",
