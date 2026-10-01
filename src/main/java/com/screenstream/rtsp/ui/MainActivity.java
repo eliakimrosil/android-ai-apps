@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -837,5 +838,46 @@ public class MainActivity extends Activity implements StreamService.StreamListen
             Toast.makeText(this, message, Toast.LENGTH_LONG).show();
             updateUiStreaming(false, null);
         });
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            int keyCode = event.getKeyCode();
+            View focus = getCurrentFocus();
+            boolean isTyping = focus instanceof EditText;
+
+            if (event.isCtrlPressed() && keyCode == KeyEvent.KEYCODE_C) {
+                if (btnCopyUrl != null && !isTyping) {
+                    btnCopyUrl.performClick();
+                    return true;
+                }
+            }
+            if (keyCode == KeyEvent.KEYCODE_SPACE && !isTyping) {
+                if (btnStreamAction != null) {
+                    btnStreamAction.performClick();
+                    return true;
+                }
+            }
+            if (event.isAltPressed()) {
+                if (keyCode == KeyEvent.KEYCODE_1 && tabRtsp != null) {
+                    tabRtsp.performClick();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_2 && tabYoutube != null) {
+                    tabYoutube.performClick();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_3 && tabFacebook != null) {
+                    tabFacebook.performClick();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_4 && tabCustom != null) {
+                    tabCustom.performClick();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_F && switchFloatingCamera != null) {
+                    switchFloatingCamera.setChecked(!switchFloatingCamera.isChecked());
+                    return true;
+                }
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 }

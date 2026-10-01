@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ScreenStream RTSP Material 3 Expressive Dark OLED Theme -->
+    <color name="background">#0F1015</color>
+    <color name="surface">#16171F</color>
+    <color name="surface_container">#1C1D26</color>
+    <color name="surface_container_high">#252733</color>
+    <color name="surface_variant">#2E303E</color>
+    <color name="outline">#3A3C4D</color>
+    <color name="outline_variant">#252733</color>
+
+    <color name="primary">#4EE2EC</color>
+    <color name="primary_dim">#319B9F</color>
+    <color name="primary_container">#0E383B</color>
+    <color name="on_primary">#002022</color>
+    <color name="on_primary_container">#82F5FE</color>
+
+    <color name="secondary">#A8C7FA</color>
+    <color name="secondary_container">#28354A</color>
+
+    <color name="live_green">#00E676</color>
+    <color name="live_green_bg">#123824</color>
+    <color name="stop_red">#FF5252</color>
+    <color name="stop_red_bg">#421A1A</color>
+
+    <color name="text_primary">#F4F6FB</color>
+    <color name="text_secondary">#9DA3AE</color>
+    <color name="text_tertiary">#666B77</color>
+
+    <color name="badge_bg">#252733</color>
+    <color name="code_box_bg">#12131A</color>
+</resources>

@@ -1,31 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#0F1015</color>
-    <color name="surface">#16171F</color>
-    <color name="surface_container">#1C1D26</color>
-    <color name="surface_container_high">#252733</color>
-    <color name="surface_variant">#2E303E</color>
-    <color name="outline">#3A3C4D</color>
-    <color name="outline_variant">#252733</color>
+    <!-- ScreenStream RTSP Material 3 Expressive Light Theme -->
+    <color name="background">#F8F9FC</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_container">#F0F3F9</color>
+    <color name="surface_container_high">#E6ECF5</color>
+    <color name="surface_variant">#DEE3EC</color>
+    <color name="outline">#CAD0DD</color>
+    <color name="outline_variant">#E0E5EE</color>
 
-    <color name="primary">#4EE2EC</color>
-    <color name="primary_dim">#319B9F</color>
-    <color name="primary_container">#0E383B</color>
-    <color name="on_primary">#002022</color>
-    <color name="on_primary_container">#82F5FE</color>
+    <color name="primary">#006874</color>
+    <color name="primary_dim">#00838F</color>
+    <color name="primary_container">#B0F0F8</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="on_primary_container">#001F24</color>
 
-    <color name="secondary">#A8C7FA</color>
-    <color name="secondary_container">#28354A</color>
+    <color name="secondary">#3C5F80</color>
+    <color name="secondary_container">#D4E3F8</color>
 
-    <color name="live_green">#00E676</color>
-    <color name="live_green_bg">#123824</color>
-    <color name="stop_red">#FF5252</color>
-    <color name="stop_red_bg">#421A1A</color>
+    <color name="live_green">#15803D</color>
+    <color name="live_green_bg">#DCFCE7</color>
+    <color name="stop_red">#DC2626</color>
+    <color name="stop_red_bg">#FEE2E2</color>
 
-    <color name="text_primary">#F4F6FB</color>
-    <color name="text_secondary">#9DA3AE</color>
-    <color name="text_tertiary">#666B77</color>
+    <color name="text_primary">#111827</color>
+    <color name="text_secondary">#4B5563</color>
+    <color name="text_tertiary">#9CA3AF</color>
 
-    <color name="badge_bg">#252733</color>
-    <color name="code_box_bg">#12131A</color>
+    <color name="badge_bg">#E2E8F0</color>
+    <color name="code_box_bg">#EDF2F7</color>
 </resources>
