@@ -1,11 +1,13 @@
 package com.aistudio.workoutprogramtracke;
 
 import android.app.Activity;
+import android.app.UiModeManager;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -18,6 +20,7 @@ import android.os.Vibrator;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -47,6 +50,7 @@ public class MainActivity extends Activity {
     private static final String KEY_SAVED_PROGRAM = "selected_program_idx";
     private static final String KEY_SAVED_REST_SECONDS = "saved_rest_seconds";
     private static final String KEY_WORKOUT_IN_PROGRESS = "in_progress_json";
+    private static final String KEY_THEME_MODE = "theme_mode"; // 0=Auto, 1=Dark, 2=Light
 
     // Programs & Exercises
     private static final String[] PROGRAMS = {
@@ -68,6 +72,7 @@ public class MainActivity extends Activity {
     };
 
     // Material 3 UI Elements
+    private Button btnThemeToggle;
     private Button btnChipPPL;
     private Button btnChipUpperLower;
     private Button btnChip5x5;
@@ -205,10 +210,12 @@ public class MainActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+        applyInitialTheme();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        prefs = getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
         try {
             toneGenerator = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 90);
@@ -225,7 +232,65 @@ public class MainActivity extends Activity {
         updateVaultStats();
     }
 
+    private void applyInitialTheme() {
+        int mode = prefs.getInt(KEY_THEME_MODE, 0);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            UiModeManager ui = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
+            if (ui != null) {
+                if (mode == 1) {
+                    ui.setApplicationNightMode(UiModeManager.MODE_NIGHT_YES);
+                } else if (mode == 2) {
+                    ui.setApplicationNightMode(UiModeManager.MODE_NIGHT_NO);
+                } else {
+                    ui.setApplicationNightMode(UiModeManager.MODE_NIGHT_AUTO);
+                }
+            }
+        }
+    }
+
+    private void toggleTheme() {
+        int currentMode = prefs.getInt(KEY_THEME_MODE, 0);
+        int nextMode = (currentMode + 1) % 3; // 0=Auto -> 1=Dark -> 2=Light
+        prefs.edit().putInt(KEY_THEME_MODE, nextMode).apply();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            UiModeManager ui = (UiModeManager) getSystemService(Context.UI_MODE_SERVICE);
+            if (ui != null) {
+                int nightMode = UiModeManager.MODE_NIGHT_AUTO;
+                String label = "System Default";
+                if (nextMode == 1) {
+                    nightMode = UiModeManager.MODE_NIGHT_YES;
+                    label = "Dark OLED";
+                } else if (nextMode == 2) {
+                    nightMode = UiModeManager.MODE_NIGHT_NO;
+                    label = "Light Expressive";
+                }
+                ui.setApplicationNightMode(nightMode);
+                updateThemeButtonLabel(nextMode);
+                Toast.makeText(this, "Theme switched: " + label, Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
+        recreate();
+    }
+
+    private void updateThemeButtonLabel(int mode) {
+        if (btnThemeToggle != null) {
+            if (mode == 1) {
+                btnThemeToggle.setText("🌙 Dark");
+            } else if (mode == 2) {
+                btnThemeToggle.setText("☀️ Light");
+            } else {
+                btnThemeToggle.setText("🌓 Auto");
+            }
+        }
+    }
+
     private void initViews() {
+        btnThemeToggle = findViewById(R.id.btnThemeToggle);
+        int savedMode = prefs.getInt(KEY_THEME_MODE, 0);
+        updateThemeButtonLabel(savedMode);
+
         btnChipPPL = findViewById(R.id.btnChipPPL);
         btnChipUpperLower = findViewById(R.id.btnChipUpperLower);
         btnChip5x5 = findViewById(R.id.btnChip5x5);
@@ -278,7 +343,9 @@ public class MainActivity extends Activity {
                 PROGRAMS
         );
         programAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerProgram.setAdapter(programAdapter);
+        if (spinnerProgram != null) {
+            spinnerProgram.setAdapter(programAdapter);
+        }
 
         int savedProgramIdx = prefs.getInt(KEY_SAVED_PROGRAM, 0);
         if (savedProgramIdx < 0 || savedProgramIdx >= PROGRAMS.length) {
@@ -290,7 +357,9 @@ public class MainActivity extends Activity {
     private void selectProgram(int index, boolean userTriggered) {
         if (index < 0 || index >= PROGRAMS.length) return;
         prefs.edit().putInt(KEY_SAVED_PROGRAM, index).apply();
-        spinnerProgram.setSelection(index);
+        if (spinnerProgram != null) {
+            spinnerProgram.setSelection(index);
+        }
         updateChipStyles(index);
         updateExerciseSpinner(index);
         updateProgressiveOverloadCue();
@@ -323,17 +392,19 @@ public class MainActivity extends Activity {
                 exercises
         );
         exerciseAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinnerExercise.setAdapter(exerciseAdapter);
+        if (spinnerExercise != null) {
+            spinnerExercise.setAdapter(exerciseAdapter);
 
-        spinnerExercise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                updateProgressiveOverloadCue();
-            }
+            spinnerExercise.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    updateProgressiveOverloadCue();
+                }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}
-        });
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {}
+            });
+        }
     }
 
     private void adjustWeight(double delta) {
@@ -363,6 +434,13 @@ public class MainActivity extends Activity {
     }
 
     private void setupListeners() {
+        if (btnThemeToggle != null) {
+            btnThemeToggle.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                toggleTheme();
+            });
+        }
+
         // Material 3 Chip Selection Listeners
         for (int i = 0; i < programChips.length; i++) {
             final int idx = i;
@@ -375,82 +453,123 @@ public class MainActivity extends Activity {
         }
 
         // Weight Numeric Steppers
-        btnWeightMinus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(-5.0); });
-        btnWeightMinus25.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(-2.5); });
-        btnWeightPlus25.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(2.5); });
-        btnWeightPlus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(5.0); });
+        if (btnWeightMinus5 != null) btnWeightMinus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(-5.0); });
+        if (btnWeightMinus25 != null) btnWeightMinus25.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(-2.5); });
+        if (btnWeightPlus25 != null) btnWeightPlus25.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(2.5); });
+        if (btnWeightPlus5 != null) btnWeightPlus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(5.0); });
 
         // Reps Numeric Steppers
-        btnRepsMinus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(-5); });
-        btnRepsMinus1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(-1); });
-        btnRepsPlus1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(1); });
-        btnRepsPlus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(5); });
+        if (btnRepsMinus5 != null) btnRepsMinus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(-5); });
+        if (btnRepsMinus1 != null) btnRepsMinus1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(-1); });
+        if (btnRepsPlus1 != null) btnRepsPlus1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(1); });
+        if (btnRepsPlus5 != null) btnRepsPlus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(5); });
 
-        btnLogSet.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            handleLogSet();
-        });
+        if (btnLogSet != null) {
+            btnLogSet.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                handleLogSet();
+            });
+        }
 
-        btnClearCurrentSets.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            if (currentSessionSets.isEmpty()) {
-                Toast.makeText(MainActivity.this, "Active set list is already empty", Toast.LENGTH_SHORT).show();
-                return;
+        if (btnClearCurrentSets != null) {
+            btnClearCurrentSets.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                if (currentSessionSets.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "Active set list is already empty", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                currentSessionSets.clear();
+                saveInProgressWorkout();
+                updateCurrentSessionUI();
+                Toast.makeText(MainActivity.this, "Current workout reset", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        if (btnFinishWorkout != null) {
+            btnFinishWorkout.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                handleFinishWorkout();
+            });
+        }
+
+        if (btnTimer60 != null) btnTimer60.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); startRestTimer(60); });
+        if (btnTimer90 != null) btnTimer90.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); startRestTimer(90); });
+        if (btnTimer120 != null) btnTimer120.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); startRestTimer(120); });
+        if (btnTimerReset != null) btnTimerReset.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); resetRestTimer(); });
+
+        if (btnExportHistory != null) btnExportHistory.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); shareHistory(); });
+        if (btnCopySummary != null) btnCopySummary.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); copySummaryToClipboard(); });
+
+        if (btnClearHistory != null) {
+            btnClearHistory.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                if (completedHistory.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "No workout logs in Vault to clear", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                completedHistory.clear();
+                prefs.edit().remove(KEY_HISTORY).apply();
+                renderHistoryLogs();
+                updateVaultStats();
+                updateProgressiveOverloadCue();
+                Toast.makeText(MainActivity.this, "History vault wiped", Toast.LENGTH_SHORT).show();
+            });
+        }
+    }
+
+    // Desktop Physical Keyboard Shortcuts
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            int keyCode = event.getKeyCode();
+            boolean isTyping = (etWeight != null && etWeight.hasFocus()) || (etReps != null && etReps.hasFocus());
+
+            // Enter key logs set
+            if ((keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER) && !isTyping) {
+                handleLogSet();
+                return true;
             }
-            currentSessionSets.clear();
-            saveInProgressWorkout();
-            updateCurrentSessionUI();
-            Toast.makeText(MainActivity.this, "Current workout reset", Toast.LENGTH_SHORT).show();
-        });
-
-        btnFinishWorkout.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            handleFinishWorkout();
-        });
-
-        btnTimer60.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            startRestTimer(60);
-        });
-
-        btnTimer90.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            startRestTimer(90);
-        });
-
-        btnTimer120.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            startRestTimer(120);
-        });
-
-        btnTimerReset.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            resetRestTimer();
-        });
-
-        btnExportHistory.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            shareHistory();
-        });
-
-        btnCopySummary.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            copySummaryToClipboard();
-        });
-
-        btnClearHistory.setOnClickListener(v -> {
-            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            if (completedHistory.isEmpty()) {
-                Toast.makeText(MainActivity.this, "No workout logs in Vault to clear", Toast.LENGTH_SHORT).show();
-                return;
+            // Spacebar starts/resets timer
+            if (keyCode == KeyEvent.KEYCODE_SPACE && !isTyping) {
+                if (isTimerRunning) {
+                    resetRestTimer();
+                } else {
+                    int sec = prefs.getInt(KEY_SAVED_REST_SECONDS, 90);
+                    startRestTimer(sec);
+                }
+                return true;
             }
-            completedHistory.clear();
-            prefs.edit().remove(KEY_HISTORY).apply();
-            renderHistoryLogs();
-            updateVaultStats();
-            updateProgressiveOverloadCue();
-            Toast.makeText(MainActivity.this, "History vault wiped", Toast.LENGTH_SHORT).show();
-        });
+            // '+' or '=' adds 2.5kg
+            if ((keyCode == KeyEvent.KEYCODE_PLUS || keyCode == KeyEvent.KEYCODE_EQUALS) && !isTyping) {
+                adjustWeight(2.5);
+                return true;
+            }
+            // '-' subtracts 2.5kg
+            if (keyCode == KeyEvent.KEYCODE_MINUS && !isTyping) {
+                adjustWeight(-2.5);
+                return true;
+            }
+            // '[' decreases reps
+            if (keyCode == KeyEvent.KEYCODE_LEFT_BRACKET && !isTyping) {
+                adjustReps(-1);
+                return true;
+            }
+            // ']' increases reps
+            if (keyCode == KeyEvent.KEYCODE_RIGHT_BRACKET && !isTyping) {
+                adjustReps(1);
+                return true;
+            }
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        // Seamless desktop window resizing without state reset
+        updateCurrentSessionUI();
+        renderHistoryLogs();
+        updateVaultStats();
     }
 
     private void handleLogSet() {
@@ -477,7 +596,7 @@ public class MainActivity extends Activity {
             return;
         }
 
-        String exercise = (spinnerExercise.getSelectedItem() != null)
+        String exercise = (spinnerExercise != null && spinnerExercise.getSelectedItem() != null)
                 ? spinnerExercise.getSelectedItem().toString()
                 : "Exercise";
 
@@ -486,7 +605,6 @@ public class MainActivity extends Activity {
         saveInProgressWorkout();
         updateCurrentSessionUI();
 
-        // Start rest timer automatically upon logging a set
         int savedSeconds = prefs.getInt(KEY_SAVED_REST_SECONDS, 90);
         startRestTimer(savedSeconds);
 
@@ -499,7 +617,9 @@ public class MainActivity extends Activity {
             return;
         }
 
-        String programName = PROGRAMS[spinnerProgram.getSelectedItemPosition()];
+        int pIdx = (spinnerProgram != null) ? spinnerProgram.getSelectedItemPosition() : prefs.getInt(KEY_SAVED_PROGRAM, 0);
+        if (pIdx < 0 || pIdx >= PROGRAMS.length) pIdx = 0;
+        String programName = PROGRAMS[pIdx];
         WorkoutLog log = new WorkoutLog(programName, System.currentTimeMillis());
 
         double totalVol = 0.0;
@@ -533,23 +653,33 @@ public class MainActivity extends Activity {
         prefs.edit().putInt(KEY_SAVED_REST_SECONDS, seconds).apply();
         restTimeTotalMs = seconds * 1000L;
         restTimeRemainingMs = restTimeTotalMs;
-        pbTimer.setMax((int) restTimeTotalMs);
-        pbTimer.setProgress((int) restTimeTotalMs);
+        if (pbTimer != null) {
+            pbTimer.setMax((int) restTimeTotalMs);
+            pbTimer.setProgress((int) restTimeTotalMs);
+        }
         isTimerRunning = true;
 
         restTimer = new CountDownTimer(restTimeTotalMs, 100) {
             @Override
             public void onTick(long millisUntilFinished) {
                 restTimeRemainingMs = millisUntilFinished;
-                tvTimerCountdown.setText(formatTime(millisUntilFinished));
-                pbTimer.setProgress((int) millisUntilFinished);
+                if (tvTimerCountdown != null) {
+                    tvTimerCountdown.setText(formatTime(millisUntilFinished));
+                }
+                if (pbTimer != null) {
+                    pbTimer.setProgress((int) millisUntilFinished);
+                }
             }
 
             @Override
             public void onFinish() {
                 isTimerRunning = false;
-                tvTimerCountdown.setText("00:00");
-                pbTimer.setProgress(0);
+                if (tvTimerCountdown != null) {
+                    tvTimerCountdown.setText("00:00");
+                }
+                if (pbTimer != null) {
+                    pbTimer.setProgress(0);
+                }
                 triggerRestAlarm();
             }
         }.start();
@@ -563,8 +693,12 @@ public class MainActivity extends Activity {
         isTimerRunning = false;
         int seconds = prefs.getInt(KEY_SAVED_REST_SECONDS, 90);
         restTimeTotalMs = seconds * 1000L;
-        tvTimerCountdown.setText(formatTime(restTimeTotalMs));
-        pbTimer.setProgress(pbTimer.getMax());
+        if (tvTimerCountdown != null) {
+            tvTimerCountdown.setText(formatTime(restTimeTotalMs));
+        }
+        if (pbTimer != null) {
+            pbTimer.setProgress(pbTimer.getMax());
+        }
     }
 
     private void triggerRestAlarm() {
@@ -593,6 +727,7 @@ public class MainActivity extends Activity {
     }
 
     private void updateCurrentSessionUI() {
+        if (layoutCurrentSetsContainer == null) return;
         layoutCurrentSetsContainer.removeAllViews();
         if (currentSessionSets.isEmpty()) {
             TextView emptyTv = new TextView(this);
@@ -651,7 +786,8 @@ public class MainActivity extends Activity {
     }
 
     private void updateProgressiveOverloadCue() {
-        if (spinnerExercise.getSelectedItem() == null) {
+        if (tvProgressiveCue == null) return;
+        if (spinnerExercise == null || spinnerExercise.getSelectedItem() == null) {
             tvProgressiveCue.setText("Overload Cue: Log consistently to unlock suggestions.");
             return;
         }
@@ -689,11 +825,16 @@ public class MainActivity extends Activity {
         }
 
         double tonnage = totalKg / 1000.0;
-        tvTotalTonnage.setText(String.format(Locale.US, "%.2f T", tonnage));
-        tvTotalSets.setText(String.valueOf(totalSets));
+        if (tvTotalTonnage != null) {
+            tvTotalTonnage.setText(String.format(Locale.US, "%.2f T", tonnage));
+        }
+        if (tvTotalSets != null) {
+            tvTotalSets.setText(String.valueOf(totalSets));
+        }
     }
 
     private void renderHistoryLogs() {
+        if (layoutHistoryContainer == null) return;
         layoutHistoryContainer.removeAllViews();
 
         if (completedHistory.isEmpty()) {

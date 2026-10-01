@@ -13,12 +13,14 @@ public final class R {
     public static final int btnTextColor=0x7f010001;
     /**
      * Legacy compatibility aliases
+     * Legacy compatibility aliases
      */
     public static final int cardBackground=0x7f010002;
     public static final int cardStroke=0x7f010003;
     public static final int colorAccent=0x7f010004;
     /**
-     * Material 3 Dark Color System Tokens
+     * Material 3 Expressive Light Theme Color Tokens
+     * Material 3 Expressive Dark Theme Color Tokens
      */
     public static final int colorPrimary=0x7f010005;
     public static final int colorPrimaryDark=0x7f010006;
@@ -81,25 +83,26 @@ public final class R {
     public static final int btnRepsMinus5=0x7f03000b;
     public static final int btnRepsPlus1=0x7f03000c;
     public static final int btnRepsPlus5=0x7f03000d;
-    public static final int btnTimer120=0x7f03000e;
-    public static final int btnTimer60=0x7f03000f;
-    public static final int btnTimer90=0x7f030010;
-    public static final int btnTimerReset=0x7f030011;
-    public static final int btnWeightMinus25=0x7f030012;
-    public static final int btnWeightMinus5=0x7f030013;
-    public static final int btnWeightPlus25=0x7f030014;
-    public static final int btnWeightPlus5=0x7f030015;
-    public static final int etReps=0x7f030016;
-    public static final int etWeight=0x7f030017;
-    public static final int layoutCurrentSetsContainer=0x7f030018;
-    public static final int layoutHistoryContainer=0x7f030019;
-    public static final int pbTimer=0x7f03001a;
-    public static final int spinnerExercise=0x7f03001b;
-    public static final int spinnerProgram=0x7f03001c;
-    public static final int tvProgressiveCue=0x7f03001d;
-    public static final int tvTimerCountdown=0x7f03001e;
-    public static final int tvTotalSets=0x7f03001f;
-    public static final int tvTotalTonnage=0x7f030020;
+    public static final int btnThemeToggle=0x7f03000e;
+    public static final int btnTimer120=0x7f03000f;
+    public static final int btnTimer60=0x7f030010;
+    public static final int btnTimer90=0x7f030011;
+    public static final int btnTimerReset=0x7f030012;
+    public static final int btnWeightMinus25=0x7f030013;
+    public static final int btnWeightMinus5=0x7f030014;
+    public static final int btnWeightPlus25=0x7f030015;
+    public static final int btnWeightPlus5=0x7f030016;
+    public static final int etReps=0x7f030017;
+    public static final int etWeight=0x7f030018;
+    public static final int layoutCurrentSetsContainer=0x7f030019;
+    public static final int layoutHistoryContainer=0x7f03001a;
+    public static final int pbTimer=0x7f03001b;
+    public static final int spinnerExercise=0x7f03001c;
+    public static final int spinnerProgram=0x7f03001d;
+    public static final int tvProgressiveCue=0x7f03001e;
+    public static final int tvTimerCountdown=0x7f03001f;
+    public static final int tvTotalSets=0x7f030020;
+    public static final int tvTotalTonnage=0x7f030021;
   }
   public static final class layout {
     public static final int activity_main=0x7f040000;

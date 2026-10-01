@@ -11,31 +11,52 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Material 3 Top Header -->
+        <!-- Material 3 Top Header with Theme Toggle -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginBottom="20dp"
             android:paddingStart="4dp"
             android:paddingEnd="4dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="IRONPULSE"
-                android:textColor="@color/m3_primary"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:letterSpacing="0.06" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <TextView
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="IRONPULSE"
+                    android:textColor="@color/m3_primary"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.06" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Material 3 Expressive Offline Gym Tracker"
+                    android:textColor="@color/m3_on_surface_variant"
+                    android:textSize="13sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Material 3 Offline Gym Tracker &amp; Rest Timer"
-                android:textColor="@color/m3_on_surface_variant"
-                android:textSize="13sp"
-                android:layout_marginTop="2dp" />
+                android:layout_height="38dp"
+                android:background="@drawable/btn_m3_outlined"
+                android:text="🌓 Theme"
+                android:textColor="@color/m3_primary"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:contentDescription="Toggle Light and Dark Mode" />
         </LinearLayout>
 
         <!-- Program & Exercise Selection Card (M3 Card) -->
