@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DevSys Monitor</string>
+    <string name="refresh">Refresh</string>
+    <string name="battery_title">Battery Telemetry</string>
+    <string name="hardware_title">Hardware &amp; System</string>
+    <string name="memory_title">Memory (RAM)</string>
+    <string name="network_title">Network &amp; Connectivity</string>
+</resources>
