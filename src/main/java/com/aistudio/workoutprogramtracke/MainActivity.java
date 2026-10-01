@@ -67,7 +67,13 @@ public class MainActivity extends Activity {
             {"Custom Compound 1", "Custom Isolation 1", "Custom Core 1", "Custom Cardio / Finisher"}
     };
 
-    // UI elements
+    // Material 3 UI Elements
+    private Button btnChipPPL;
+    private Button btnChipUpperLower;
+    private Button btnChip5x5;
+    private Button btnChipCustom;
+    private Button[] programChips;
+
     private Spinner spinnerProgram;
     private Spinner spinnerExercise;
     private EditText etWeight;
@@ -75,6 +81,17 @@ public class MainActivity extends Activity {
     private Button btnLogSet;
     private Button btnClearCurrentSets;
     private Button btnFinishWorkout;
+
+    // Steppers
+    private Button btnWeightMinus5;
+    private Button btnWeightMinus25;
+    private Button btnWeightPlus25;
+    private Button btnWeightPlus5;
+
+    private Button btnRepsMinus5;
+    private Button btnRepsMinus1;
+    private Button btnRepsPlus1;
+    private Button btnRepsPlus5;
 
     // Rest Timer
     private TextView tvTimerCountdown;
@@ -200,7 +217,7 @@ public class MainActivity extends Activity {
         }
 
         initViews();
-        setupSpinners();
+        setupSpinnersAndChips();
         loadHistory();
         loadInProgressWorkout();
         setupListeners();
@@ -209,6 +226,12 @@ public class MainActivity extends Activity {
     }
 
     private void initViews() {
+        btnChipPPL = findViewById(R.id.btnChipPPL);
+        btnChipUpperLower = findViewById(R.id.btnChipUpperLower);
+        btnChip5x5 = findViewById(R.id.btnChip5x5);
+        btnChipCustom = findViewById(R.id.btnChipCustom);
+        programChips = new Button[]{btnChipPPL, btnChipUpperLower, btnChip5x5, btnChipCustom};
+
         spinnerProgram = findViewById(R.id.spinnerProgram);
         spinnerExercise = findViewById(R.id.spinnerExercise);
         etWeight = findViewById(R.id.etWeight);
@@ -216,6 +239,16 @@ public class MainActivity extends Activity {
         btnLogSet = findViewById(R.id.btnLogSet);
         btnClearCurrentSets = findViewById(R.id.btnClearCurrentSets);
         btnFinishWorkout = findViewById(R.id.btnFinishWorkout);
+
+        btnWeightMinus5 = findViewById(R.id.btnWeightMinus5);
+        btnWeightMinus25 = findViewById(R.id.btnWeightMinus25);
+        btnWeightPlus25 = findViewById(R.id.btnWeightPlus25);
+        btnWeightPlus5 = findViewById(R.id.btnWeightPlus5);
+
+        btnRepsMinus5 = findViewById(R.id.btnRepsMinus5);
+        btnRepsMinus1 = findViewById(R.id.btnRepsMinus1);
+        btnRepsPlus1 = findViewById(R.id.btnRepsPlus1);
+        btnRepsPlus5 = findViewById(R.id.btnRepsPlus5);
 
         tvTimerCountdown = findViewById(R.id.tvTimerCountdown);
         pbTimer = findViewById(R.id.pbTimer);
@@ -238,7 +271,7 @@ public class MainActivity extends Activity {
         tvTimerCountdown.setText(formatTime(restTimeTotalMs));
     }
 
-    private void setupSpinners() {
+    private void setupSpinnersAndChips() {
         ArrayAdapter<String> programAdapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -248,23 +281,37 @@ public class MainActivity extends Activity {
         spinnerProgram.setAdapter(programAdapter);
 
         int savedProgramIdx = prefs.getInt(KEY_SAVED_PROGRAM, 0);
-        if (savedProgramIdx >= 0 && savedProgramIdx < PROGRAMS.length) {
-            spinnerProgram.setSelection(savedProgramIdx);
+        if (savedProgramIdx < 0 || savedProgramIdx >= PROGRAMS.length) {
+            savedProgramIdx = 0;
         }
+        selectProgram(savedProgramIdx, false);
+    }
 
-        spinnerProgram.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                prefs.edit().putInt(KEY_SAVED_PROGRAM, position).apply();
-                updateExerciseSpinner(position);
-                updateProgressiveOverloadCue();
+    private void selectProgram(int index, boolean userTriggered) {
+        if (index < 0 || index >= PROGRAMS.length) return;
+        prefs.edit().putInt(KEY_SAVED_PROGRAM, index).apply();
+        spinnerProgram.setSelection(index);
+        updateChipStyles(index);
+        updateExerciseSpinner(index);
+        updateProgressiveOverloadCue();
+        if (userTriggered) {
+            Toast.makeText(this, "Active Split: " + PROGRAMS[index], Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void updateChipStyles(int selectedIndex) {
+        for (int i = 0; i < programChips.length; i++) {
+            if (programChips[i] == null) continue;
+            if (i == selectedIndex) {
+                programChips[i].setBackgroundResource(R.drawable.chip_active);
+                programChips[i].setTextColor(Color.parseColor("#381E72"));
+                programChips[i].setTypeface(null, Typeface.BOLD);
+            } else {
+                programChips[i].setBackgroundResource(R.drawable.chip_inactive);
+                programChips[i].setTextColor(Color.parseColor("#E6E1E5"));
+                programChips[i].setTypeface(null, Typeface.NORMAL);
             }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
-
-        updateExerciseSpinner(spinnerProgram.getSelectedItemPosition());
+        }
     }
 
     private void updateExerciseSpinner(int programIndex) {
@@ -289,7 +336,56 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void adjustWeight(double delta) {
+        String str = etWeight.getText().toString().trim();
+        double current = 0.0;
+        try {
+            if (!TextUtils.isEmpty(str)) {
+                current = Double.parseDouble(str);
+            }
+        } catch (NumberFormatException ignored) {}
+        current = Math.max(0.0, current + delta);
+        etWeight.setText(String.format(Locale.US, "%.1f", current));
+        etWeight.setSelection(etWeight.getText().length());
+    }
+
+    private void adjustReps(int delta) {
+        String str = etReps.getText().toString().trim();
+        int current = 0;
+        try {
+            if (!TextUtils.isEmpty(str)) {
+                current = Integer.parseInt(str);
+            }
+        } catch (NumberFormatException ignored) {}
+        current = Math.max(1, current + delta);
+        etReps.setText(String.valueOf(current));
+        etReps.setSelection(etReps.getText().length());
+    }
+
     private void setupListeners() {
+        // Material 3 Chip Selection Listeners
+        for (int i = 0; i < programChips.length; i++) {
+            final int idx = i;
+            if (programChips[i] != null) {
+                programChips[i].setOnClickListener(v -> {
+                    v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                    selectProgram(idx, true);
+                });
+            }
+        }
+
+        // Weight Numeric Steppers
+        btnWeightMinus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(-5.0); });
+        btnWeightMinus25.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(-2.5); });
+        btnWeightPlus25.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(2.5); });
+        btnWeightPlus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustWeight(5.0); });
+
+        // Reps Numeric Steppers
+        btnRepsMinus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(-5); });
+        btnRepsMinus1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(-1); });
+        btnRepsPlus1.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(1); });
+        btnRepsPlus5.setOnClickListener(v -> { v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY); adjustReps(5); });
+
         btnLogSet.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             handleLogSet();
@@ -472,7 +568,6 @@ public class MainActivity extends Activity {
     }
 
     private void triggerRestAlarm() {
-        // Haptic vibration
         if (vibrator != null && vibrator.hasVibrator()) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator.vibrate(VibrationEffect.createWaveform(new long[]{0, 300, 150, 400}, -1));
@@ -481,7 +576,6 @@ public class MainActivity extends Activity {
             }
         }
 
-        // Auditory tone
         if (toneGenerator != null) {
             try {
                 toneGenerator.startTone(ToneGenerator.TONE_PROP_BEEP2, 400);
@@ -503,7 +597,7 @@ public class MainActivity extends Activity {
         if (currentSessionSets.isEmpty()) {
             TextView emptyTv = new TextView(this);
             emptyTv.setText("No sets logged yet. Select exercise, enter weight & reps above.");
-            emptyTv.setTextColor(Color.parseColor("#8E8E93"));
+            emptyTv.setTextColor(Color.parseColor("#CAC4D0"));
             emptyTv.setTextSize(13);
             emptyTv.setPadding(8, 16, 8, 16);
             layoutCurrentSetsContainer.addView(emptyTv);
@@ -518,28 +612,31 @@ public class MainActivity extends Activity {
             LinearLayout itemRow = new LinearLayout(this);
             itemRow.setOrientation(LinearLayout.HORIZONTAL);
             itemRow.setGravity(Gravity.CENTER_VERTICAL);
-            itemRow.setPadding(16, 12, 16, 12);
-            itemRow.setBackgroundColor(Color.parseColor("#1E1E24"));
+            itemRow.setPadding(18, 14, 18, 14);
+            itemRow.setBackgroundResource(R.drawable.card_m3_high);
 
             LinearLayout.LayoutParams rowParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            rowParams.setMargins(0, 4, 0, 4);
+            rowParams.setMargins(0, 4, 0, 8);
             itemRow.setLayoutParams(rowParams);
 
             TextView tvInfo = new TextView(this);
             LinearLayout.LayoutParams textParams = new LinearLayout.LayoutParams(
                     0, ViewGroup.LayoutParams.WRAP_CONTENT, 1.0f);
             tvInfo.setLayoutParams(textParams);
-            tvInfo.setText(String.format(Locale.US, "#%d  %s\n%.1f kg  x  %d reps  (Vol: %.0f kg)",
+            tvInfo.setText(String.format(Locale.US, "Set #%d: %s\n%.1f kg × %d reps  (Vol: %.0f kg)",
                     setNumber++, set.exercise, set.weight, set.reps, (set.weight * set.reps)));
-            tvInfo.setTextColor(Color.WHITE);
-            tvInfo.setTextSize(14);
+            tvInfo.setTextColor(Color.parseColor("#E6E1E5"));
+            tvInfo.setTextSize(13);
             tvInfo.setTypeface(Typeface.DEFAULT_BOLD);
+            tvInfo.setLineSpacing(2.0f, 1.0f);
 
             Button btnRemove = new Button(this);
             btnRemove.setText("✕");
-            btnRemove.setTextColor(Color.parseColor("#FF453A"));
+            btnRemove.setTextColor(Color.parseColor("#F2B8B5"));
             btnRemove.setBackgroundColor(Color.TRANSPARENT);
+            btnRemove.setTextSize(16);
+            btnRemove.setContentDescription("Remove set");
             btnRemove.setOnClickListener(v -> {
                 v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
                 currentSessionSets.remove(index);
@@ -560,7 +657,6 @@ public class MainActivity extends Activity {
         }
 
         String currentEx = spinnerExercise.getSelectedItem().toString();
-        // Look through previous workouts to find best set or last set for this exercise
         WorkoutSet lastBestSet = null;
         for (WorkoutLog log : completedHistory) {
             for (WorkoutSet s : log.sets) {
@@ -570,7 +666,7 @@ public class MainActivity extends Activity {
                     }
                 }
             }
-            if (lastBestSet != null) break; // Look at latest workout that had this exercise
+            if (lastBestSet != null) break;
         }
 
         if (lastBestSet != null) {
@@ -603,7 +699,7 @@ public class MainActivity extends Activity {
         if (completedHistory.isEmpty()) {
             TextView empty = new TextView(this);
             empty.setText("Vault is empty. Finish workouts to record volume history.");
-            empty.setTextColor(Color.parseColor("#8E8E93"));
+            empty.setTextColor(Color.parseColor("#CAC4D0"));
             empty.setTextSize(13);
             empty.setPadding(8, 16, 8, 16);
             layoutHistoryContainer.addView(empty);
@@ -615,34 +711,33 @@ public class MainActivity extends Activity {
         for (WorkoutLog log : completedHistory) {
             LinearLayout card = new LinearLayout(this);
             card.setOrientation(LinearLayout.VERTICAL);
-            card.setPadding(20, 16, 20, 16);
-            card.setBackgroundColor(Color.parseColor("#1A1A1E"));
+            card.setPadding(18, 14, 18, 14);
+            card.setBackgroundResource(R.drawable.card_m3_high);
 
             LinearLayout.LayoutParams cardParams = new LinearLayout.LayoutParams(
                     ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            cardParams.setMargins(0, 8, 0, 8);
+            cardParams.setMargins(0, 4, 0, 10);
             card.setLayoutParams(cardParams);
 
             TextView tvHeader = new TextView(this);
             tvHeader.setText(String.format("%s • %s", log.program, sdf.format(new Date(log.date))));
-            tvHeader.setTextColor(Color.parseColor("#FF9F0A"));
+            tvHeader.setTextColor(Color.parseColor("#D0BCFF"));
             tvHeader.setTextSize(14);
             tvHeader.setTypeface(Typeface.DEFAULT_BOLD);
 
             TextView tvStats = new TextView(this);
             tvStats.setText(String.format(Locale.US, "Total Volume: %.1f kg | Sets: %d", log.totalVolume, log.totalSetsCount));
-            tvStats.setTextColor(Color.parseColor("#E5E5EA"));
+            tvStats.setTextColor(Color.parseColor("#E6E1E5"));
             tvStats.setTextSize(13);
             tvStats.setPadding(0, 4, 0, 8);
 
             card.addView(tvHeader);
             card.addView(tvStats);
 
-            // Detail lines
             for (WorkoutSet s : log.sets) {
                 TextView tvSet = new TextView(this);
                 tvSet.setText(String.format(Locale.US, "  • %s: %.1f kg × %d", s.exercise, s.weight, s.reps));
-                tvSet.setTextColor(Color.parseColor("#AEAEB2"));
+                tvSet.setTextColor(Color.parseColor("#CAC4D0"));
                 tvSet.setTextSize(12);
                 card.addView(tvSet);
             }
