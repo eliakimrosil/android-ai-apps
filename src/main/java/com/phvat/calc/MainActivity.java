@@ -5,12 +5,14 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -85,6 +87,25 @@ public class MainActivity extends Activity {
         initViews();
         setupListeners();
         applyTheme(isDarkTheme);
+        calculate();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        String savedAmount = etAmount != null ? etAmount.getText().toString() : "";
+        boolean isInc = rbInclusive == null || rbInclusive.isChecked();
+        boolean isPwd = swSeniorPwd != null && swSeniorPwd.isChecked();
+
+        setContentView(R.layout.activity_main);
+        initViews();
+        setupListeners();
+        applyTheme(isDarkTheme);
+
+        if (etAmount != null) etAmount.setText(savedAmount);
+        if (rbInclusive != null) rbInclusive.setChecked(isInc);
+        if (rbExclusive != null) rbExclusive.setChecked(!isInc);
+        if (swSeniorPwd != null) swSeniorPwd.setChecked(isPwd);
         calculate();
     }
 
@@ -209,14 +230,14 @@ public class MainActivity extends Activity {
     }
 
     private void applyTheme(boolean isDark) {
-        int bgMain = isDark ? 0xFF0F1117 : 0xFFF4F6F9;
+        int bgMain = isDark ? 0xFF0F1117 : 0xFFF8F9FA;
         int bgCard = isDark ? 0xFF1A1D27 : 0xFFFFFFFF;
-        int bgInner = isDark ? 0xFF222634 : 0xFFF8FAFC;
-        int strokeColor = isDark ? 0xFF2E3446 : 0xFFE2E8F0;
+        int bgInner = isDark ? 0xFF222634 : 0xFFF3F4F6;
+        int strokeColor = isDark ? 0xFF2E3446 : 0xFFE5E7EB;
 
-        int textHigh = isDark ? 0xFFF0F3F8 : 0xFF0F172A;
-        int textMid = isDark ? 0xFF9CA3AF : 0xFF64748B;
-        int textMuted = isDark ? 0xFF6B7280 : 0xFF94A3B8;
+        int textHigh = isDark ? 0xFFF0F3F8 : 0xFF111827;
+        int textMid = isDark ? 0xFF9CA3AF : 0xFF4B5563;
+        int textMuted = isDark ? 0xFF6B7280 : 0xFF9CA3AF;
 
         int accentGold = isDark ? 0xFFFFD54F : 0xFFB45309;
         int accentCyan = isDark ? 0xFF00E5FF : 0xFF0284C7;
@@ -249,31 +270,31 @@ public class MainActivity extends Activity {
         tvAppTitle.setTextColor(accentGold);
         tvAppSubtitle.setTextColor(textMid);
         btnTheme.setText(isDark ? "☀ Light" : "🌙 Dark");
-        btnTheme.setTextColor(isDark ? 0xFFFFD54F : 0xFF0F172A);
+        btnTheme.setTextColor(isDark ? 0xFFFFD54F : 0xFF111827);
 
-        // Drawables
+        // M3 Expressive Card Drawables with 20dp corners
         GradientDrawable cardDraw1 = new GradientDrawable();
         cardDraw1.setColor(bgCard);
         cardDraw1.setStroke(dpToPx(1), strokeColor);
-        cardDraw1.setCornerRadius(dpToPx(16));
+        cardDraw1.setCornerRadius(dpToPx(20));
         cardAmount.setBackground(cardDraw1);
 
         GradientDrawable cardDraw2 = new GradientDrawable();
         cardDraw2.setColor(bgCard);
         cardDraw2.setStroke(dpToPx(1), strokeColor);
-        cardDraw2.setCornerRadius(dpToPx(16));
+        cardDraw2.setCornerRadius(dpToPx(20));
         cardMode.setBackground(cardDraw2);
 
         GradientDrawable cardDraw3 = new GradientDrawable();
         cardDraw3.setColor(bgCard);
         cardDraw3.setStroke(dpToPx(1), strokeColor);
-        cardDraw3.setCornerRadius(dpToPx(16));
+        cardDraw3.setCornerRadius(dpToPx(20));
         cardBreakdown.setBackground(cardDraw3);
 
         GradientDrawable inputDraw = new GradientDrawable();
         inputDraw.setColor(bgInner);
         inputDraw.setStroke(dpToPx(1), isDark ? strokeColor : 0xFFCBD5E1);
-        inputDraw.setCornerRadius(dpToPx(12));
+        inputDraw.setCornerRadius(dpToPx(14));
         llInputBox.setBackground(inputDraw);
 
         // Text & elements in card 1
@@ -282,11 +303,11 @@ public class MainActivity extends Activity {
         etAmount.setTextColor(textHigh);
         etAmount.setHintTextColor(textMuted);
 
-        // Chips
+        // Pill Chips (20dp rounded)
         Button[] chips = {chip100, chip500, chip1000, chip5000, chip10000, btnTheme};
         for (Button chip : chips) {
             GradientDrawable chipBg = new GradientDrawable();
-            chipBg.setColor(isDark ? 0xFF222634 : 0xFFF1F5F9);
+            chipBg.setColor(isDark ? 0xFF222634 : 0xFFF3F4F6);
             chipBg.setStroke(dpToPx(1), strokeColor);
             chipBg.setCornerRadius(dpToPx(20));
             chip.setBackground(chipBg);
@@ -314,20 +335,52 @@ public class MainActivity extends Activity {
         tvDiscountVal.setTextColor(accentGold);
         tvFormulaNote.setTextColor(textMuted);
 
-        // Bottom action buttons
+        // Bottom action buttons with 16dp rounded corners
         GradientDrawable clearDraw = new GradientDrawable();
-        clearDraw.setColor(isDark ? 0xFF1A2736 : 0xFFF1F5F9);
+        clearDraw.setColor(isDark ? 0xFF1A2736 : 0xFFF3F4F6);
         clearDraw.setStroke(dpToPx(1), strokeColor);
-        clearDraw.setCornerRadius(dpToPx(12));
+        clearDraw.setCornerRadius(dpToPx(16));
         btnClear.setBackground(clearDraw);
         btnClear.setTextColor(textMid);
 
         GradientDrawable copyDraw = new GradientDrawable();
         copyDraw.setColor(isDark ? 0xFF1A2736 : 0xFFEFF6FF);
         copyDraw.setStroke(dpToPx(1), isDark ? accentCyan : 0xFF0284C7);
-        copyDraw.setCornerRadius(dpToPx(12));
+        copyDraw.setCornerRadius(dpToPx(16));
         btnCopy.setBackground(copyDraw);
         btnCopy.setTextColor(isDark ? accentGold : 0xFF0284C7);
+    }
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent event) {
+        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+            int keyCode = event.getKeyCode();
+            if (event.isCtrlPressed() && keyCode == KeyEvent.KEYCODE_C) {
+                copySummary();
+                return true;
+            }
+            if (keyCode == KeyEvent.KEYCODE_ESCAPE) {
+                etAmount.setText("");
+                calculate();
+                return true;
+            }
+            if (event.isAltPressed()) {
+                if (keyCode == KeyEvent.KEYCODE_T) {
+                    btnTheme.performClick();
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_I) {
+                    rbInclusive.setChecked(true);
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_E) {
+                    rbExclusive.setChecked(true);
+                    return true;
+                } else if (keyCode == KeyEvent.KEYCODE_S) {
+                    swSeniorPwd.setChecked(!swSeniorPwd.isChecked());
+                    return true;
+                }
+            }
+        }
+        return super.dispatchKeyEvent(event);
     }
 
     private double parseInput() {
