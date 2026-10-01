@@ -11,14 +11,24 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher">
+        android:icon="@drawable/ic_launcher"
+        android:resizeableActivity="true">
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:resizeableActivity="true"
+            android:supportsPictureInPicture="true"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboardHidden|uiMode">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <layout
+                android:defaultWidth="840dp"
+                android:defaultHeight="800dp"
+                android:gravity="top|center_horizontal"
+                android:minWidth="360dp"
+                android:minHeight="480dp" />
         </activity>
     </application>
 </manifest>

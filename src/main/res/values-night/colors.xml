@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- DevSysMonitor Material 3 Expressive Dark Theme -->
+    <color name="background">#121214</color>
+    <color name="card_bg">#1E1E24</color>
+    <color name="card_stroke">#2A2B36</color>
+    <color name="primary">#00E5FF</color>
+    <color name="primary_variant">#00B0FF</color>
+    <color name="accent">#76FF03</color>
+    <color name="text_primary">#F0F4F8</color>
+    <color name="text_secondary">#9BA1A6</color>
+    <color name="battery_green">#00E676</color>
+    <color name="battery_orange">#FF9100</color>
+</resources>
