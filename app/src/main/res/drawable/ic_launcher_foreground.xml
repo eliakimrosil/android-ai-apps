@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group>
+        
+        <!-- Folding Document Body -->
+        <path
+            android:fillColor="#312E81"
+            android:pathData="M32,22h32l14,14v50a4,4 0 0 1 -4,4h-42a4,4 0 0 1 -4,-4z" />
+        <!-- Folded Page Flap -->
+        <path
+            android:fillColor="#6366F1"
+            android:pathData="M64,22v14h14z" />
+        <!-- Bold Markdown 'M' Glyph -->
+        <path
+            android:fillColor="#E0E7FF"
+            android:pathData="M38,44h6l5,10 5,-10h6v22h-5v-13l-4.5,9h-3l-4.5,-9v13h-5z" />
+        <!-- Markdown Down-Arrow Badge -->
+        <path
+            android:fillColor="#818CF8"
+            android:pathData="M65,51h4v-7h4v7h4l-6,7z" />
+        <!-- Accent Syntax Bar -->
+        <path
+            android:fillColor="#A5B4FC"
+            android:pathData="M38,71h32v2.5h-32z" />
+        
+    </group>
+</vector>

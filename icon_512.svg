@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B0F19" />
+    <!-- Background Decor -->
+    
+        <!-- Card Backdrop -->
+        <path
+            fill="#171F38"
+            d="M18,12h72a12,12 0 0 1 12,12v60a12,12 0 0 1 -12,12h-72a12,12 0 0 1 -12,-12v-60a12,12 0 0 1 12,-12z" />
+        <!-- Subtle Indigo Grid Guidelines -->
+        <path
+            stroke="#253259"
+            stroke-width="1.2"
+            d="M24,36h60 M24,54h60 M24,72h60" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Folding Document Body -->
+        <path
+            fill="#312E81"
+            d="M32,22h32l14,14v50a4,4 0 0 1 -4,4h-42a4,4 0 0 1 -4,-4z" />
+        <!-- Folded Page Flap -->
+        <path
+            fill="#6366F1"
+            d="M64,22v14h14z" />
+        <!-- Bold Markdown 'M' Glyph -->
+        <path
+            fill="#E0E7FF"
+            d="M38,44h6l5,10 5,-10h6v22h-5v-13l-4.5,9h-3l-4.5,-9v13h-5z" />
+        <!-- Markdown Down-Arrow Badge -->
+        <path
+            fill="#818CF8"
+            d="M65,51h4v-7h4v7h4l-6,7z" />
+        <!-- Accent Syntax Bar -->
+        <path
+            fill="#A5B4FC"
+            d="M38,71h32v2.5h-32z" />
+        
+</svg>
