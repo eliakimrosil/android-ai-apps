@@ -1,0 +1,7 @@
+Initial release of DoseGuard (v1.0.0).
+
+• Complete offline architecture with zero cloud logins or trackers
+• Customizable medication reminders and dosage schedules
+• Automatic prescription inventory and low-refill alerts
+• Android Quick Settings tile for instant one-tap dose confirmation
+• Clean intake logging and local export support
