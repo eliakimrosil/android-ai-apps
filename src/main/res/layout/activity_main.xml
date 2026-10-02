@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/m3_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="20dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="36dp">
+
+        <!-- Top Header & App Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_title"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_primary" />
+
+                <TextView
+                    android:id="@+id/tvStatusBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/status_ready"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_outline" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:minHeight="36dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textSize="12sp"
+                android:text="@string/theme_auto"
+                android:textColor="@color/m3_on_primary"
+                android:background="@drawable/btn_m3_outlined" />
+        </LinearLayout>
+
+        <!-- Hero Card: Input Workspace -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/header_input_payload"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/etInputPayload"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:gravity="top|start"
+                android:hint="@string/hint_input_payload"
+                android:textSize="14sp"
+                android:textColor="@color/m3_on_surface"
+                android:textColorHint="@color/m3_outline"
+                android:background="@drawable/edittext_m3"
+                android:padding="12dp"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tvInputMeta"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/meta_empty"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_outline" />
+
+                <Button
+                    android:id="@+id/btnPasteClipboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:minHeight="36dp"
+                    android:text="@string/btn_paste"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_primary"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnClearInput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:minHeight="36dp"
+                    android:text="@string/btn_clear"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_primary"
+                    android:background="@drawable/btn_m3_outlined" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Card: Sanitization Rules & Automation Engine -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/header_filter_rules"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Rule 1: Strip UTM / Tracking -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_utm_title"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_utm_desc"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_outline" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchUrlTracking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <!-- Rule 2: Affiliate Link Stripper -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_affiliate_title"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_affiliate_desc"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_outline" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchAffiliates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <!-- Rule 3: Unwrap Redirects -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_redirects_title"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_redirects_desc"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_outline" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchRedirects"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true" />
+            </LinearLayout>
+
+            <!-- Rule 4: PII Masking -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_pii_title"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_pii_desc"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_outline" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchPiiScrub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+            </LinearLayout>
+
+            <!-- Automation: Auto-scrub clipboard on launch -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_auto_clip_title"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/rule_auto_clip_desc"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_outline" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/switchAutoClipboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Primary Action Trigger -->
+        <Button
+            android:id="@+id/btnScrubAction"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/btn_scrub_action"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="@color/m3_on_primary"
+            android:background="@drawable/btn_m3_primary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Output Preview Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/header_cleaned_output"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_primary" />
+
+                <TextView
+                    android:id="@+id/tvMetricsBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/status_ready"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_outline" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvOutputPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="80dp"
+                android:text="@string/output_empty_placeholder"
+                android:textSize="13sp"
+                android:textColor="@color/m3_on_surface"
+                android:background="@drawable/edittext_m3"
+                android:padding="12dp"
+                android:textIsSelectable="true" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnCopyOutput"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:minHeight="40dp"
+                    android:text="@string/btn_copy_clean"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_primary"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnShareClean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:minHeight="40dp"
+                    android:text="@string/btn_share_clean"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_primary"
+                    android:background="@drawable/btn_m3_primary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Local Sanitization History -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/header_history"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_primary" />
+
+                <Button
+                    android:id="@+id/btnClearHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:minHeight="32dp"
+                    android:text="@string/btn_clear_history"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_on_primary"
+                    android:background="@drawable/btn_m3_outlined" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutHistoryContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

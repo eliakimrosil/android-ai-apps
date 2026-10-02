@@ -1,0 +1,26 @@
+Tired of sharing bloated links riddled with surveillance tokens, referral IDs, and UTM tracking parameters? Frustrated when sending photos that expose your home coordinates and camera EXIF metadata?
+
+Meet ClipScrub, the privacy-first utility that cleans links and strips photo metadata instantly on your device—with zero friction, zero ads, and zero cloud tracking.
+
+Unlike traditional utilities that bombard you with full-screen interstitial ads, require cloud redirects, or force multi-step confirmations, ClipScrub works in under 50 milliseconds directly within your native Android Share Sheet.
+
+━━━━━━━━━━━━━━━━━━━━
+✓ CORE PRIVACY FEATURES
+━━━━━━━━━━━━━━━━━━━━
+✓ Instant URL Sanitizer: Automatically strips UTM tags, fbclid, gclid, igsh, affiliate tokens, and tracking queries from URLs before you share.
+✓ Photo EXIF & GPS Scrubber: Cleans sensitive location tags, camera gear details, timestamps, and device fingerprints from shared images.
+✓ Seamless Android Share Target: Tap "Share via ClipScrub" in any app to scrub and forward to WhatsApp, Telegram, Signal, or Slack in a blink.
+✓ Quick Settings Tile: Toggle Background Clipboard Auto-Sanitizer on demand for hands-free link cleaning as you copy.
+✓ Clean Link Copier: Copy links directly to your clipboard sanitized and ready to paste anywhere.
+✓ 100% Local Execution: Zero external server calls, no telemetry, no accounts, and no background profiling.
+
+━━━━━━━━━━━━━━━━━━━━
+WHY CHOOSE CLIPSCRUB?
+━━━━━━━━━━━━━━━━━━━━
+• NO Interstitial Ads: Never get interrupted by video ads when copying or sharing a link.
+• NO Cloud Redirection: Your URLs and images never touch a remote server or analytics pipeline.
+• Zero Friction Workflow: Bypasses clunky confirmation dialogs for lightning-fast sharing.
+• Material 3 Design: Built natively with dynamic Material You theming and AMOLED dark mode support.
+• Transparent & Lightweight: Minimal battery usage and zero bloat.
+
+Protect your privacy, declutter your shares, and keep your personal coordinates private with ClipScrub.

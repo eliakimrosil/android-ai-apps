@@ -1,0 +1,6 @@
+Welcome to ClipScrub v1.0.0!
+- Instant URL sanitization stripping UTM, fbclid, and tracking queries
+- One-tap EXIF & GPS location metadata stripper for photos
+- Native Android Share Sheet target integration
+- Quick Settings Tile for fast clipboard cleaning
+- 100% offline, local-only processing with zero ads

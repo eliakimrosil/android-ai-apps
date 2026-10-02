@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">ClipScrub: Private Share Sanitizer</string>
+    <string name="app_title">ClipScrub</string>
+    <string name="status_ready">Ready to sanitize</string>
+    <string name="theme_auto">Auto</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="header_input_payload">Input Text / Links</string>
+    <string name="hint_input_payload">Paste text or URL with tracking tags...</string>
+    <string name="meta_empty">0 characters • 0 words</string>
+    <string name="btn_paste">Paste</string>
+    <string name="btn_clear">Clear</string>
+    <string name="header_filter_rules">Sanitization Rules</string>
+    <string name="rule_utm_title">Strip UTM &amp; Analytics Tags</string>
+    <string name="rule_utm_desc">Removes utm_*, fbclid, gclid, and other ad query tokens</string>
+    <string name="rule_affiliate_title">Strip Affiliate IDs</string>
+    <string name="rule_affiliate_desc">Removes referral tags, amazon associate tags, etc.</string>
+    <string name="rule_redirects_title">Unwrap Redirect URLs</string>
+    <string name="rule_redirects_desc">Resolves intermediate redirect hops to canonical destination</string>
+    <string name="rule_pii_title">Scrub PII (Emails &amp; Phone #s)</string>
+    <string name="rule_pii_desc">Masks embedded personal phone numbers and email addresses</string>
+    <string name="rule_auto_clip_title">Auto-Scrub on Launch</string>
+    <string name="rule_auto_clip_desc">Automatically read and cleanse current clipboard when opened</string>
+    <string name="btn_scrub_action">Scrub &amp; Sanitize Now</string>
+    <string name="header_cleaned_output">Sanitized Payload</string>
+    <string name="output_empty_placeholder">Sanitized text or link will appear here...</string>
+    <string name="btn_copy_clean">Copy Clean</string>
+    <string name="btn_share_clean">Share</string>
+    <string name="header_history">Sanitization History</string>
+    <string name="btn_clear_history">Clear History</string>
+    <string name="history_empty_note">No scrub history yet</string>
+</resources>

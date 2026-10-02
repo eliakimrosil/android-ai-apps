@@ -1,0 +1,1 @@
+Strip tracking params & EXIF metadata instantly. 100% offline, zero ads.
