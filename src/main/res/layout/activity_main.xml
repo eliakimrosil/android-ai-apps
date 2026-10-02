@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/m3_surface"
+    android:fillViewport="true"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top Header Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/card_m3"
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:gravity="center_vertical">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="DropScribe"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_primary" />
+
+                <TextView
+                    android:id="@+id/tvSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:text="Offline Audio Drop &amp; Speech Transcriber"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_outline" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvThemeLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Theme: Auto"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_outline" />
+
+                <Button
+                    android:id="@+id/btnThemeToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/btn_m3_outlined"
+                    android:paddingHorizontal="12dp"
+                    android:text="Switch Theme"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_primary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Drop Target Hero Card -->
+        <LinearLayout
+            android:id="@+id/dropTargetCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_m3_high"
+            android:elevation="3dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:id="@+id/tvDropIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="▼ [DROP AUDIO HERE] ▼"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary" />
+
+            <TextView
+                android:id="@+id/tvDropPrompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Drag &amp; Drop Audio Files Here"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_surface" />
+
+            <TextView
+                android:id="@+id/tvDropSubtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:text="Supports MP3, WAV, M4A, OGG, FLAC directly on desktop or Android freeform mode"
+                android:textSize="11sp"
+                android:textColor="@color/m3_outline" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnBrowseAudio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:background="@drawable/btn_m3_primary"
+                    android:paddingHorizontal="16dp"
+                    android:text="Browse Files"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_primary" />
+
+                <Button
+                    android:id="@+id/btnRecordDemo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:layout_marginStart="12dp"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:paddingHorizontal="14dp"
+                    android:text="Load Test Audio"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_primary" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLoadedFileInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/edittext_m3"
+                android:padding="10dp"
+                android:text="No file loaded. Drop an audio file or click browse."
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface" />
+        </LinearLayout>
+
+        <!-- Transcription Engine Configuration Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_m3"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Acoustic Model &amp; Language"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_surface" />
+
+            <!-- Language Chips Segment -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/chipLangEn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:background="@drawable/chip_active"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="English (EN)"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_on_primary" />
+
+                    <TextView
+                        android:id="@+id/chipLangEs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/chip_inactive"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="Spanish (ES)"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_primary" />
+
+                    <TextView
+                        android:id="@+id/chipLangFr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/chip_inactive"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="French (FR)"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_primary" />
+
+                    <TextView
+                        android:id="@+id/chipLangDe"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/chip_inactive"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="German (DE)"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_primary" />
+
+                    <TextView
+                        android:id="@+id/chipLangZh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="36dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/chip_inactive"
+                        android:gravity="center"
+                        android:paddingHorizontal="14dp"
+                        android:text="Mandarin (ZH)"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_primary" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <!-- VAD Sensitivity Slider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Voice Activity Detection (VAD) Threshold"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvSensitivityVal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="65%"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_primary" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbSensitivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:max="100"
+                android:progress="65" />
+
+            <!-- Options Switches -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <Switch
+                    android:id="@+id/swTimestamps"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Timestamps"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_surface" />
+
+                <Switch
+                    android:id="@+id/swPunctuation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="Auto Punctuation"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_surface" />
+            </LinearLayout>
+
+            <!-- Actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnStartTranscribe"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_weight="2"
+                    android:background="@drawable/btn_m3_primary"
+                    android:text="Start Transcription [Enter]"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_on_primary" />
+
+                <Button
+                    android:id="@+id/btnClear"
+                    android:layout_width="0dp"
+                    android:layout_height="44dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_m3_outlined"
+                    android:text="Clear"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_primary" />
+            </LinearLayout>
+
+            <ProgressBar
+                android:id="@+id/pbProcessing"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="10dp"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvEngineStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Engine: Offline model idle (No network required)"
+                android:textSize="11sp"
+                android:textColor="@color/m3_outline" />
+        </LinearLayout>
+
+        <!-- Transcription Result Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/card_m3"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Transcribed Output"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_on_surface" />
+
+                <Button
+                    android:id="@+id/btnCopyResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:paddingHorizontal="10dp"
+                    android:text="Copy"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_primary" />
+
+                <Button
+                    android:id="@+id/btnShareResult"
+                    android:layout_width="wrap_content"
+                    android:layout_height="34dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/btn_m3_outlined"
+                    android:paddingHorizontal="10dp"
+                    android:text="Share"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_primary" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etTranscriptionResult"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edittext_m3"
+                android:gravity="top|start"
+                android:hint="Transcribed text will appear here. You can also edit it before exporting..."
+                android:inputType="textMultiLine"
+                android:padding="12dp"
+                android:scrollbars="vertical"
+                android:textColor="@color/m3_on_surface"
+                android:textColorHint="@color/m3_outline"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Transcription History Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/card_m3"
+            android:elevation="2dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Local History"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_surface" />
+
+            <LinearLayout
+                android:id="@+id/llHistoryContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

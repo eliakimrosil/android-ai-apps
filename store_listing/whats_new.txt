@@ -1,0 +1,5 @@
+Welcome to DropScribe v1.0.0!
+- Instant transcription via Android Direct Share
+- Lightweight on-device Whisper engine for 100% offline speech recognition
+- Floating quick-read overlay dialog
+- Clean Material 3 design with zero tracking and zero ads

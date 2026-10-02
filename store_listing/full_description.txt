@@ -1,0 +1,32 @@
+Tired of sitting through long, rambling WhatsApp or Telegram audio notes in noisy rooms, meetings, or quiet libraries? Frustrated by transcribers that demand $9.99/week subscriptions, spam full-screen video ads, or upload your private conversations to unknown cloud servers?
+
+Meet DropScribe — the fast, 100% offline private voice note transcriber designed specifically for Android.
+
+Convert voice messages to clean, readable text instantly without switching apps or compromising confidential data.
+
+⚡ INSTANT DIRECT SHARE WORKFLOW
+Transcribe in under 2 seconds right from your messaging app:
+1. Long-press any voice message in WhatsApp, Telegram, or Signal.
+2. Tap "Share" and pick DropScribe.
+3. Read the transcription in a floating overlay without leaving your chat!
+
+✓ 100% OFFLINE & PRIVATE
+Powered by on-device Whisper AI models. Your audio files and transcripts never touch an external server or leave your phone. Ideal for medical professionals, legal teams, executive briefings, and personal privacy.
+
+✓ ZERO ADS & NO SUBSCRIPTIONS
+No predatory recurring weekly fees. No 30-second unskippable video ads blocking your workflow. Enjoy unlimited free core offline transcription forever.
+
+✓ NO ACCOUNTS OR SIGN-UPS
+No phone numbers, no emails, no passwords. Open the app or share an audio clip, and it just works.
+
+✓ BUILT FOR MODERN ANDROID
+Engineered with clean Material You (Material 3) adaptive theming, dynamic colors, low battery consumption, and lightweight quantized neural speech engines.
+
+✓ POWERFUL PRO UPGRADES (ONE-TIME PURCHASE)
+Need studio-grade precision? Unlock Lifetime Pro for a single small payment:
+• Higher accuracy with quantized Whisper Small models
+• Speaker diarization & timeline markers
+• Batch export to Markdown, PDF, and SRT subtitle files
+• True AMOLED Black stealth mode
+
+Stop listening in silence. Start reading instantly with DropScribe.
