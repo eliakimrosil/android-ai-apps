@@ -1,0 +1,21 @@
+Tired of standing at the gas pump waiting for slow ads to load just to log a fill-up? Frustrated by mileage apps that demand an account, track your location, and lock basic CSV exports behind monthly subscriptions?
+
+Meet TankPulse: the lightning-fast, 100% offline fuel economy and mileage tracker engineered for drivers who value speed, privacy, and simplicity.
+
+WHY DRIVERS CHOOSE TANKPULSE:
+Most fuel logs have turned into bloated subscription traps with forced cloud accounts and 30-second unskippable video ads. TankPulse strips away the bloat. Track fuel efficiency, calculate MPG or L/100km, monitor vehicle running costs, and log fill-ups instantly without an internet connection.
+
+CORE FEATURES:
+✓ 100% Offline Fuel Log: Works seamlessly with zero cellular reception at remote highway gas stations.
+✓ 5-Second Quick Settings Tile: Log fill-ups directly from your Android notification shade without opening the full app.
+✓ Home Screen Glance Widget: Live rolling Cost-Per-Mile and estimated distance-to-empty right on your home screen.
+✓ Zero Account Creation: No sign-ups, no emails, no passwords, and zero tracking.
+✓ Instant Fuel Economy Math: Accurate MPG, L/100km, km/L, cost per gallon, and cost per mile calculation.
+✓ Clean Expense Tracking: Keep tabs on fuel costs, service intervals, and vehicle operating expenses.
+✓ Lifetime Simplicity: No monthly fees. Unlimited core logging free forever.
+✓ One-Time Pro Upgrade: Unlock multi-vehicle garage management, tax-ready PDF/CSV expense exports, and true AMOLED dark mode.
+
+BUILT FOR PRIVACY & SPEED:
+TankPulse operates entirely on-device with modern Material 3 design. Your financial and travel logs never leave your phone. No telemetry, no third-party ad networks, and no cloud dependency.
+
+Take control of your car expenses today with TankPulse—the fast, private fuel tracker that respects your time and data.

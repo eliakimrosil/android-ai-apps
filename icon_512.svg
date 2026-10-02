@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#1E1B4B" />
+    <!-- Background Decor -->
+    <path fill="#312E81" d="M54,16a38,38 0 1 1 0,76a38,38 0 1 1 0,-76" />
+    <!-- Foreground Iconography -->
+    <path fill="#C7D2FE" d="M54,18a36,36 0 1 1 0,72a36,36 0 1 1 0,-72 M50,38h8v20h-8z M50,64h8v8h-8z" />
+</svg>

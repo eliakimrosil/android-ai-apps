@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/m3_surface"
+    android:scrollbars="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TankPulse"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvAppSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Offline Fuel &amp; Mileage Tracker"
+                    android:textSize="13sp"
+                    android:textColor="@color/m3_on_surface_variant" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@drawable/btn_m3_outlined"
+                android:text="Theme: Auto"
+                android:textSize="12sp"
+                android:textColor="@color/m3_primary"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </LinearLayout>
+
+        <!-- Unit System Switcher Chips -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnUnitMetric"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/chip_active"
+                android:text="Metric (km, L, L/100km)"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_primary" />
+
+            <Button
+                android:id="@+id/btnUnitImperial"
+                android:layout_width="0dp"
+                android:layout_height="42dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/chip_inactive"
+                android:text="Imperial (mi, gal, MPG)"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface" />
+        </LinearLayout>
+
+        <!-- Hero Card: Consumption & Stats Overview -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:id="@+id/tvAvgConsumptionLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AVERAGE CONSUMPTION (L/100km)"
+                android:textSize="11sp"
+                android:letterSpacing="0.08"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_surface_variant" />
+
+            <TextView
+                android:id="@+id/tvAvgConsumption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="--"
+                android:textSize="44sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Sub Metrics Row 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Distance"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_on_surface_variant" />
+
+                    <TextView
+                        android:id="@+id/tvTotalDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 km"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Fuel"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_on_surface_variant" />
+
+                    <TextView
+                        android:id="@+id/tvTotalFuel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 L"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Sub Metrics Row 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Cost"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_on_surface_variant" />
+
+                    <TextView
+                        android:id="@+id/tvTotalSpent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="$0.00"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Cost / Distance"
+                        android:textSize="11sp"
+                        android:textColor="@color/m3_on_surface_variant" />
+
+                    <TextView
+                        android:id="@+id/tvCostPerDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-- / km"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/m3_on_surface" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- New Fill-Up Entry Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3_high"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="LOG FUEL FILL-UP"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.06"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Odometer with Steppers -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Odometer"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp">
+
+                <EditText
+                    android:id="@+id/etOdometer"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_m3"
+                    android:hint="Odometer (km)"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btnStepOdoMinus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/btn_stepper"
+                    android:text="-10"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_on_surface" />
+
+                <Button
+                    android:id="@+id/btnStepOdoPlus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/btn_stepper"
+                    android:text="+10"
+                    android:textSize="11sp"
+                    android:textColor="@color/m3_on_surface" />
+            </LinearLayout>
+
+            <!-- Fuel Volume with Steppers -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fuel Volume"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp">
+
+                <EditText
+                    android:id="@+id/etFuelVolume"
+                    android:layout_width="0dp"
+                    android:layout_height="48dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/edittext_m3"
+                    android:hint="Fuel added (L)"
+                    android:inputType="numberDecimal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="14sp" />
+
+                <Button
+                    android:id="@+id/btnStepFuelMinus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/btn_stepper"
+                    android:text="-1"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface" />
+
+                <Button
+                    android:id="@+id/btnStepFuelPlus"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/btn_stepper"
+                    android:text="+1"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface" />
+            </LinearLayout>
+
+            <!-- Pricing Fields Grid -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginEnd="6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Price per Unit"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <EditText
+                        android:id="@+id/etPricePerUnit"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/edittext_m3"
+                        android:hint="Price / L"
+                        android:inputType="numberDecimal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="6dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Total Cost"
+                        android:textSize="12sp"
+                        android:textColor="@color/m3_on_surface" />
+
+                    <EditText
+                        android:id="@+id/etTotalCost"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/edittext_m3"
+                        android:hint="Total Cost ($)"
+                        android:inputType="numberDecimal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp"
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Full tank flag & notes -->
+            <Switch
+                android:id="@+id/switchFullTank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tank filled to full (for precise consumption calculation)"
+                android:checked="true"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="13sp"
+                android:layout_marginBottom="12dp" />
+
+            <EditText
+                android:id="@+id/etNotes"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edittext_m3"
+                android:hint="Notes (e.g. Gas station name, Highway drive)"
+                android:inputType="textCapSentences"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp" />
+
+            <Button
+                android:id="@+id/btnAddLog"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:background="@drawable/btn_m3_primary"
+                android:text="Add Fuel Log Entry"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_primary" />
+        </LinearLayout>
+
+        <!-- Actions / Utility Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btnExportData"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/btn_m3_tonal"
+                android:text="Export CSV / Share"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textColor="@color/m3_on_surface" />
+
+            <Button
+                android:id="@+id/btnClearAll"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/btn_m3_outlined"
+                android:text="Clear History"
+                android:textSize="12sp"
+                android:textAllCaps="false"
+                android:textColor="@color/m3_error" />
+        </LinearLayout>
+
+        <!-- History List Header -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="FILL-UP HISTORY"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:textColor="@color/m3_on_surface"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/tvEmptyHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="No fuel entries yet. Record your first tank fill above."
+            android:textColor="@color/m3_on_surface_variant"
+            android:textSize="13sp"
+            android:padding="28dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/layoutHistoryContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+</ScrollView>
