@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/m3_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Header Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ParkPin"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/m3_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvAppSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Offline Spot Anchor"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface_variant" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theme: Auto"
+                android:textSize="12sp"
+                android:textColor="@color/m3_primary"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+
+        <!-- Live Navigation HUD -->
+        <LinearLayout
+            android:id="@+id/cardTelemetryHud"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_surface_card"
+            android:padding="18dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:id="@+id/tvGpsTelemetry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GPS: Acquiring fix..."
+                android:textSize="11sp"
+                android:fontFamily="monospace"
+                android:textColor="@color/m3_on_surface_variant"
+                android:layout_marginBottom="6dp" />
+
+            <TextView
+                android:id="@+id/tvCompassHeading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Heading: ---° --"
+                android:textSize="13sp"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="12dp" />
+
+            <TextView
+                android:id="@+id/tvDirectionArrow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="⚓"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvDistanceBearing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="No Active Spot Anchor Pinned"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/m3_on_surface"
+                android:layout_marginBottom="4dp" />
+
+            <TextView
+                android:id="@+id/tvLevelGuidance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Floor/Deck: --"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:textColor="@color/m3_on_surface_variant" />
+        </LinearLayout>
+
+        <!-- Multi-Deck & Spot Identification Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_surface_card"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Spot Identification"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="10dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etLevelNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Deck / Level (e.g. P2)"
+                    android:textSize="14sp"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/m3_on_surface"
+                    android:textColorHint="@color/m3_on_surface_variant"
+                    android:layout_marginEnd="8dp" />
+
+                <EditText
+                    android:id="@+id/etSpotNumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Bay / Spot (e.g. 42B)"
+                    android:textSize="14sp"
+                    android:inputType="textCapCharacters"
+                    android:textColor="@color/m3_on_surface"
+                    android:textColorHint="@color/m3_on_surface_variant" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etParkingNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Landmark / Pillar / Aisle Notes"
+                android:textSize="14sp"
+                android:inputType="textCapSentences"
+                android:textColor="@color/m3_on_surface"
+                android:textColorHint="@color/m3_on_surface_variant"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnDropPin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="⚓ Drop Anchor"
+                    android:textColor="@color/m3_on_primary"
+                    android:backgroundTint="@color/m3_primary"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnClearPin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Clear"
+                    android:textColor="@color/m3_on_surface"
+                    android:backgroundTint="@color/m3_surface_container" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnShareLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Share Pinned Coordinates"
+                android:textSize="13sp"
+                android:textColor="@color/m3_primary"
+                android:layout_marginTop="6dp"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+
+        <!-- Parking Meter Alarm Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_surface_card"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parking Meter Timer"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvMeterCountdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Meter: Inactive"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="@color/m3_on_surface"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnMeter15m"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+15m"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface"
+                    android:backgroundTint="@color/m3_surface_container"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnMeter30m"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+30m"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface"
+                    android:backgroundTint="@color/m3_surface_container"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnMeter60m"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="+60m"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface"
+                    android:backgroundTint="@color/m3_surface_container"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnMeterClear"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Reset"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface"
+                    android:backgroundTint="@color/m3_surface_container" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Parking History Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Recent Anchors History"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_surface" />
+
+            <Button
+                android:id="@+id/btnClearHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clear All"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface_variant"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/containerHistory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+</ScrollView>

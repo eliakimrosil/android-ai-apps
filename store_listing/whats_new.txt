@@ -1,0 +1,6 @@
+Initial release of ParkPin: Offline Spot Anchor (v1.0.0).
+- Offline parking location and note storage
+- Level, pillar, and zone recording
+- Photo snapshot attachment
+- Quick Settings Tile for instant spot saving
+- Home screen widget and ongoing notification support

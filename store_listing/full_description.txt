@@ -1,0 +1,11 @@
+ParkPin: Offline Spot Anchor helps you remember exactly where you parked your vehicle without relying on an active internet connection, GPS signal, or external accounts. Designed specifically for subterranean garages, multi-story parking structures, and crowded outdoor lots where cellular reception is unavailable, ParkPin provides a fast, offline-first experience directly on your device. Key Features: - True Offline Operation: All parking records, floor levels, notes, and photos are saved directly on your local device storage. No account creation, cloud sync, or internet connection required. - One-Tap Quick Settings Tile: Save your current spot instantly from your Android Quick Settings panel without opening the full application. - Multi-Level Structure Support: Record exact garage levels, pillar numbers, zone letters, and custom text notes for complex multi-story lots. - Visual Spot Anchor: Attach a local camera snapshot of your parking stall, nearby signs, or reference landmarks to easily guide you back. - Home Screen Widget: Monitor your saved stall details and floor level directly from your home screen using an interactive Android widget. - Ongoing Notification: Keep your saved spot handy in your notification shade for immediate one-tap reference when returning to your vehicle. - Lightweight and Private: Zero trackers, zero invasive permissions, and no background location tracking. Your data never leaves your device. ParkPin focuses entirely on quick utility so you can save your parking space in seconds and return to it with total confidence.
+
+
+Data Safety & Offline Privacy Guarantee:
+- 100% Offline: This application operates entirely on your device without requiring an active internet connection.
+- Zero Data Collection: We do not collect, monitor, track, store, or transmit any personal identifiable information (PII), device identifiers, or usage telemetry.
+- No Accounts or Subscriptions: Enjoy complete utility with zero account creation, logins, or hidden recurring fees.
+- Local Storage Only: All items, history, and preferences are retained strictly within on-device sandboxed storage.
+
+
+Notice of Non-Affiliation: All product and company names, logos, and brands mentioned are trademarks™ or registered® trademarks of their respective holders. Use of them does not imply any affiliation with or endorsement by them.
