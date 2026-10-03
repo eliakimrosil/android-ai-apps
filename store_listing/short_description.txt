@@ -1,0 +1,1 @@
+Calculate safe food defrost times and monitor danger zones completely offline.

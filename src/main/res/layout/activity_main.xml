@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/m3_surface"
+    android:clipToPadding="false"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Top Header & Theme Switcher -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ThawGuard Sentinel"
+                    android:textStyle="bold"
+                    android:textSize="22sp"
+                    android:textColor="@color/m3_on_surface" />
+
+                <TextView
+                    android:id="@+id/tvSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Food Defrost &amp; Danger-Zone Physics Sentinel"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface_variant" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="⚙️ Theme"
+                android:textSize="12sp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:backgroundTint="@color/m3_surface_container"
+                android:textColor="@color/m3_on_surface" />
+        </LinearLayout>
+
+        <!-- Live Timer Display HUD -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/m3_surface_container"
+            android:padding="18dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:id="@+id/tvTimerStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="READY TO MONITOR"
+                android:letterSpacing="0.1"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:textColor="@color/m3_primary" />
+
+            <TextView
+                android:id="@+id/tvTimerCountdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:fontFamily="monospace"
+                android:textStyle="bold"
+                android:textSize="44sp"
+                android:textColor="@color/m3_on_surface"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnStartTimer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="START SENTINEL"
+                    android:textStyle="bold"
+                    android:backgroundTint="@color/m3_primary"
+                    android:textColor="@color/m3_on_primary" />
+
+                <Button
+                    android:id="@+id/btnResetTimer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="RESET"
+                    android:layout_marginStart="8dp"
+                    android:backgroundTint="@color/m3_surface"
+                    android:textColor="@color/m3_on_surface" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Food Category Selector Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/m3_surface_container"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1. SELECT TARGET PROTEIN / FOOD DENSITY"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface_variant" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fillViewport="true"
+                android:scrollbars="none"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnFoodPoultry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🍗 Poultry"
+                        android:backgroundTint="@color/m3_primary"
+                        android:textColor="@color/m3_on_primary"
+                        android:layout_marginEnd="6dp" />
+
+                    <Button
+                        android:id="@+id/btnFoodRedMeat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🥩 Beef / Pork"
+                        android:backgroundTint="@color/m3_primary"
+                        android:textColor="@color/m3_on_primary"
+                        android:layout_marginEnd="6dp" />
+
+                    <Button
+                        android:id="@+id/btnFoodFish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🐟 Seafood"
+                        android:backgroundTint="@color/m3_primary"
+                        android:textColor="@color/m3_on_primary"
+                        android:layout_marginEnd="6dp" />
+
+                    <Button
+                        android:id="@+id/btnFoodCasserole"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🥘 Casserole"
+                        android:backgroundTint="@color/m3_primary"
+                        android:textColor="@color/m3_on_primary" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Thawing Method Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/m3_surface_container"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2. SELECT THAWING ENVIRONMENT"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface_variant" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp">
+
+                <Button
+                    android:id="@+id/btnMethodFridge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="❄️ Refrig."
+                    android:textSize="11sp"
+                    android:backgroundTint="@color/m3_primary"
+                    android:textColor="@color/m3_on_primary"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnMethodColdWater"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="💧 Submerged"
+                    android:textSize="11sp"
+                    android:backgroundTint="@color/m3_primary"
+                    android:textColor="@color/m3_on_primary"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnMethodMicrowave"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="⚡ Microwave"
+                    android:textSize="11sp"
+                    android:backgroundTint="@color/m3_primary"
+                    android:textColor="@color/m3_on_primary" />
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/switchWaterAlarm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="30-Min Submersion Water Change Alarm"
+                android:textStyle="bold"
+                android:textColor="@color/m3_on_surface"
+                android:layout_marginTop="12dp"
+                android:checked="true"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tvWaterAlarmNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Cold water thawing requires replacing the water bath every 30 minutes to prevent surface bacteria growth."
+                android:textSize="11sp"
+                android:textColor="@color/m3_on_surface_variant"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Weight & Thickness Telemetry Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/m3_surface_container"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3. PHYSICAL DIMENSIONS &amp; MASS"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface_variant" />
+
+            <!-- Weight -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mass: "
+                    android:textColor="@color/m3_on_surface"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvWeightDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1000 g (1.00 kg / 2.20 lbs)"
+                    android:textColor="@color/m3_primary"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekWeight"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+
+            <!-- Thickness -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cross-Cut Thickness: "
+                    android:textColor="@color/m3_on_surface"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvThicknessDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 cm (approx. 1.2 in)"
+                    android:textColor="@color/m3_primary"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/seekThickness"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Calculated Protocol & Safety Directives -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/m3_surface_container"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4. COMPUTED DURATION &amp; DIRECTIVE"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/m3_on_surface_variant" />
+
+            <TextView
+                android:id="@+id/tvCalculatedEstimate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="10 hrs 0 mins"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/m3_primary"
+                android:layout_marginTop="4dp" />
+
+            <TextView
+                android:id="@+id/tvDangerZoneSafetyProtocol"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Safety protocol placeholder"
+                android:textSize="12sp"
+                android:lineSpacingExtra="3dp"
+                android:textColor="@color/m3_on_surface"
+                android:layout_marginTop="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="12dp">
+
+                <Button
+                    android:id="@+id/btnShareProtocol"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="📤 Share Protocol"
+                    android:backgroundTint="@color/m3_surface"
+                    android:textColor="@color/m3_on_surface"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnCopyProtocol"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="📋 Copy Text"
+                    android:backgroundTint="@color/m3_surface"
+                    android:textColor="@color/m3_on_surface" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Thaw Audit History Logs -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/m3_surface_container"
+            android:padding="14dp"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="SESSION TELEMETRY LOGS"
+                    android:textStyle="bold"
+                    android:textSize="12sp"
+                    android:textColor="@color/m3_on_surface_variant" />
+
+                <Button
+                    android:id="@+id/btnClearHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clear"
+                    android:textSize="11sp"
+                    android:backgroundTint="@color/m3_surface"
+                    android:textColor="@color/m3_on_surface" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutHistoryContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

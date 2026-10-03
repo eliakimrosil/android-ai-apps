@@ -1,0 +1,6 @@
+Initial release of ThawGuard (v1.0.0).
+- Algorithmic defrost calculator for poultry, beef, pork, and seafood.
+- Support for refrigerator, cold-water bath, and microwave defrost methods.
+- Temperature danger zone threshold alerts.
+- Android Quick Settings tile for rapid session starts.
+- Fully offline architecture with zero data collection.
