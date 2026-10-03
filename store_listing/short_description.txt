@@ -1,0 +1,1 @@
+Private, offline ephemeral scratchpad for rapid temporary note-taking.

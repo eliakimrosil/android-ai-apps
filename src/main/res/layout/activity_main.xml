@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/m3_surface">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- App Header Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_name"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvStatusSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/app_tagline"
+                    android:textColor="@color/m3_outline"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/theme_mode_auto"
+                android:textSize="12sp"
+                android:background="@drawable/btn_m3_outlined"
+                android:textColor="@color/m3_primary"
+                android:layout_marginEnd="8dp"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp" />
+
+            <Button
+                android:id="@+id/btnPanicWipe"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text="@string/action_panic_wipe"
+                android:textSize="12sp"
+                android:background="@drawable/btn_m3_primary"
+                android:textColor="@color/m3_on_primary"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp" />
+        </LinearLayout>
+
+        <!-- Hero Ephemeral Scratchpad Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- Card Header: Title & Wipe Countdown -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/label_scratchpad"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvWipeTimerCountdown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wipe_countdown_default"
+                    android:textColor="@color/m3_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Progress bar reflecting auto wipe TTL -->
+            <ProgressBar
+                android:id="@+id/pbWipeTimer"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:max="60"
+                android:progress="60"
+                android:progressTint="@color/m3_primary"
+                android:progressBackgroundTint="@color/m3_outline"
+                android:layout_marginBottom="14dp" />
+
+            <!-- Secret Multiline Input -->
+            <EditText
+                android:id="@+id/etSecretNote"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:gravity="top|start"
+                android:hint="@string/hint_enter_secret"
+                android:textColor="@color/m3_on_surface"
+                android:textColorHint="@color/m3_outline"
+                android:background="@drawable/edittext_m3"
+                android:padding="16dp"
+                android:textSize="15sp"
+                android:scrollbars="vertical"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:importantForAutofill="no" />
+
+            <!-- Counter row & SHA-256 fingerprint -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvCharCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/counter_chars_default"
+                    android:textColor="@color/m3_outline"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvWordCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/counter_words_default"
+                    android:textColor="@color/m3_outline"
+                    android:textSize="12sp"
+                    android:layout_marginEnd="12dp" />
+
+                <TextView
+                    android:id="@+id/tvSecurityHash"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="end"
+                    android:text="@string/hash_idle"
+                    android:textColor="@color/m3_outline"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Quick Action Buttons -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginTop="16dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <Button
+                        android:id="@+id/btnCopyClipboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="@string/action_copy"
+                        android:textSize="12sp"
+                        android:background="@drawable/btn_m3_tonal"
+                        android:textColor="@color/m3_primary"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/btnPasteClipboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="@string/action_paste"
+                        android:textSize="12sp"
+                        android:background="@drawable/btn_m3_tonal"
+                        android:textColor="@color/m3_primary"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/btnShareNote"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="@string/action_share"
+                        android:textSize="12sp"
+                        android:background="@drawable/btn_m3_tonal"
+                        android:textColor="@color/m3_primary"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/btnSaveSecret"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="@string/action_vault_save"
+                        android:textSize="12sp"
+                        android:background="@drawable/btn_m3_primary"
+                        android:textColor="@color/m3_on_primary"
+                        android:layout_marginEnd="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+
+                    <Button
+                        android:id="@+id/btnClearDraft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="38dp"
+                        android:text="@string/action_clear"
+                        android:textSize="12sp"
+                        android:background="@drawable/btn_m3_outlined"
+                        android:textColor="@color/m3_outline"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp" />
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
+        <!-- Ephemeral Controls Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/card_m3"
+            android:padding="20dp"
+            android:layout_marginBottom="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/section_ephemeral_controls"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Auto Wipe Duration Stepper / SeekBar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/setting_auto_wipe"
+                    android:textColor="@color/m3_on_surface"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/tvAutoWipeDurationLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wipe_timer_default_label"
+                    android:textColor="@color/m3_primary"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbAutoWipeDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:min="10"
+                android:max="300"
+                android:progress="60"
+                android:progressTint="@color/m3_primary"
+                android:thumbTint="@color/m3_primary"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Stealth Mode (FLAG_SECURE) Toggle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_stealth_title"
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_stealth_desc"
+                        android:textColor="@color/m3_outline"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swStealthMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Mask Content Toggle -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_mask_title"
+                        android:textColor="@color/m3_on_surface"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting_mask_desc"
+                        android:textColor="@color/m3_outline"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <Switch
+                    android:id="@+id/swMaskContent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Self-destruct on background Checkbox -->
+            <CheckBox
+                android:id="@+id/cbSelfDestructOnBackground"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting_destruct_background"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <!-- Saved Ephemeral Vault Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/tvVaultHeader"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/vault_header_default"
+                android:textColor="@color/m3_on_surface"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/btnClearAllVault"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:text="@string/action_clear_all"
+                android:textSize="11sp"
+                android:background="@drawable/btn_m3_outlined"
+                android:textColor="@color/m3_outline"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp" />
+        </LinearLayout>
+
+        <!-- Dynamic Container for Vaulted Items -->
+        <LinearLayout
+            android:id="@+id/llSavedNotesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+</ScrollView>

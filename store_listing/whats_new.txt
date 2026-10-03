@@ -1,0 +1,5 @@
+Initial release (v1.0.0):
+• Instant offline ephemeral scratchpad.
+• Quick Settings Tile integration for rapid access.
+• Floating overlay window mode for seamless multitasking.
+• Customizable automatic clearing and local storage settings.

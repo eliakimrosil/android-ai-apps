@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">StealthDrop: Offline Ephemeral Scratchpad</string>
+    <string name="app_tagline">Offline Ephemeral Scratchpad</string>
+    <string name="stealth_active_shield">Stealth Active • Window Shielded</string>
+
+    <!-- Theme Modes -->
+    <string name="theme_mode_auto">Theme: Auto</string>
+    <string name="theme_mode_dark">Theme: Dark</string>
+    <string name="theme_mode_light">Theme: Light</string>
+
+    <!-- Header Actions -->
+    <string name="action_panic_wipe">Panic Wipe</string>
+
+    <!-- Scratchpad Section -->
+    <string name="label_scratchpad">Ephemeral Scratchpad</string>
+    <string name="wipe_countdown_default">Wipe in 60s</string>
+    <string name="wipe_countdown_format">Wipe in %1$ds</string>
+    <string name="hint_enter_secret">Type or paste sensitive secret here…</string>
+    <string name="counter_chars_default">0 chars</string>
+    <string name="counter_words_default">0 words</string>
+    <string name="counter_chars">%1$d chars</string>
+    <string name="counter_words">%1$d words</string>
+    <string name="hash_idle">SHA: IDLE</string>
+    <string name="hash_prefix">SHA: %1$s</string>
+
+    <!-- Action Buttons -->
+    <string name="action_copy">Copy</string>
+    <string name="action_paste">Paste</string>
+    <string name="action_share">Share</string>
+    <string name="action_vault_save">Save Vault</string>
+    <string name="action_clear">Clear</string>
+    <string name="action_clear_all">Clear All</string>
+
+    <!-- Ephemeral Controls Section -->
+    <string name="section_ephemeral_controls">Ephemeral &amp; Privacy Settings</string>
+    <string name="setting_auto_wipe">Auto-Wipe Timer</string>
+    <string name="wipe_timer_default_label">60s</string>
+    <string name="wipe_timer_format">%1$ds</string>
+    <string name="wipe_timer_off">Timer Off</string>
+    <string name="wipe_triggered">Wiped!</string>
+
+    <string name="setting_stealth_title">Stealth Mode (FLAG_SECURE)</string>
+    <string name="setting_stealth_desc">Blocks screenshots and app switcher preview</string>
+    <string name="setting_mask_title">Mask Sensitive Content</string>
+    <string name="setting_mask_desc">Obfuscates text with dots (Alt+Space to toggle)</string>
+    <string name="setting_destruct_background">Self-destruct scratchpad when app moves to background</string>
+
+    <!-- Vault / History Section -->
+    <string name="vault_header_default">Saved Vault</string>
+    <string name="vault_title_count">Saved Vault (%1$d)</string>
+    <string name="vault_title_error">Saved Vault</string>
+    <string name="vault_empty_notice">No encrypted notes saved in local vault.</string>
+    <string name="btn_restore">Restore</string>
+    <string name="btn_delete">Delete</string>
+
+    <!-- Toast & Intent Messages -->
+    <string name="msg_empty_note">Scratchpad is empty</string>
+    <string name="msg_copied">Copied to clipboard</string>
+    <string name="msg_pasted">Pasted from clipboard</string>
+    <string name="msg_clipboard_empty">Clipboard is empty</string>
+    <string name="share_title">Share Secret via</string>
+    <string name="msg_note_vaulted">Secret vaulted</string>
+    <string name="msg_vault_error">Failed to save note</string>
+    <string name="msg_restored_to_scratchpad">Restored note to scratchpad</string>
+    <string name="msg_vault_item_deleted">Vault entry deleted</string>
+    <string name="msg_vault_cleared">Vault cleared</string>
+    <string name="msg_panic_wiped">Panic wipe completed: all scratchpad, vault &amp; clipboard data wiped</string>
+</resources>
