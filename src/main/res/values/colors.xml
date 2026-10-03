@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 Expressive Light Theme Color Tokens -->
+    <color name="colorPrimary">#E11D48</color>
+    <color name="colorPrimaryDark">#FFF8F6</color>
+    <color name="colorAccent">#E11D48</color>
+    <color name="windowBackground">#FFF8F6</color>
+
+    <color name="m3_primary">#BA1A1A</color>
+    <color name="m3_on_primary">#FFFFFF</color>
+    <color name="m3_primary_container">#FFDAD6</color>
+    <color name="m3_on_primary_container">#410002</color>
+
+    <color name="m3_secondary">#775653</color>
+    <color name="m3_on_secondary">#FFFFFF</color>
+    <color name="m3_secondary_container">#FFDAD6</color>
+    <color name="m3_on_secondary_container">#2C1513</color>
+
+    <color name="m3_tertiary">#715B2E</color>
+    <color name="m3_on_tertiary">#FFFFFF</color>
+    <color name="m3_tertiary_container">#FEDF96</color>
+    <color name="m3_on_tertiary_container">#261A00</color>
+
+    <color name="m3_surface">#FFF8F6</color>
+    <color name="m3_surface_container">#FCEAE7</color>
+    <color name="m3_surface_container_high">#F6E4E1</color>
+    <color name="m3_surface_container_highest">#F1DFDC</color>
+
+    <color name="m3_on_surface">#231918</color>
+    <color name="m3_on_surface_variant">#534342</color>
+    <color name="m3_outline">#857371</color>
+    <color name="m3_outline_variant">#D8C2C0</color>
+
+    <color name="m3_success">#1B6D36</color>
+    <color name="m3_on_success">#FFFFFF</color>
+    <color name="m3_error">#BA1A1A</color>
+    <color name="m3_on_error">#FFFFFF</color>
+
+    <!-- Legacy compatibility aliases -->
+    <color name="cardBackground">#FCEAE7</color>
+    <color name="cardStroke">#D8C2C0</color>
+    <color name="textPrimary">#231918</color>
+    <color name="textSecondary">#534342</color>
+    <color name="btnColor">#BA1A1A</color>
+    <color name="btnTextColor">#FFFFFF</color>
+</resources>

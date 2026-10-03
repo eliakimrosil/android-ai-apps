@@ -1,0 +1,5 @@
+Initial release of OmniStream Screen Live Studio (v1.0.0).
+- Hardware-accelerated H.264 screen capture and RTMP/RTMPS broadcasting.
+- Configurable front-facing camera overlay.
+- High-fidelity microphone and internal audio capture.
+- Real-time connection and bitrate monitoring.
