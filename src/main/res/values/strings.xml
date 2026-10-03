@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MeterPulse - Offline Parking Sentinel</string>
+    <string name="app_title">MeterPulse</string>
+    <string name="app_subtitle">Offline Parking Sentinel</string>
+    <string name="theme_auto">Theme: Auto</string>
+    <string name="theme_light">Theme: Light</string>
+    <string name="theme_dark">Theme: Dark</string>
+    <string name="status_meter_standby">STANDBY</string>
+    <string name="status_parked_active">ACTIVE SESSION</string>
+    <string name="status_expiring_soon">EXPIRING SOON</string>
+    <string name="status_meter_expired">EXPIRED</string>
+    <string name="timer_placeholder">00:00:00</string>
+    <string name="no_active_session">No Active Session</string>
+    <string name="default_cost">$0.00</string>
+    <string name="action_start_parking">Start Meter</string>
+    <string name="action_stop">Stop</string>
+    <string name="action_extend_15">+15m Quick Extend</string>
+    <string name="label_duration_setting">Duration</string>
+    <string name="default_duration">60 min</string>
+    <string name="duration_min_format">%d min</string>
+    <string name="step_minus_15">-15m</string>
+    <string name="step_minus_5">-5m</string>
+    <string name="step_plus_5">+5m</string>
+    <string name="step_plus_15">+15m</string>
+    <string name="step_plus_30">+30m</string>
+    <string name="step_plus_60">+60m</string>
+    <string name="section_spot_details">Spot &amp; Rate Details</string>
+    <string name="hint_spot_level">Spot / Level (e.g. 4B)</string>
+    <string name="hint_rate">Rate / hr ($)</string>
+    <string name="hint_notes">Notes (e.g. Pillar near elevator)</string>
+    <string name="action_share">Share Spot</string>
+    <string name="action_copy">Copy Info</string>
+    <string name="alert_buffer_default">Alert Buffer: 5 min before</string>
+    <string name="alert_buffer_format">Alert Buffer: %d min before</string>
+    <string name="setting_sound_alert">Sound Alert</string>
+    <string name="setting_vibrate_alert">Vibration Alert</string>
+    <string name="setting_keep_screen_on">Keep Screen On</string>
+    <string name="section_recent_sessions">Recent Sessions</string>
+    <string name="action_clear">Clear</string>
+    <string name="no_parking_history">No recent parking sessions recorded.</string>
+    <string name="expires_at_format">Expires at %s</string>
+</resources>

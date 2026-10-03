@@ -1,0 +1,1 @@
+Initial release of MeterPulse. Quick Settings integration, interactive home screen widget support, and offline parking countdown alarms.
