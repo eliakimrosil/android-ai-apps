@@ -1,0 +1,1 @@
+Cold plunge timer with haptic breathing pacing and Quick Settings access.

@@ -1,0 +1,1 @@
+Initial release of CryoPulse (v1.0.0). Features an offline cold plunge timer, customizable haptic breath pacer, Quick Settings tile integration, and lock screen ongoing notifications.

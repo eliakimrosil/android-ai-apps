@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Top App Bar & Theme Toggle -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CRYO PULSE"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cold Plunge Sentinel • Precision Autonomics"
+                    android:textSize="12sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Auto Theme"
+                android:textSize="12sp"
+                style="?android:attr/buttonBarStyle" />
+        </LinearLayout>
+
+        <!-- Sentinel HUD / Timer Display Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="?android:attr/colorBackgroundFloating"
+            android:padding="24dp"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="18dp">
+
+            <TextView
+                android:id="@+id/tvStatusBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="READY"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:letterSpacing="0.12"
+                android:textColor="?android:attr/colorAccent"
+                android:paddingBottom="8dp" />
+
+            <!-- Ultra-readable Timer Digits -->
+            <TextView
+                android:id="@+id/tvTimerDisplay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02:30"
+                android:textSize="64sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <TextView
+                android:id="@+id/tvTimerSubtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set temperature &amp; duration below"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:textColor="?android:attr/textColorSecondary"
+                android:paddingBottom="16dp" />
+
+            <ProgressBar
+                android:id="@+id/pbPlungeProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="12dp"
+                android:max="100"
+                android:progress="0"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Guided Breath Pacer Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tvBreathCue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Autonomic Breath Control: Standby"
+                    android:textSize="13sp"
+                    android:textStyle="italic"
+                    android:gravity="center"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:paddingBottom="6dp" />
+
+                <ProgressBar
+                    android:id="@+id/pbBreathVisualizer"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:max="100"
+                    android:progress="0" />
+            </LinearLayout>
+
+            <!-- Primary Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:text="RESET"
+                    android:layout_marginEnd="8dp" />
+
+                <Button
+                    android:id="@+id/btnStartPause"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="2"
+                    android:text="START IMMERSION"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnLogManual"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Completed Session Directly"
+                android:textSize="12sp"
+                android:layout_marginTop="8dp"
+                style="?android:attr/borderlessButtonStyle" />
+        </LinearLayout>
+
+        <!-- Protocol Presets -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROTOCOL PRESETS"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="20dp">
+
+            <Button
+                android:id="@+id/btnPresetBeginner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Beginner (1m)"
+                android:textSize="11sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnPresetStandard"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Standard (2.5m)"
+                android:textSize="11sp"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnPresetSovereign"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Elite (4m)"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Environment & Target Configuration -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TEMPERATURE &amp; SAFETY CONFIGURATION"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="?android:attr/colorBackgroundFloating"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <!-- Temperature Input -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Water Temperature:"
+                    android:textSize="14sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <EditText
+                    android:id="@+id/etWaterTemp"
+                    android:layout_width="72dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:text="10.0"
+                    android:textAlignment="center"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <RadioGroup
+                    android:id="@+id/rgTempUnit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginStart="8dp">
+
+                    <RadioButton
+                        android:id="@+id/rbCelsius"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="°C"
+                        android:checked="true" />
+
+                    <RadioButton
+                        android:id="@+id/rbFahrenheit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="°F" />
+                </RadioGroup>
+            </LinearLayout>
+
+            <!-- Safety Recommendation Advisory -->
+            <TextView
+                android:id="@+id/tvSafetyRecommendation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="OPTIMAL CRYOTHERAPY: Active cold shock protein synthesis."
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/colorAccent"
+                android:padding="10dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Immersion Minutes Slider -->
+            <TextView
+                android:id="@+id/tvTargetDurationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="02:30 Target Immersion"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="Min:"
+                    android:textSize="12sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+
+                <SeekBar
+                    android:id="@+id/sbTargetMin"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="15"
+                    android:progress="2" />
+            </LinearLayout>
+
+            <!-- Immersion Seconds Slider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="12dp">
+
+                <TextView
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:text="Sec:"
+                    android:textSize="12sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+
+                <SeekBar
+                    android:id="@+id/sbTargetSec"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:max="59"
+                    android:progress="30" />
+            </LinearLayout>
+
+            <!-- Preparation Buffer Slider -->
+            <TextView
+                android:id="@+id/tvPrepDurationLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15s Ready Buffer"
+                android:textSize="14sp"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <SeekBar
+                android:id="@+id/sbPrepSec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="60"
+                android:progress="15"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Toggles -->
+            <Switch
+                android:id="@+id/swGuidedBreath"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Guided Vagus Breath Pacing"
+                android:textColor="?android:attr/textColorPrimary"
+                android:checked="true"
+                android:layout_marginBottom="8dp" />
+
+            <Switch
+                android:id="@+id/swSoundChimes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Acoustic Sentinel Chimes &amp; Alerts"
+                android:textColor="?android:attr/textColorPrimary"
+                android:checked="true" />
+        </LinearLayout>
+
+        <!-- Cumulative Telemetry & Stats -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PLUNGE TELEMETRY &amp; HISTORY"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"
+            android:textColor="?android:attr/textColorSecondary"
+            android:layout_marginBottom="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="?android:attr/colorBackgroundFloating"
+                android:padding="14dp"
+                android:layout_marginEnd="6dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvTotalDipsCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Dips"
+                    android:textSize="11sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="?android:attr/colorBackgroundFloating"
+                android:padding="14dp"
+                android:layout_marginStart="6dp"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvTotalTimeCumulative"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0m 00s"
+                    android:textSize="26sp"
+                    android:textStyle="bold"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Immersion Time"
+                    android:textSize="11sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Session Logs List Container -->
+        <LinearLayout
+            android:id="@+id/llLogsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="16dp" />
+
+        <!-- History Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <Button
+                android:id="@+id/btnExportShare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Export &amp; Share"
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/btnClearHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Clear History"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
