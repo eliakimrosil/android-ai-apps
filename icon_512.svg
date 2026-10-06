@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0F172A" />
+    <!-- Background Decor -->
+    <path fill="#1E293B" d="M54,12 C30.8,12 12,30.8 12,54 C12,77.2 30.8,96 54,96 C77.2,96 96,77.2 96,54 C96,30.8 77.2,12 54,12 Z" /><path fill="#132238" d="M54,20 C35.2,20 20,35.2 20,54 C20,72.8 35.2,88 54,88 C72.8,88 88,72.8 88,54 C88,35.2 72.8,20 54,20 Z" />
+    <!-- Foreground Iconography -->
+    <path stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" fill="#00000000" d="M30,54 A24,24 0 0,1 78,54" /><path stroke="#818CF8" stroke-width="3.5" stroke-linecap="round" fill="#00000000" d="M54,28 A26,26 0 1,1 28,54" /><path fill="#F8FAFC" d="M54,34 L54,54 L68,62" stroke="#F8FAFC" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" /><path stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" fill="#00000000" d="M42,74 C46,71 50,71 54,74 C58,77 62,77 66,74" /><path stroke="#818CF8" stroke-width="2" stroke-linecap="round" fill="#00000000" d="M46,80 C49,78 51,78 54,80 C57,82 59,82 62,80" /><path fill="#E0F2FE" d="M74,32 L75.5,36.5 L80,38 L75.5,39.5 L74,44 L72.5,39.5 L68,38 L72.5,36.5 Z" />
+</svg>

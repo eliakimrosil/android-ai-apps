@@ -1,0 +1,5 @@
+Initial release of AuraFocus v1.0.0:
+• Clean interval countdown timer with custom work and break durations.
+• Local ambient sound generator with offline audio playback.
+• Interactive home screen widget and Quick Settings tile support.
+• Zero sign-in requirement and full offline functionality.
