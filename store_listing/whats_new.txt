@@ -1,0 +1,1 @@
+Initial release of SnoozeGuard Commute Alarm. Includes offline motion-assisted commute timers, private haptic alarm alerts, and Android Quick Settings tile support.
