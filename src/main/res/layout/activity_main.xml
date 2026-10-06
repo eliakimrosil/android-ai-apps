@@ -1,0 +1,425 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainScrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?android:attr/colorBackground">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header Telemetry Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppBrand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="STEEPPULSE"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:letterSpacing="0.08"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Offline Multi-Infusion Sentinel"
+                    android:textSize="12sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theme: Auto"
+                android:textSize="12sp"
+                style="?android:attr/buttonStyleSmall" />
+        </LinearLayout>
+
+        <!-- Horizontal Preset Selector Strip -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CURATED INFUSION PROTOCOLS"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorSecondary"
+            android:paddingBottom="4dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:id="@+id/llPresetChipsContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- Sentinel Status & Timer Central Display Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:background="?android:attr/colorBackgroundFloating"
+            android:elevation="4dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tvProfileCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RAW AGED TEA"
+                android:textSize="11sp"
+                android:letterSpacing="0.12"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorSecondary" />
+
+            <TextView
+                android:id="@+id/tvProfileName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gongfu Sheng Pu'er"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:paddingTop="2dp"
+                android:paddingBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/tvCurrentSteepOrdinal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Steep #1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvInfusionProgressIndicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" • 1 of 8 Passes"
+                    android:textSize="14sp"
+                    android:textColor="?android:attr/textColorSecondary" />
+            </LinearLayout>
+
+            <!-- Ultra-High Contrast Monospace Timer Display -->
+            <TextView
+                android:id="@+id/tvTimerCountdown"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00:15"
+                android:fontFamily="monospace"
+                android:textSize="64sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorPrimary"
+                android:paddingTop="12dp"
+                android:paddingBottom="12dp" />
+
+            <!-- Circular/Horizontal Precise Progress Fill -->
+            <ProgressBar
+                android:id="@+id/pbSteepProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:max="1000"
+                android:progress="1000"
+                android:indeterminate="false" />
+
+            <!-- Primary Control Deck -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:paddingTop="16dp">
+
+                <Button
+                    android:id="@+id/btnReset"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reset"
+                    style="?android:attr/buttonStyleSmall" />
+
+                <Button
+                    android:id="@+id/btnStartPause"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Start Sentinel"
+                    android:textStyle="bold"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/btnPrevInfusion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="◄ Prev"
+                    style="?android:attr/buttonStyleSmall" />
+
+                <Button
+                    android:id="@+id/btnNextInfusion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Next ►"
+                    style="?android:attr/buttonStyleSmall" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Steeping Curve Interactive Ribbon -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="INFUSION EXTRACTION SEQUENCE"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:textColor="?android:attr/textColorSecondary"
+            android:paddingTop="16dp"
+            android:paddingBottom="6dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/llInfusionCurveBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+        </HorizontalScrollView>
+
+        <!-- Calibration & Sensory Notes Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXTRACTION CALIBRATION"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="?android:attr/textColorSecondary" />
+
+            <!-- Temperature Slider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Water Temperature:"
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvTempDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="98°C (208°F)"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbTemperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="50"
+                android:progress="48"
+                android:paddingTop="4dp"
+                android:paddingBottom="8dp" />
+
+            <!-- Water Ratio Slider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Vessel Volume:"
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <TextView
+                    android:id="@+id/tvWaterRatioValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="120 ml total liquor"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbWaterRatio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="50"
+                android:progress="7"
+                android:paddingTop="4dp"
+                android:paddingBottom="8dp" />
+
+            <!-- Leaf Dose & Flavor Descriptor Inputs -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Leaf Dose (g): "
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+
+                <EditText
+                    android:id="@+id/etLeafWeight"
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:text="8"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Sensory / Protocol Name:"
+                    android:textSize="13sp"
+                    android:textColor="?android:attr/textColorPrimary" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etSensoryNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="e.g., Wild camphor, minerality, orchid aroma"
+                android:textSize="13sp"
+                android:singleLine="true"
+                android:layout_marginTop="4dp" />
+
+            <!-- Protocol Actions -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="6dp">
+
+                <Button
+                    android:id="@+id/btnSaveCustomProfile"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="Save As Custom"
+                    style="?android:attr/buttonStyleSmall" />
+
+                <Button
+                    android:id="@+id/btnCopyTastingLog"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Copy Recipe"
+                    style="?android:attr/buttonStyleSmall" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Session History & Extraction Log -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:text="SESSION EXTRACTION TELEMETRY"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="?android:attr/textColorSecondary" />
+
+                <Button
+                    android:id="@+id/btnExportHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Share"
+                    style="?android:attr/buttonStyleSmall" />
+
+                <Button
+                    android:id="@+id/btnClearHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="Clear"
+                    style="?android:attr/buttonStyleSmall" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvTastingHistoryFeed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:layout_marginTop="6dp"
+                android:background="?android:attr/colorBackgroundFloating"
+                android:fontFamily="monospace"
+                android:textSize="11sp"
+                android:lineSpacingExtra="4dp"
+                android:textColor="?android:attr/textColorPrimary" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

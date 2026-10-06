@@ -1,0 +1,1 @@
+Initial release of SteepPulse v1.0.0 featuring multi-infusion steep sequencing, background brewing chronometer notification, Quick Settings tile support, and offline recipe logging.
