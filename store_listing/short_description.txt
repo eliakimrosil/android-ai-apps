@@ -1,0 +1,1 @@
+Offline multi-stage laundry timer with smart reminders and persistent alerts.

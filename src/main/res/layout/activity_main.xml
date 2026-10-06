@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Header & App Bar -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CycleGuard"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#38BDF8" />
+
+                <TextView
+                    android:id="@+id/tvAppSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Laundry Sentinel HUD"
+                    android:textSize="12sp"
+                    android:textColor="#94A3B8" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:text="Theme: Auto"
+                android:textSize="12sp"
+                android:backgroundTint="#334155"
+                android:textColor="#F8FAFC" />
+        </LinearLayout>
+
+        <!-- Sentinel Status Banner -->
+        <TextView
+            android:id="@+id/tvStatusBadge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SENTINEL STANDBY - IDLE"
+            android:textAlignment="center"
+            android:paddingVertical="8dp"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:background="#374151" />
+
+        <!-- High-Visibility Main Timer Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="24dp"
+            android:layout_marginVertical="12dp"
+            android:background="#0F172A">
+
+            <TextView
+                android:id="@+id/tvApplianceIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="WASHER MODE"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:background="#0F766E" />
+
+            <TextView
+                android:id="@+id/tvCountdownTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="45:00"
+                android:textSize="68sp"
+                android:textStyle="bold"
+                android:fontFamily="monospace"
+                android:textColor="#38BDF8"
+                android:layout_marginVertical="8dp" />
+
+            <TextView
+                android:id="@+id/tvCycleDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Normal Cotton | WASHER"
+                android:textSize="15sp"
+                android:textColor="#E2E8F0" />
+        </LinearLayout>
+
+        <!-- Appliance Mode & Load Label Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:gravity="center_vertical">
+
+            <Button
+                android:id="@+id/btnToggleAppliance"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:text="Switch to Dryer"
+                android:textSize="12sp"
+                android:backgroundTint="#0284C7"
+                android:textColor="#FFFFFF" />
+
+            <EditText
+                android:id="@+id/etLoadNotes"
+                android:layout_width="0dp"
+                android:layout_height="44dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:hint="Load tag (e.g. Delicates, Towels, Bedding)"
+                android:textColorHint="#64748B"
+                android:textColor="#F8FAFC"
+                android:textSize="13sp"
+                android:paddingHorizontal="10dp"
+                android:background="#1E293B"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- Presets Quick Select Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SELECT PRESET CYCLE"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#94A3B8"
+            android:layout_marginBottom="6dp" />
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnPresetQuick"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="Quick Wash (25m)"
+                    android:textSize="11sp"
+                    android:backgroundTint="#1E293B"
+                    android:textColor="#F1F5F9"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnPresetNormal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="Normal Cotton (45m)"
+                    android:textSize="11sp"
+                    android:backgroundTint="#1E293B"
+                    android:textColor="#F1F5F9"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnPresetHeavy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="Heavy Duty (65m)"
+                    android:textSize="11sp"
+                    android:backgroundTint="#1E293B"
+                    android:textColor="#F1F5F9"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnPresetDelicates"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="Delicates (35m)"
+                    android:textSize="11sp"
+                    android:backgroundTint="#1E293B"
+                    android:textColor="#F1F5F9"
+                    android:layout_marginEnd="6dp" />
+
+                <Button
+                    android:id="@+id/btnPresetBedding"
+                    android:layout_width="wrap_content"
+                    android:layout_height="38dp"
+                    android:text="Bedding/Bulky (75m)"
+                    android:textSize="11sp"
+                    android:backgroundTint="#1E293B"
+                    android:textColor="#F1F5F9" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Duration Custom Slider -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E293B"
+            android:padding="12dp"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Custom Duration [Keys: + / -]"
+                    android:textSize="12sp"
+                    android:textColor="#94A3B8" />
+
+                <TextView
+                    android:id="@+id/tvDurationValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="45 Minutes"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#38BDF8" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbDurationAdjuster"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="150"
+                android:progress="45"
+                android:layout_marginTop="8dp" />
+        </LinearLayout>
+
+        <!-- Primary Action Trigger Panel -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+
+            <Button
+                android:id="@+id/btnStartPauseTimer"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="2"
+                android:text="Start Sentinel [Space]"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:backgroundTint="#059669"
+                android:textColor="#FFFFFF" />
+
+            <Button
+                android:id="@+id/btnResetTimer"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Reset"
+                android:textSize="13sp"
+                android:backgroundTint="#475569"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp" />
+
+            <Button
+                android:id="@+id/btnFinishNow"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:text="Finish [Enter]"
+                android:textSize="12sp"
+                android:backgroundTint="#B91C1C"
+                android:textColor="#FFFFFF"
+                android:layout_marginStart="6dp" />
+        </LinearLayout>
+
+        <!-- Sentinel Alert Settings -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#1E293B"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center_vertical">
+
+            <Switch
+                android:id="@+id/swSoundAlarm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Audio Chime"
+                android:textColor="#E2E8F0"
+                android:checked="true" />
+
+            <Switch
+                android:id="@+id/swVibrateAlarm"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Vibration Pattern"
+                android:textColor="#E2E8F0"
+                android:checked="true" />
+        </LinearLayout>
+
+        <!-- Laundry History & Log Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="CYCLE ACTIVITY LOG"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#94A3B8" />
+
+            <Button
+                android:id="@+id/btnExportHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Share / Export"
+                android:textSize="11sp"
+                android:backgroundTint="#334155"
+                android:textColor="#F1F5F9"
+                android:layout_marginEnd="4dp" />
+
+            <Button
+                android:id="@+id/btnClearHistory"
+                android:layout_width="wrap_content"
+                android:layout_height="34dp"
+                android:text="Clear"
+                android:textSize="11sp"
+                android:backgroundTint="#334155"
+                android:textColor="#F87171" />
+        </LinearLayout>
+
+        <!-- Cycle History Records Container -->
+        <LinearLayout
+            android:id="@+id/llHistoryContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+    </LinearLayout>
+</ScrollView>

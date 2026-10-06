@@ -1,0 +1,1 @@
+Initial release of CycleGuard v1.0.0. Features include multi-stage laundry sequence tracking, anti-mildew transfer reminders, custom cycle presets, Quick Settings tile support, and live notification countdowns.
