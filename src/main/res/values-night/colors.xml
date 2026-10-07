@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- OmniStream Studio: Broadcast Master Console Palette (Dark Theme / Control Room Obsidian) -->
+    <!-- KIM Live Studio: Broadcast Master Console Palette (Dark Theme / Control Room Obsidian) -->
     <color name="colorPrimary">#EF4444</color>
     <color name="colorPrimaryDark">#090C10</color>
     <color name="colorAccent">#00E5FF</color>

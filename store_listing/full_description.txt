@@ -1,8 +1,25 @@
-OmniStream Screen Live Studio delivers professional live broadcasting directly from your Android device. Designed for content creators, mobile gamers, and educators, OmniStream empowers you to stream your display, camera overlay, and audio directly to custom RTMP and RTMPS endpoints with zero cloud intermediaries. High-Performance Direct Streaming OmniStream utilizes hardware-accelerated MediaCodec H.264 video encoding coupled with low-latency MediaProjection capture. Connect straight to your ingest server without third-party proxy relays, preserving video fidelity, reducing latency, and protecting your data privacy. Core Features • Hardware Video Encoding: Efficient H.264/AVC processing engineered to balance bitrate, frame rate, and battery usage. • Dual Video Sources: Broadcast full-screen gameplay or app demonstrations alongside an adjustable front-camera overlay. • Multi-Channel Audio: Capture crisp microphone commentary paired with clear internal system audio mixing. • Standard RTMP & RTMPS Support: Full compatibility with standard port 1935 and TLS-encrypted port 443 streaming URLs. • Real-Time Metrics: Monitor bitrate output, current frame rates, and network stability directly from the in-app dashboard. • Clean Architecture: No background analytics tracking, no intrusive account registrations, and no remote data harvesting. Permissions & Transparency • Screen Capture: Required to capture and broadcast screen activity during an active stream. • Camera: Optional permission utilized solely for the picture-in-picture facecam overlay. • Microphone: Required to broadcast voice commentary and audio during live sessions. Stream your passion with speed, precision, and privacy using OmniStream.
+KIM Live Studio delivers direct live broadcasting from your Android device. Designed for content creators, mobile gamers, and live presenters, KIM Live Studio enables you to stream your display, camera overlay, and microphone audio directly to standard RTMP and RTMPS endpoints.
 
+Direct Ingest Architecture
+KIM Live Studio connects straight to your specified streaming endpoint using hardware-accelerated MediaCodec H.264 video encoding and MediaProjection capture. Because streams transmit directly between your device and your chosen ingest server without third-party cloud intermediaries or relay proxies, your transmission latency is minimized and your broadcast credentials remain secure.
 
-Data Safety & Offline Privacy Guarantee:
-- 100% Offline: This application operates entirely on your device without requiring an active internet connection.
-- Zero Data Collection: We do not collect, monitor, track, store, or transmit any personal identifiable information (PII), device identifiers, or usage telemetry.
-- No Accounts or Subscriptions: Enjoy complete utility with zero account creation, logins, or hidden recurring fees.
-- Local Storage Only: All items, history, and preferences are retained strictly within on-device sandboxed storage.
+Core Features:
+• Hardware Video Encoding: MediaCodec H.264/AVC processing engineered for efficient real-time compression and battery balance.
+• Direct RTMP & RTMPS Protocol: Native streaming engine supporting standard port 1935 and TLS-encrypted port 443 endpoints.
+• Dual Video Presentation: Broadcast full-screen gameplay or mobile apps with an optional draggable camera overlay.
+• Flexible Audio Capture: Clean microphone commentary recording with configurable audio parameters.
+• Quick Preset Switching: Fast configuration profiles for major live platforms and custom RTMP endpoints.
+• Real-Time Telemetry: On-screen monitoring of live uptime, current bitrate output, FPS, and dropped frames.
+• Tactile Controls: Clear bitrate adjustments, resolution selection (1080p, 720p, 480p), and visual audio VU indicators.
+
+Permissions & Usage:
+• Screen Capture (MediaProjection): Required to capture display content during active broadcasts.
+• Microphone (RECORD_AUDIO): Required to record microphone commentary for your stream.
+• Camera (CAMERA): Optional permission used only when you enable the picture-in-picture facecam overlay.
+• Display Over Other Apps: Optional permission used to show the floating camera preview while navigating other apps.
+
+Privacy & Data Safety:
+• Direct Connection Only: Video and audio packets flow directly to your designated RTMP server. No third-party proxy or intermediary server is used.
+• Zero Data Harvesting: No personal identifiable information (PII), stream keys, or device identifiers are collected or tracked.
+• No Account Required: Full functionality without accounts, sign-ups, or subscriptions.
+• Sandboxed Local Storage: All preferences and stream settings are saved securely on your local device.

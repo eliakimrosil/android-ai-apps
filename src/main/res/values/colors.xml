@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- OmniStream Studio: Broadcast Console Palette (Light Theme / Studio Workstation) -->
+    <!-- KIM Live Studio: Broadcast Console Palette (Light Theme / Studio Workstation) -->
     <color name="colorPrimary">#DC2626</color>
     <color name="colorPrimaryDark">#E2E8F0</color>
     <color name="colorAccent">#0284C7</color>

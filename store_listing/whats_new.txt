@@ -1,5 +1,5 @@
-Initial release of OmniStream Screen Live Studio (v1.0.0).
-- Hardware-accelerated H.264 screen capture and RTMP/RTMPS broadcasting.
-- Configurable front-facing camera overlay.
-- High-fidelity microphone and internal audio capture.
-- Real-time connection and bitrate monitoring.
+Initial release of KIM Live Studio (v1.0.0).
+- Direct RTMP and RTMPS hardware-accelerated H.264 mobile broadcasting.
+- Configurable floating camera overlay with front/rear camera switching.
+- High-fidelity microphone capture with real-time VU telemetry.
+- On-screen studio dashboard displaying live uptime, bitrate, and frame rate metrics.

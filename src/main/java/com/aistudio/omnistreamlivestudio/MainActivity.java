@@ -74,6 +74,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.Collections;
 import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -86,7 +87,8 @@ public class MainActivity extends Activity {
     private static final int REQUEST_CODE_MEDIA_PROJECTION = 1001;
     private static final int REQUEST_CODE_PERMISSIONS = 1002;
     private static final int REQUEST_CODE_OVERLAY_PERMISSION = 1003;
-    private static final String PREFS_NAME = "omnistream-live-studio_prefs";
+    private static final String PREFS_NAME = "kim_live_studio_prefs";
+    private static final String LEGACY_PREFS_NAME = "omnistream-live-studio_prefs";
 
     // Header & Theming
     private Button btnThemeToggle;
@@ -169,6 +171,12 @@ public class MainActivity extends Activity {
     @Override
     protected void attachBaseContext(Context newBase) {
         SharedPreferences sp = newBase.getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        if (!sp.contains("pref_theme_mode")) {
+            SharedPreferences legacy = newBase.getSharedPreferences(LEGACY_PREFS_NAME, MODE_PRIVATE);
+            if (legacy.contains("pref_theme_mode")) {
+                sp.edit().putInt("pref_theme_mode", legacy.getInt("pref_theme_mode", 0)).apply();
+            }
+        }
         int mode = sp.getInt("pref_theme_mode", 0);
         Configuration config = new Configuration(newBase.getResources().getConfiguration());
         if (mode == 0) {
@@ -200,11 +208,37 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
+        migrateLegacyPreferencesIfNeeded();
         initViews();
         setupTheming();
         loadSavedPreferences();
         setupListeners();
         requestNecessaryPermissions();
+    }
+
+    private void migrateLegacyPreferencesIfNeeded() {
+        try {
+            SharedPreferences legacy = getSharedPreferences(LEGACY_PREFS_NAME, MODE_PRIVATE);
+            if (!legacy.getAll().isEmpty() && !prefs.contains("pref_stream_key") && legacy.contains("pref_stream_key")) {
+                SharedPreferences.Editor editor = prefs.edit();
+                for (Map.Entry<String, ?> entry : legacy.getAll().entrySet()) {
+                    Object val = entry.getValue();
+                    if (val instanceof String) {
+                        editor.putString(entry.getKey(), (String) val);
+                    } else if (val instanceof Integer) {
+                        editor.putInt(entry.getKey(), (Integer) val);
+                    } else if (val instanceof Boolean) {
+                        editor.putBoolean(entry.getKey(), (Boolean) val);
+                    } else if (val instanceof Float) {
+                        editor.putFloat(entry.getKey(), (Float) val);
+                    } else if (val instanceof Long) {
+                        editor.putLong(entry.getKey(), (Long) val);
+                    }
+                }
+                editor.apply();
+            }
+        } catch (Exception ignored) {
+        }
     }
 
     private void initViews() {
@@ -752,7 +786,7 @@ public class MainActivity extends Activity {
 
         public static final String ACTION_START = "com.aistudio.omnistreamlivestudio.START";
         public static final String ACTION_STOP = "com.aistudio.omnistreamlivestudio.STOP";
-        private static final String CHANNEL_ID = "omnistream_channel_live";
+        private static final String CHANNEL_ID = "kim_live_studio_channel_live";
 
         private static volatile boolean isStreaming = false;
         private static volatile long streamStartTime = 0;
@@ -811,7 +845,7 @@ public class MainActivity extends Activity {
             String action = intent.getAction();
 
             if (ACTION_START.equals(action)) {
-                startForeground(101, buildNotification("OmniStream Broadcasting Live..."));
+                startForeground(101, buildNotification("KIM Live Studio is ON AIR..."));
                 startStreamingPipeline(intent);
             } else if (ACTION_STOP.equals(action)) {
                 stopStreamingPipeline();
@@ -825,7 +859,7 @@ public class MainActivity extends Activity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel channel = new NotificationChannel(
                         CHANNEL_ID,
-                        "OmniStream Studio Broadcast",
+                        "KIM Live Studio Broadcast",
                         NotificationManager.IMPORTANCE_LOW
                 );
                 channel.setDescription("Shows active live streaming status & telemetry");
@@ -855,7 +889,7 @@ public class MainActivity extends Activity {
                 builder = new Notification.Builder(this);
             }
 
-            return builder.setContentTitle("OmniStream Live Studio")
+            return builder.setContentTitle("KIM Live Studio")
                     .setContentText(contentText)
                     .setSmallIcon(android.R.drawable.presence_video_online)
                     .setContentIntent(pendingIntent)
@@ -1146,7 +1180,7 @@ public class MainActivity extends Activity {
 
         public void start() {
             isRunning.set(true);
-            thread = new Thread(this, "OmniStream-VideoEncoder");
+            thread = new Thread(this, "KimLive-VideoEncoder");
             thread.start();
         }
 
@@ -1165,7 +1199,7 @@ public class MainActivity extends Activity {
                 mediaCodec.start();
 
                 virtualDisplay = projection.createVirtualDisplay(
-                        "OmniStreamScreenCapture",
+                        "KimLiveScreenCapture",
                         width, height, dpi,
                         DisplayMetrics.DENSITY_DEFAULT,
                         inputSurface, null, null
@@ -1267,7 +1301,7 @@ public class MainActivity extends Activity {
 
         public void start() {
             isRunning.set(true);
-            thread = new Thread(this, "OmniStream-AudioEncoder");
+            thread = new Thread(this, "KimLive-AudioEncoder");
             thread.start();
         }
 
@@ -1398,7 +1432,7 @@ public class MainActivity extends Activity {
 
         public void start() {
             isRunning.set(true);
-            thread = new Thread(this, "OmniStream-RtmpWorker");
+            thread = new Thread(this, "KimLive-RtmpWorker");
             thread.start();
         }
 
