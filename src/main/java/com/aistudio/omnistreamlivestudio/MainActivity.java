@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
@@ -211,9 +212,42 @@ public class MainActivity extends Activity {
         migrateLegacyPreferencesIfNeeded();
         initViews();
         setupTheming();
+        setupFacecamStateListener();
         loadSavedPreferences();
         setupListeners();
         requestNecessaryPermissions();
+    }
+
+    private void setupFacecamStateListener() {
+        FloatingCamManager.getInstance(this).setStateListener(new FloatingCamManager.StateListener() {
+            @Override
+            public void onFacecamToggled(boolean isShowing) {
+                switchFacecam.setChecked(isShowing);
+                updateOverlayStatus();
+                saveCurrentPreferences();
+            }
+
+            @Override
+            public void onCameraFlipped(boolean isFront) {
+                btnFlipCamera.setText(isFront ? "FLIP: FRONT" : "FLIP: REAR");
+            }
+        });
+    }
+
+    private void startFacecamService() {
+        Intent fIntent = new Intent(this, StreamService.class);
+        fIntent.setAction(StreamService.ACTION_START_FACECAM);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            startForegroundService(fIntent);
+        } else {
+            startService(fIntent);
+        }
+    }
+
+    private void stopFacecamService() {
+        Intent fIntent = new Intent(this, StreamService.class);
+        fIntent.setAction(StreamService.ACTION_STOP_FACECAM);
+        startService(fIntent);
     }
 
     private void migrateLegacyPreferencesIfNeeded() {
@@ -352,6 +386,10 @@ public class MainActivity extends Activity {
         updateBitrateHint();
         switchMicAudio.setChecked(micEnabled);
         switchFacecam.setChecked(facecamEnabled);
+        if (facecamEnabled && checkOverlayPermission()) {
+            FloatingCamManager.getInstance(this).showOverlay();
+            startFacecamService();
+        }
         updateOverlayStatus();
         updateMicHint(micEnabled);
     }
@@ -466,14 +504,16 @@ public class MainActivity extends Activity {
             buttonView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             if (isChecked) {
                 if (checkOverlayPermission()) {
-                    StreamService.toggleFloatingFacecam(MainActivity.this, true);
+                    FloatingCamManager.getInstance(MainActivity.this).showOverlay();
+                    startFacecamService();
                     updateOverlayStatus();
                 } else {
                     switchFacecam.setChecked(false);
                     requestOverlayPermission();
                 }
             } else {
-                StreamService.toggleFloatingFacecam(MainActivity.this, false);
+                FloatingCamManager.getInstance(MainActivity.this).hideOverlay();
+                stopFacecamService();
                 updateOverlayStatus();
             }
             saveCurrentPreferences();
@@ -481,7 +521,7 @@ public class MainActivity extends Activity {
 
         btnFlipCamera.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            StreamService.flipFacecamCamera(this);
+            FloatingCamManager.getInstance(this).flipCamera();
         });
 
         btnStartStopStream.setOnClickListener(v -> {
@@ -514,9 +554,15 @@ public class MainActivity extends Activity {
     private void updateOverlayStatus() {
         if (tvOverlayStatus != null) {
             boolean hasPermission = checkOverlayPermission();
+            boolean isShowing = FloatingCamManager.getInstance(this).isShowing();
             if (hasPermission) {
-                tvOverlayStatus.setText("Overlay Permission: Ready & Granted");
-                tvOverlayStatus.setTextColor(getColor(R.color.studio_green));
+                if (isShowing) {
+                    tvOverlayStatus.setText("Facecam: ACTIVE ON SCREEN (Tap ✕ to hide)");
+                    tvOverlayStatus.setTextColor(getColor(R.color.studio_cyan));
+                } else {
+                    tvOverlayStatus.setText("Overlay Permission: Ready & Granted");
+                    tvOverlayStatus.setTextColor(getColor(R.color.studio_green));
+                }
             } else {
                 tvOverlayStatus.setText("Overlay Permission: Tap Switch to Grant");
                 tvOverlayStatus.setTextColor(getColor(R.color.studio_amber));
@@ -639,7 +685,17 @@ public class MainActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_MEDIA_PROJECTION) {
+        if (requestCode == REQUEST_CODE_OVERLAY_PERMISSION) {
+            updateOverlayStatus();
+            if (checkOverlayPermission()) {
+                switchFacecam.setChecked(true);
+                FloatingCamManager.getInstance(this).showOverlay();
+                startFacecamService();
+                Toast.makeText(this, "Facecam overlay enabled!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Overlay permission is required for floating facecam.", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == REQUEST_CODE_MEDIA_PROJECTION) {
             if (resultCode == RESULT_OK && data != null) {
                 Intent serviceIntent = new Intent(this, StreamService.class);
                 serviceIntent.setAction(StreamService.ACTION_START);
@@ -666,6 +722,7 @@ public class MainActivity extends Activity {
     }
 
     private void updateUiStreamState(boolean isStreaming) {
+        FloatingCamManager.getInstance(this).setLiveState(isStreaming);
         if (isStreaming) {
             btnStartStopStream.setText("■ STOP BROADCAST (ON AIR)");
             btnStartStopStream.setBackgroundResource(R.drawable.btn_m3_outlined);
@@ -786,6 +843,8 @@ public class MainActivity extends Activity {
 
         public static final String ACTION_START = "com.aistudio.omnistreamlivestudio.START";
         public static final String ACTION_STOP = "com.aistudio.omnistreamlivestudio.STOP";
+        public static final String ACTION_START_FACECAM = "com.aistudio.omnistreamlivestudio.START_FACECAM";
+        public static final String ACTION_STOP_FACECAM = "com.aistudio.omnistreamlivestudio.STOP_FACECAM";
         private static final String CHANNEL_ID = "kim_live_studio_channel_live";
 
         private static volatile boolean isStreaming = false;
@@ -798,14 +857,6 @@ public class MainActivity extends Activity {
         private VideoEncoder videoEncoder;
         private AudioEncoder audioEncoder;
         private RtmpMuxerClient rtmpClient;
-
-        // Floating Facecam Window State
-        private static StreamService serviceInstance;
-        private WindowManager windowManager;
-        private View floatingCamView;
-        private CameraDevice cameraDevice;
-        private CameraCaptureSession captureSession;
-        private boolean isFrontCamera = true;
 
         public static boolean isStreamingActive() {
             return isStreaming;
@@ -830,7 +881,6 @@ public class MainActivity extends Activity {
         @Override
         public void onCreate() {
             super.onCreate();
-            serviceInstance = this;
             createNotificationChannel();
         }
 
@@ -845,12 +895,42 @@ public class MainActivity extends Activity {
             String action = intent.getAction();
 
             if (ACTION_START.equals(action)) {
-                startForeground(101, buildNotification("KIM Live Studio is ON AIR..."));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    startForeground(101, buildNotification("KIM Live Studio is ON AIR..."),
+                            ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION |
+                            ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA |
+                            ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE);
+                } else {
+                    startForeground(101, buildNotification("KIM Live Studio is ON AIR..."));
+                }
                 startStreamingPipeline(intent);
             } else if (ACTION_STOP.equals(action)) {
                 stopStreamingPipeline();
-                stopForeground(true);
-                stopSelf();
+                if (!FloatingCamManager.getInstance(this).isShowing()) {
+                    stopForeground(true);
+                    stopSelf();
+                } else {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        startForeground(101, buildNotification("KIM Live Studio Facecam Active"),
+                                ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA);
+                    }
+                }
+            } else if (ACTION_START_FACECAM.equals(action)) {
+                if (!isStreaming) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        startForeground(101, buildNotification("KIM Live Studio Facecam Active"),
+                                ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA);
+                    } else {
+                        startForeground(101, buildNotification("KIM Live Studio Facecam Active"));
+                    }
+                }
+                FloatingCamManager.getInstance(this).showOverlay();
+            } else if (ACTION_STOP_FACECAM.equals(action)) {
+                FloatingCamManager.getInstance(this).hideOverlay();
+                if (!isStreaming) {
+                    stopForeground(true);
+                    stopSelf();
+                }
             }
             return START_NOT_STICKY;
         }
@@ -923,6 +1003,11 @@ public class MainActivity extends Activity {
             currentBitrateKbps = bitrate;
             currentFps = 30.0f;
 
+            FloatingCamManager.getInstance(this).setLiveState(true);
+            if (enableFacecam && Settings.canDrawOverlays(this)) {
+                FloatingCamManager.getInstance(this).showOverlay();
+            }
+
             rtmpClient = new RtmpMuxerClient(serverUrl, streamKey);
             rtmpClient.start();
 
@@ -934,14 +1019,11 @@ public class MainActivity extends Activity {
                 audioEncoder = new AudioEncoder(rtmpClient);
                 audioEncoder.start();
             }
-
-            if (enableFacecam && Settings.canDrawOverlays(this)) {
-                setupFloatingFacecam();
-            }
         }
 
         private void stopStreamingPipeline() {
             isStreaming = false;
+            FloatingCamManager.getInstance(this).setLiveState(false);
 
             if (videoEncoder != null) {
                 videoEncoder.stop();
@@ -959,195 +1041,11 @@ public class MainActivity extends Activity {
                 rtmpClient.stop();
                 rtmpClient = null;
             }
-
-            removeFloatingFacecam();
-        }
-
-        public static void toggleFloatingFacecam(Context context, boolean enable) {
-            if (serviceInstance == null) return;
-            if (enable) {
-                serviceInstance.setupFloatingFacecam();
-            } else {
-                serviceInstance.removeFloatingFacecam();
-            }
-        }
-
-        public static void flipFacecamCamera(Context context) {
-            if (serviceInstance != null) {
-                serviceInstance.isFrontCamera = !serviceInstance.isFrontCamera;
-                serviceInstance.restartCameraCapture();
-            }
-        }
-
-        private void setupFloatingFacecam() {
-            if (floatingCamView != null || !Settings.canDrawOverlays(this)) return;
-
-            windowManager = (WindowManager) getSystemService(WINDOW_SERVICE);
-            int layoutType = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ?
-                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY :
-                    WindowManager.LayoutParams.TYPE_PHONE;
-
-            final WindowManager.LayoutParams params = new WindowManager.LayoutParams(
-                    320, 400,
-                    layoutType,
-                    WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
-                    PixelFormat.TRANSLUCENT
-            );
-            params.gravity = Gravity.TOP | Gravity.START;
-            params.x = 100;
-            params.y = 150;
-
-            TextureView textureView = new TextureView(this);
-            textureView.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.MATCH_PARENT
-            ));
-
-            floatingCamView = textureView;
-            floatingCamView.setOnTouchListener(new View.OnTouchListener() {
-                private int initialX, initialY;
-                private float initialTouchX, initialTouchY;
-
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    switch (event.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            initialX = params.x;
-                            initialY = params.y;
-                            initialTouchX = event.getRawX();
-                            initialTouchY = event.getRawY();
-                            return true;
-                        case MotionEvent.ACTION_MOVE:
-                            params.x = initialX + (int) (event.getRawX() - initialTouchX);
-                            params.y = initialY + (int) (event.getRawY() - initialTouchY);
-                            windowManager.updateViewLayout(floatingCamView, params);
-                            return true;
-                    }
-                    return false;
-                }
-            });
-
-            textureView.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
-                @Override
-                public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-                    openCamera(surface);
-                }
-
-                @Override
-                public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {}
-
-                @Override
-                public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-                    closeCamera();
-                    return true;
-                }
-
-                @Override
-                public void onSurfaceTextureUpdated(SurfaceTexture surface) {}
-            });
-
-            windowManager.addView(floatingCamView, params);
-        }
-
-        private void openCamera(SurfaceTexture surfaceTexture) {
-            CameraManager cm = (CameraManager) getSystemService(CAMERA_SERVICE);
-            try {
-                String selectedId = null;
-                for (String id : cm.getCameraIdList()) {
-                    CameraCharacteristics characteristics = cm.getCameraCharacteristics(id);
-                    Integer facing = characteristics.get(CameraCharacteristics.LENS_FACING);
-                    if (isFrontCamera && facing != null && facing == CameraCharacteristics.LENS_FACING_FRONT) {
-                        selectedId = id;
-                        break;
-                    } else if (!isFrontCamera && facing != null && facing == CameraCharacteristics.LENS_FACING_BACK) {
-                        selectedId = id;
-                        break;
-                    }
-                }
-                if (selectedId == null && cm.getCameraIdList().length > 0) {
-                    selectedId = cm.getCameraIdList()[0];
-                }
-                if (selectedId == null) return;
-
-                if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-
-                cm.openCamera(selectedId, new CameraDevice.StateCallback() {
-                    @Override
-                    public void onOpened(CameraDevice camera) {
-                        cameraDevice = camera;
-                        Surface surface = new Surface(surfaceTexture);
-                        try {
-                            CaptureRequest.Builder builder = camera.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-                            builder.addTarget(surface);
-                            camera.createCaptureSession(Collections.singletonList(surface), new CameraCaptureSession.StateCallback() {
-                                @Override
-                                public void onConfigured(CameraCaptureSession session) {
-                                    captureSession = session;
-                                    try {
-                                        builder.set(CaptureRequest.CONTROL_MODE, CaptureRequest.CONTROL_MODE_AUTO);
-                                        session.setRepeatingRequest(builder.build(), null, null);
-                                    } catch (CameraAccessException ignored) {}
-                                }
-
-                                @Override
-                                public void onConfigureFailed(CameraCaptureSession session) {}
-                            }, null);
-                        } catch (CameraAccessException ignored) {}
-                    }
-
-                    @Override
-                    public void onDisconnected(CameraDevice camera) {
-                        camera.close();
-                        cameraDevice = null;
-                    }
-
-                    @Override
-                    public void onError(CameraDevice camera, int error) {
-                        camera.close();
-                        cameraDevice = null;
-                    }
-                }, null);
-
-            } catch (Exception ignored) {}
-        }
-
-        private void closeCamera() {
-            if (captureSession != null) {
-                captureSession.close();
-                captureSession = null;
-            }
-            if (cameraDevice != null) {
-                cameraDevice.close();
-                cameraDevice = null;
-            }
-        }
-
-        private void restartCameraCapture() {
-            closeCamera();
-            if (floatingCamView instanceof TextureView) {
-                TextureView tv = (TextureView) floatingCamView;
-                if (tv.isAvailable()) {
-                    openCamera(tv.getSurfaceTexture());
-                }
-            }
-        }
-
-        private void removeFloatingFacecam() {
-            closeCamera();
-            if (floatingCamView != null && windowManager != null) {
-                try {
-                    windowManager.removeView(floatingCamView);
-                } catch (Exception ignored) {}
-                floatingCamView = null;
-            }
         }
 
         @Override
         public void onDestroy() {
             stopStreamingPipeline();
-            serviceInstance = null;
             super.onDestroy();
         }
     }
