@@ -1,0 +1,1 @@
+Initial release of PanFlip v1.0.0. Features automated two-stage flip and rest timers, high-visibility kitchen display, and complete offline privacy.
