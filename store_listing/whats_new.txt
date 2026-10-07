@@ -1,0 +1,1 @@
+Welcome to FastTrack version 1.0.0. Features include offline local fast tracking, custom intervals, Android Quick Settings tile integration, and notification shade chronometer support.
