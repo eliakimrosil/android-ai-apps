@@ -3,9 +3,11 @@
     android:id="@+id/mainScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/m3_surface"
+    android:background="@color/studio_bg"
     android:fillViewport="true"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,7 +15,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <!-- Header Card: Studio Identity & Theme Engine -->
+        <!-- Studio Master Header Bar -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,7 +23,14 @@
             android:background="@drawable/card_m3"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:padding="14dp">
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="Broadcast Signal Antenna"
+                android:src="@drawable/ic_broadcast_antenna" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -33,9 +42,10 @@
                     android:id="@+id/tvAppTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="OmniStream Studio"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="20sp"
+                    android:letterSpacing="0.04"
+                    android:text="OMNISTREAM STUDIO"
+                    android:textColor="@color/studio_text_primary"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -43,150 +53,277 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:text="Screen &amp; Facecam Live Broadcast Engine"
-                    android:textColor="@color/m3_on_surface_variant"
-                    android:textSize="12sp" />
+                    android:letterSpacing="0.02"
+                    android:text="MASTER CONTROL • DIRECT RTMP/RTMPS"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/btnThemeToggle"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="36dp"
                 android:background="@drawable/btn_m3_tonal"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:text="Auto"
-                android:textColor="@color/m3_primary"
-                android:textSize="12sp"
+                android:minHeight="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:text="MODE: AUTO"
+                android:textColor="@color/studio_cyan"
+                android:textSize="11sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Live Telemetry Card -->
+        <!-- Master Telemetry HUD (Broadcast Monitor) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@drawable/card_m3_high"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="14dp">
 
-            <TextView
-                android:id="@+id/tvLiveStatus"
-                android:layout_width="wrap_content"
+            <!-- Status Header with Beacon Dot & Encoder Badge -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="STUDIO READY (OFFLINE)"
-                android:textColor="@color/m3_on_surface_variant"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
+                <ImageView
+                    android:id="@+id/ivLiveBeacon"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Broadcast Beacon"
+                    android:src="@drawable/ic_live_tally_dot" />
+
+                <TextView
+                    android:id="@+id/tvLiveStatus"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:letterSpacing="0.04"
+                    android:text="STUDIO READY (STANDBY)"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvEncoderBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_studio_indicator"
+                    android:paddingStart="8dp"
+                    android:paddingTop="3dp"
+                    android:paddingEnd="8dp"
+                    android:paddingBottom="3dp"
+                    android:text="H.264 / AAC HW"
+                    android:textColor="@color/studio_text_muted"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- 4-Instrument Telemetry Grid -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:orientation="horizontal">
 
+                <!-- Instrument 1: Uptime -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/card_studio_recessed"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UPTIME"
-                        android:textColor="@color/m3_on_surface_variant"
-                        android:textSize="10sp" />
+                        android:letterSpacing="0.04"
+                        android:text="BROADCAST TIME"
+                        android:textColor="@color/studio_text_muted"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvUptime"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
                         android:text="00:00:00"
-                        android:textColor="@color/m3_on_surface"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/studio_text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
                 </LinearLayout>
 
+                <!-- Instrument 2: Bitrate -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/card_studio_recessed"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:letterSpacing="0.04"
                         android:text="INGEST SPEED"
-                        android:textColor="@color/m3_on_surface_variant"
-                        android:textSize="10sp" />
+                        android:textColor="@color/studio_text_muted"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvLiveBitrate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
                         android:text="0 kbps"
-                        android:textColor="@color/m3_on_surface"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/studio_cyan"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
                 </LinearLayout>
 
+                <!-- Instrument 3: Framerate -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/card_studio_recessed"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="FRAMERATE"
-                        android:textColor="@color/m3_on_surface_variant"
-                        android:textSize="10sp" />
+                        android:letterSpacing="0.04"
+                        android:text="FRAME CADENCE"
+                        android:textColor="@color/studio_text_muted"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvLiveFps"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
                         android:text="0.0 fps"
-                        android:textColor="@color/m3_on_surface"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/studio_green"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
                 </LinearLayout>
 
+                <!-- Instrument 4: Dropped Frames -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:background="@drawable/card_studio_recessed"
+                    android:orientation="vertical"
+                    android:padding="8dp">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:letterSpacing="0.04"
                         android:text="DROPPED"
-                        android:textColor="@color/m3_on_surface_variant"
-                        android:textSize="10sp" />
+                        android:textColor="@color/studio_text_muted"
+                        android:textSize="9sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvDroppedFrames"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
                         android:text="0"
-                        android:textColor="@color/m3_on_surface"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textColor="@color/studio_text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:typeface="monospace" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <!-- Studio VU / Audio Signal Visualizer Strip -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/card_studio_recessed"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="8dp"
+                android:paddingTop="6dp"
+                android:paddingEnd="8dp"
+                android:paddingBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:letterSpacing="0.04"
+                    android:text="VU METER"
+                    android:textColor="@color/studio_text_muted"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+
+                <!-- Segmented LED Bar Views -->
+                <LinearLayout
+                    android:id="@+id/layoutVuSegments"
+                    android:layout_width="0dp"
+                    android:layout_height="8dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <View android:id="@+id/vuSeg1" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_green" />
+                    <View android:id="@+id/vuSeg2" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_green" />
+                    <View android:id="@+id/vuSeg3" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_green" />
+                    <View android:id="@+id/vuSeg4" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_green" />
+                    <View android:id="@+id/vuSeg5" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_green" />
+                    <View android:id="@+id/vuSeg6" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_yellow" />
+                    <View android:id="@+id/vuSeg7" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_yellow" />
+                    <View android:id="@+id/vuSeg8" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_yellow" />
+                    <View android:id="@+id/vuSeg9" android:layout_width="0dp" android:layout_height="match_parent" android:layout_marginEnd="2dp" android:layout_weight="1" android:background="@color/studio_vu_off" />
+                    <View android:id="@+id/vuSeg10" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@color/studio_vu_off" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvVuLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="-12 dB"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="9sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Target Destination Selector -->
+        <!-- Section Header: Platform Ingest Switcher Bus -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginBottom="8dp"
-            android:text="SELECT INGEST PLATFORM"
-            android:textColor="@color/m3_primary"
+            android:letterSpacing="0.06"
+            android:text="INGEST PLATFORM ROUTING"
+            android:textColor="@color/studio_ruby"
             android:textSize="11sp"
             android:textStyle="bold" />
 
@@ -205,65 +342,84 @@
                 <Button
                     android:id="@+id/btnPlatformYoutube"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/chip_active"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="YouTube"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="12sp" />
+                    android:textColor="@color/studio_chip_active_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnPlatformFacebook"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="Facebook"
-                    android:textColor="@color/m3_on_surface"
+                    android:textColor="@color/studio_chip_text"
                     android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btnPlatformTwitch"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="Twitch"
-                    android:textColor="@color/m3_on_surface"
+                    android:textColor="@color/studio_chip_text"
                     android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btnPlatformTiktok"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="TikTok"
-                    android:textColor="@color/m3_on_surface"
+                    android:textColor="@color/studio_chip_text"
                     android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btnPlatformKick"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="Kick"
-                    android:textColor="@color/m3_on_surface"
+                    android:textColor="@color/studio_chip_text"
                     android:textSize="12sp" />
 
                 <Button
                     android:id="@+id/btnPlatformCustom"
                     android:layout_width="wrap_content"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
                     android:text="Custom RTMP"
-                    android:textColor="@color/m3_on_surface"
+                    android:textColor="@color/studio_chip_text"
                     android:textSize="12sp" />
             </LinearLayout>
         </HorizontalScrollView>
 
-        <!-- Broadcast Configuration Card -->
+        <!-- Broadcast Configuration Card (Patch Bay) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -272,39 +428,66 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Server URL"
-                android:textColor="@color/m3_on_surface_variant"
-                android:textSize="11sp" />
+                android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:letterSpacing="0.04"
+                    android:text="INGEST SERVER URL (RTMP / RTMPS)"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvUrlLockBadge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/badge_studio_indicator"
+                    android:paddingStart="6dp"
+                    android:paddingTop="2dp"
+                    android:paddingEnd="6dp"
+                    android:paddingBottom="2dp"
+                    android:text="PRESET LOCKED"
+                    android:textColor="@color/studio_cyan"
+                    android:textSize="9sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
             <EditText
                 android:id="@+id/etServerUrl"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="12dp"
+                android:layout_height="46dp"
+                android:layout_marginBottom="14dp"
                 android:background="@drawable/edittext_m3"
-                android:hint="rtmp:// or rtmps://"
+                android:hint="rtmp:// or rtmps://endpoint"
                 android:inputType="textUri"
                 android:paddingStart="12dp"
                 android:paddingEnd="12dp"
-                android:textColor="@color/m3_on_surface"
-                android:textColorHint="@color/m3_on_surface_variant"
-                android:textSize="13sp" />
+                android:textColor="@color/studio_text_primary"
+                android:textColorHint="@color/studio_text_muted"
+                android:textSize="12sp"
+                android:typeface="monospace" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Stream Key"
-                android:textColor="@color/m3_on_surface_variant"
-                android:textSize="11sp" />
+                android:layout_marginBottom="6dp"
+                android:letterSpacing="0.04"
+                android:text="STREAM KEY (PRIVATE AUTH TOKEN)"
+                android:textColor="@color/studio_text_secondary"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -314,25 +497,41 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@drawable/edittext_m3"
-                    android:hint="Live stream key"
+                    android:hint="Paste private stream key"
                     android:inputType="textPassword"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
-                    android:textColor="@color/m3_on_surface"
-                    android:textColorHint="@color/m3_on_surface_variant"
-                    android:textSize="13sp" />
+                    android:textColor="@color/studio_text_primary"
+                    android:textColorHint="@color/studio_text_muted"
+                    android:textSize="12sp"
+                    android:typeface="monospace" />
+
+                <Button
+                    android:id="@+id/btnToggleKeyVisibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="6dp"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:minHeight="0dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:text="SHOW"
+                    android:textColor="@color/studio_cyan"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnPasteKey"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="6dp"
                     android:background="@drawable/btn_m3_tonal"
-                    android:paddingStart="16dp"
-                    android:paddingEnd="16dp"
+                    android:minHeight="0dp"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="14dp"
                     android:text="PASTE"
-                    android:textColor="@color/m3_primary"
-                    android:textSize="12sp"
+                    android:textColor="@color/studio_ruby"
+                    android:textSize="11sp"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
@@ -350,8 +549,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
-                android:text="VIDEO RESOLUTION"
-                android:textColor="@color/m3_primary"
+                android:letterSpacing="0.04"
+                android:text="ENCODING RESOLUTION"
+                android:textColor="@color/studio_ruby"
                 android:textSize="11sp"
                 android:textStyle="bold" />
 
@@ -364,42 +564,49 @@
                 <Button
                     android:id="@+id/btnRes1080p"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginEnd="6dp"
                     android:layout_weight="1"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
                     android:text="1080p FHD"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="12sp" />
+                    android:textColor="@color/studio_chip_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnRes720p"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginStart="3dp"
                     android:layout_marginEnd="3dp"
                     android:layout_weight="1"
                     android:background="@drawable/chip_active"
+                    android:minHeight="0dp"
                     android:text="720p HD"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="12sp" />
+                    android:textColor="@color/studio_chip_active_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnRes480p"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="38dp"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
                     android:background="@drawable/chip_inactive"
+                    android:minHeight="0dp"
                     android:text="480p SD"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="12sp" />
+                    android:textColor="@color/studio_chip_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
+            <!-- Bitrate Header & Numeric Display -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
+                android:layout_marginBottom="6dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -407,8 +614,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="TARGET BITRATE"
-                    android:textColor="@color/m3_primary"
+                    android:letterSpacing="0.04"
+                    android:text="TARGET ENCODER BITRATE"
+                    android:textColor="@color/studio_text_secondary"
                     android:textSize="11sp"
                     android:textStyle="bold" />
 
@@ -416,18 +624,88 @@
                     android:id="@+id/tvBitrateValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2500 kbps"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="13sp"
-                    android:textStyle="bold" />
+                    android:text="2,500 kbps"
+                    android:textColor="@color/studio_cyan"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:typeface="monospace" />
             </LinearLayout>
 
             <SeekBar
                 android:id="@+id/seekBitrate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="32dp"
                 android:max="8000"
-                android:progress="2500" />
+                android:progress="2500"
+                android:progressDrawable="@drawable/seekbar_studio_track"
+                android:thumb="@drawable/seekbar_studio_thumb" />
+
+            <!-- Quick Bitrate Preset Keycaps -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnBitrate1500"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:minHeight="0dp"
+                    android:text="1500k"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnBitrate2500"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:minHeight="0dp"
+                    android:text="2500k"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnBitrate4500"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:minHeight="0dp"
+                    android:text="4500k"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="11sp" />
+
+                <Button
+                    android:id="@+id/btnBitrate6000"
+                    android:layout_width="0dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_m3_tonal"
+                    android:minHeight="0dp"
+                    android:text="6000k"
+                    android:textColor="@color/studio_text_secondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvBitrateHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Recommended: 2500 kbps for clean 720p 60fps streaming"
+                android:textColor="@color/studio_text_muted"
+                android:textSize="11sp" />
         </LinearLayout>
 
         <!-- Audio & Facecam Controls Card -->
@@ -439,19 +717,36 @@
             android:orientation="vertical"
             android:padding="16dp">
 
+            <!-- Mic Audio Ingest Switch -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Microphone Voice Ingest"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="14sp" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Microphone Commentary Ingest"
+                        android:textColor="@color/studio_text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvMicStatusHint"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="AAC 128 kbps • 44.1 kHz Studio Audio"
+                        android:textColor="@color/studio_text_secondary"
+                        android:textSize="11sp" />
+                </LinearLayout>
 
                 <Switch
                     android:id="@+id/switchMicAudio"
@@ -465,21 +760,38 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginBottom="12dp"
-                android:background="@color/m3_outline" />
+                android:background="@color/studio_border" />
 
+            <!-- Floating Facecam PiP Switch -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Floating Camera Facecam"
-                    android:textColor="@color/m3_on_surface"
-                    android:textSize="14sp" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Floating Camera Facecam (PiP)"
+                        android:textColor="@color/studio_text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvOverlayStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Movable screen overlay window"
+                        android:textColor="@color/studio_text_secondary"
+                        android:textSize="11sp" />
+                </LinearLayout>
 
                 <Button
                     android:id="@+id/btnFlipCamera"
@@ -487,11 +799,13 @@
                     android:layout_height="32dp"
                     android:layout_marginEnd="8dp"
                     android:background="@drawable/btn_stepper"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="8dp"
-                    android:text="Flip"
-                    android:textColor="@color/m3_primary"
-                    android:textSize="11sp" />
+                    android:minHeight="0dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:text="FLIP"
+                    android:textColor="@color/studio_cyan"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
 
                 <Switch
                     android:id="@+id/switchFacecam"
@@ -501,15 +815,17 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Main Stream Trigger Action -->
+        <!-- Master Broadcast Action Trigger -->
         <Button
             android:id="@+id/btnStartStopStream"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/btn_m3_primary"
-            android:text="GO LIVE NOW"
-            android:textColor="@color/m3_on_primary"
+            android:elevation="4dp"
+            android:letterSpacing="0.06"
+            android:text="● START BROADCAST (GO LIVE)"
+            android:textColor="@color/studio_chip_active_text"
             android:textSize="15sp"
             android:textStyle="bold" />
 

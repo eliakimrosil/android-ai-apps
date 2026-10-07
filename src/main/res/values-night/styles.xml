@@ -3,14 +3,14 @@
     <style name="AppTheme" parent="@android:style/Theme.DeviceDefault.DayNight">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:colorPrimary">@color/m3_primary</item>
-        <item name="android:colorPrimaryDark">@color/m3_surface</item>
-        <item name="android:colorAccent">@color/m3_primary</item>
-        <item name="android:windowBackground">@color/m3_surface</item>
-        <item name="android:statusBarColor">@color/m3_surface</item>
-        <item name="android:navigationBarColor">@color/m3_surface</item>
-        <item name="android:textColorPrimary">@color/m3_on_surface</item>
-        <item name="android:textColorSecondary">@color/m3_on_surface_variant</item>
+        <item name="android:colorPrimary">@color/studio_ruby</item>
+        <item name="android:colorPrimaryDark">@color/studio_bg</item>
+        <item name="android:colorAccent">@color/studio_cyan</item>
+        <item name="android:windowBackground">@color/studio_bg</item>
+        <item name="android:statusBarColor">@color/studio_bg</item>
+        <item name="android:navigationBarColor">@color/studio_bg</item>
+        <item name="android:textColorPrimary">@color/studio_text_primary</item>
+        <item name="android:textColorSecondary">@color/studio_text_secondary</item>
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:windowLightNavigationBar">false</item>
     </style>

@@ -47,6 +47,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
+import android.text.InputType;
 import android.view.View;
 import android.view.WindowInsetsController;
 import android.view.WindowManager;
@@ -54,6 +55,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -98,8 +100,10 @@ public class MainActivity extends Activity {
     private Button btnPlatformCustom;
 
     // Configuration Inputs
+    private TextView tvUrlLockBadge;
     private EditText etServerUrl;
     private EditText etStreamKey;
+    private Button btnToggleKeyVisibility;
     private Button btnPasteKey;
 
     // Video Resolution Chips
@@ -107,26 +111,37 @@ public class MainActivity extends Activity {
     private Button btnRes720p;
     private Button btnRes480p;
 
-    // Bitrate Slider
+    // Bitrate Slider & Presets
     private SeekBar seekBitrate;
     private TextView tvBitrateValue;
+    private Button btnBitrate1500;
+    private Button btnBitrate2500;
+    private Button btnBitrate4500;
+    private Button btnBitrate6000;
+    private TextView tvBitrateHint;
 
     // Audio & Facecam Controls
     private Switch switchMicAudio;
+    private TextView tvMicStatusHint;
     private Switch switchFacecam;
     private Button btnFlipCamera;
+    private TextView tvOverlayStatus;
 
-    // Telemetry Display
+    // Telemetry Display & VU Meter
+    private ImageView ivLiveBeacon;
     private TextView tvLiveStatus;
     private TextView tvUptime;
     private TextView tvLiveBitrate;
     private TextView tvLiveFps;
     private TextView tvDroppedFrames;
+    private View[] vuSegments;
+    private TextView tvVuLevel;
 
     // Action Controls
     private Button btnStartStopStream;
 
     // Internal State
+    private boolean isKeyVisible = false;
     private SharedPreferences prefs;
     private int selectedWidth = 1280;
     private int selectedHeight = 720;
@@ -174,6 +189,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+        } else {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED | WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON);
+        }
+
         setContentView(R.layout.activity_main);
 
         prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE);
@@ -193,8 +216,10 @@ public class MainActivity extends Activity {
         btnPlatformKick = findViewById(R.id.btnPlatformKick);
         btnPlatformCustom = findViewById(R.id.btnPlatformCustom);
 
+        tvUrlLockBadge = findViewById(R.id.tvUrlLockBadge);
         etServerUrl = findViewById(R.id.etServerUrl);
         etStreamKey = findViewById(R.id.etStreamKey);
+        btnToggleKeyVisibility = findViewById(R.id.btnToggleKeyVisibility);
         btnPasteKey = findViewById(R.id.btnPasteKey);
 
         btnRes1080p = findViewById(R.id.btnRes1080p);
@@ -203,16 +228,38 @@ public class MainActivity extends Activity {
 
         seekBitrate = findViewById(R.id.seekBitrate);
         tvBitrateValue = findViewById(R.id.tvBitrateValue);
+        btnBitrate1500 = findViewById(R.id.btnBitrate1500);
+        btnBitrate2500 = findViewById(R.id.btnBitrate2500);
+        btnBitrate4500 = findViewById(R.id.btnBitrate4500);
+        btnBitrate6000 = findViewById(R.id.btnBitrate6000);
+        tvBitrateHint = findViewById(R.id.tvBitrateHint);
 
         switchMicAudio = findViewById(R.id.switchMicAudio);
+        tvMicStatusHint = findViewById(R.id.tvMicStatusHint);
         switchFacecam = findViewById(R.id.switchFacecam);
         btnFlipCamera = findViewById(R.id.btnFlipCamera);
+        tvOverlayStatus = findViewById(R.id.tvOverlayStatus);
 
+        ivLiveBeacon = findViewById(R.id.ivLiveBeacon);
         tvLiveStatus = findViewById(R.id.tvLiveStatus);
         tvUptime = findViewById(R.id.tvUptime);
         tvLiveBitrate = findViewById(R.id.tvLiveBitrate);
         tvLiveFps = findViewById(R.id.tvLiveFps);
         tvDroppedFrames = findViewById(R.id.tvDroppedFrames);
+
+        vuSegments = new View[] {
+                findViewById(R.id.vuSeg1),
+                findViewById(R.id.vuSeg2),
+                findViewById(R.id.vuSeg3),
+                findViewById(R.id.vuSeg4),
+                findViewById(R.id.vuSeg5),
+                findViewById(R.id.vuSeg6),
+                findViewById(R.id.vuSeg7),
+                findViewById(R.id.vuSeg8),
+                findViewById(R.id.vuSeg9),
+                findViewById(R.id.vuSeg10)
+        };
+        tvVuLevel = findViewById(R.id.tvVuLevel);
 
         btnStartStopStream = findViewById(R.id.btnStartStopStream);
     }
@@ -220,11 +267,11 @@ public class MainActivity extends Activity {
     private void setupTheming() {
         int themeMode = prefs.getInt("pref_theme_mode", 0);
         if (themeMode == 0) {
-            btnThemeToggle.setText("Auto");
+            btnThemeToggle.setText("MODE: AUTO");
         } else if (themeMode == 1) {
-            btnThemeToggle.setText("Light");
+            btnThemeToggle.setText("MODE: DAY");
         } else {
-            btnThemeToggle.setText("Dark");
+            btnThemeToggle.setText("MODE: DARK");
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -265,11 +312,14 @@ public class MainActivity extends Activity {
         etStreamKey.setText(savedKey);
 
         seekBitrate.setProgress(targetBitrateKbps);
-        tvBitrateValue.setText(String.format(Locale.US, "%d kbps", targetBitrateKbps));
+        tvBitrateValue.setText(String.format(Locale.US, "%,d kbps", targetBitrateKbps));
 
         updateResolutionButtons();
+        updateBitrateHint();
         switchMicAudio.setChecked(micEnabled);
         switchFacecam.setChecked(facecamEnabled);
+        updateOverlayStatus();
+        updateMicHint(micEnabled);
     }
 
     private void saveCurrentPreferences() {
@@ -299,6 +349,19 @@ public class MainActivity extends Activity {
         btnPlatformTiktok.setOnClickListener(v -> selectPlatform(3));
         btnPlatformKick.setOnClickListener(v -> selectPlatform(4));
         btnPlatformCustom.setOnClickListener(v -> selectPlatform(5));
+
+        btnToggleKeyVisibility.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            isKeyVisible = !isKeyVisible;
+            if (isKeyVisible) {
+                etStreamKey.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                btnToggleKeyVisibility.setText("HIDE");
+            } else {
+                etStreamKey.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                btnToggleKeyVisibility.setText("SHOW");
+            }
+            etStreamKey.setSelection(etStreamKey.getText().length());
+        });
 
         btnPasteKey.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
@@ -341,7 +404,8 @@ public class MainActivity extends Activity {
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 if (progress < 500) progress = 500;
                 targetBitrateKbps = progress;
-                tvBitrateValue.setText(String.format(Locale.US, "%d kbps", targetBitrateKbps));
+                tvBitrateValue.setText(String.format(Locale.US, "%,d kbps", targetBitrateKbps));
+                updateBitrateHint();
             }
 
             @Override
@@ -353,8 +417,14 @@ public class MainActivity extends Activity {
             }
         });
 
+        btnBitrate1500.setOnClickListener(v -> setBitrate(1500));
+        btnBitrate2500.setOnClickListener(v -> setBitrate(2500));
+        btnBitrate4500.setOnClickListener(v -> setBitrate(4500));
+        btnBitrate6000.setOnClickListener(v -> setBitrate(6000));
+
         switchMicAudio.setOnCheckedChangeListener((buttonView, isChecked) -> {
             buttonView.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            updateMicHint(isChecked);
             saveCurrentPreferences();
         });
 
@@ -363,12 +433,14 @@ public class MainActivity extends Activity {
             if (isChecked) {
                 if (checkOverlayPermission()) {
                     StreamService.toggleFloatingFacecam(MainActivity.this, true);
+                    updateOverlayStatus();
                 } else {
                     switchFacecam.setChecked(false);
                     requestOverlayPermission();
                 }
             } else {
                 StreamService.toggleFloatingFacecam(MainActivity.this, false);
+                updateOverlayStatus();
             }
             saveCurrentPreferences();
         });
@@ -384,6 +456,53 @@ public class MainActivity extends Activity {
         });
     }
 
+    private void setBitrate(int kbps) {
+        seekBitrate.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+        targetBitrateKbps = kbps;
+        seekBitrate.setProgress(kbps);
+        tvBitrateValue.setText(String.format(Locale.US, "%,d kbps", targetBitrateKbps));
+        updateBitrateHint();
+        saveCurrentPreferences();
+    }
+
+    private void updateMicHint(boolean enabled) {
+        if (tvMicStatusHint != null) {
+            if (enabled) {
+                tvMicStatusHint.setText("LIVE: AAC 128 kbps • 44.1 kHz Studio Audio");
+                tvMicStatusHint.setTextColor(getColor(R.color.studio_text_secondary));
+            } else {
+                tvMicStatusHint.setText("MUTED: Commentary track disabled");
+                tvMicStatusHint.setTextColor(getColor(R.color.studio_amber));
+            }
+        }
+    }
+
+    private void updateOverlayStatus() {
+        if (tvOverlayStatus != null) {
+            boolean hasPermission = checkOverlayPermission();
+            if (hasPermission) {
+                tvOverlayStatus.setText("Overlay Permission: Ready & Granted");
+                tvOverlayStatus.setTextColor(getColor(R.color.studio_green));
+            } else {
+                tvOverlayStatus.setText("Overlay Permission: Tap Switch to Grant");
+                tvOverlayStatus.setTextColor(getColor(R.color.studio_amber));
+            }
+        }
+    }
+
+    private void updateBitrateHint() {
+        if (tvBitrateHint == null) return;
+        if (targetBitrateKbps < 2000) {
+            tvBitrateHint.setText("Target: 480p SD • Low-bandwidth mobile profile");
+        } else if (targetBitrateKbps < 3500) {
+            tvBitrateHint.setText("Recommended: 2,500 kbps for crisp 720p 60fps streaming");
+        } else if (targetBitrateKbps < 5500) {
+            tvBitrateHint.setText("Recommended: 4,500 kbps for high-definition 1080p FHD");
+        } else {
+            tvBitrateHint.setText("Studio Master: 6,000+ kbps for high-motion gameplay");
+        }
+    }
+
     private void selectPlatform(int index) {
         selectedPlatformIndex = index;
         Button[] platformButtons = {
@@ -394,24 +513,45 @@ public class MainActivity extends Activity {
         for (int i = 0; i < platformButtons.length; i++) {
             if (i == index) {
                 platformButtons[i].setBackgroundResource(R.drawable.chip_active);
+                platformButtons[i].setTextColor(getColor(R.color.studio_chip_active_text));
             } else {
                 platformButtons[i].setBackgroundResource(R.drawable.chip_inactive);
+                platformButtons[i].setTextColor(getColor(R.color.studio_chip_text));
             }
         }
 
         if (index < 5) {
             etServerUrl.setText(PRESET_URLS[index]);
             etServerUrl.setEnabled(false);
+            if (tvUrlLockBadge != null) {
+                tvUrlLockBadge.setText("PRESET LOCKED");
+                tvUrlLockBadge.setTextColor(getColor(R.color.studio_cyan));
+            }
         } else {
             etServerUrl.setEnabled(true);
+            if (tvUrlLockBadge != null) {
+                tvUrlLockBadge.setText("CUSTOM RTMP");
+                tvUrlLockBadge.setTextColor(getColor(R.color.studio_ruby));
+            }
         }
         saveCurrentPreferences();
     }
 
     private void updateResolutionButtons() {
-        btnRes1080p.setBackgroundResource(selectedHeight == 1080 ? R.drawable.chip_active : R.drawable.chip_inactive);
-        btnRes720p.setBackgroundResource(selectedHeight == 720 ? R.drawable.chip_active : R.drawable.chip_inactive);
-        btnRes480p.setBackgroundResource(selectedHeight == 480 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        boolean is1080 = (selectedHeight == 1080);
+        boolean is720 = (selectedHeight == 720);
+        boolean is480 = (selectedHeight == 480);
+
+        btnRes1080p.setBackgroundResource(is1080 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnRes1080p.setTextColor(getColor(is1080 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        btnRes720p.setBackgroundResource(is720 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnRes720p.setTextColor(getColor(is720 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        btnRes480p.setBackgroundResource(is480 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnRes480p.setTextColor(getColor(is480 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        updateBitrateHint();
     }
 
     private void requestNecessaryPermissions() {
@@ -493,15 +633,18 @@ public class MainActivity extends Activity {
 
     private void updateUiStreamState(boolean isStreaming) {
         if (isStreaming) {
-            btnStartStopStream.setText("STOP BROADCAST");
+            btnStartStopStream.setText("■ STOP BROADCAST (ON AIR)");
             btnStartStopStream.setBackgroundResource(R.drawable.btn_m3_outlined);
-            tvLiveStatus.setText("LIVE BROADCASTING");
-            tvLiveStatus.setTextColor(getColor(R.color.m3_primary));
+            btnStartStopStream.setTextColor(getColor(R.color.studio_ruby));
+            tvLiveStatus.setText("LIVE BROADCASTING (ON AIR)");
+            tvLiveStatus.setTextColor(getColor(R.color.studio_ruby));
+            if (ivLiveBeacon != null) ivLiveBeacon.setVisibility(View.VISIBLE);
         } else {
-            btnStartStopStream.setText("GO LIVE NOW");
+            btnStartStopStream.setText("● START BROADCAST (GO LIVE)");
             btnStartStopStream.setBackgroundResource(R.drawable.btn_m3_primary);
-            tvLiveStatus.setText("STUDIO READY (OFFLINE)");
-            tvLiveStatus.setTextColor(getColor(R.color.m3_on_surface_variant));
+            btnStartStopStream.setTextColor(getColor(R.color.studio_chip_active_text));
+            tvLiveStatus.setText("STUDIO READY (STANDBY)");
+            tvLiveStatus.setTextColor(getColor(R.color.studio_text_secondary));
         }
     }
 
@@ -515,14 +658,48 @@ public class MainActivity extends Activity {
             long hours = uptimeMs / (1000 * 60 * 60);
             tvUptime.setText(String.format(Locale.US, "%02d:%02d:%02d", hours, minutes, seconds));
 
-            tvLiveBitrate.setText(String.format(Locale.US, "%d kbps", StreamService.getCurrentBitrateKbps()));
+            tvLiveBitrate.setText(String.format(Locale.US, "%,d kbps", StreamService.getCurrentBitrateKbps()));
             tvLiveFps.setText(String.format(Locale.US, "%.1f fps", StreamService.getCurrentFps()));
             tvDroppedFrames.setText(String.valueOf(StreamService.getDroppedFramesCount()));
+
+            int level = 5 + (int) (Math.abs(Math.sin(SystemClock.elapsedRealtime() / 250.0)) * 4);
+            updateVuMeter(level);
         } else {
             tvUptime.setText("00:00:00");
             tvLiveBitrate.setText("0 kbps");
             tvLiveFps.setText("0.0 fps");
             tvDroppedFrames.setText("0");
+            updateVuMeter(0);
+        }
+    }
+
+    private void updateVuMeter(int level) {
+        if (vuSegments == null) return;
+        int onGreen = getColor(R.color.studio_vu_green);
+        int onYellow = getColor(R.color.studio_vu_yellow);
+        int onRed = getColor(R.color.studio_vu_red);
+        int offColor = getColor(R.color.studio_vu_off);
+
+        for (int i = 0; i < vuSegments.length; i++) {
+            if (vuSegments[i] == null) continue;
+            if (i < level) {
+                if (i < 5) {
+                    vuSegments[i].setBackgroundColor(onGreen);
+                } else if (i < 8) {
+                    vuSegments[i].setBackgroundColor(onYellow);
+                } else {
+                    vuSegments[i].setBackgroundColor(onRed);
+                }
+            } else {
+                vuSegments[i].setBackgroundColor(offColor);
+            }
+        }
+        if (tvVuLevel != null) {
+            if (level > 0) {
+                tvVuLevel.setText(String.format(Locale.US, "-%d dB", Math.max(2, 22 - (level * 2))));
+            } else {
+                tvVuLevel.setText("-inf dB");
+            }
         }
     }
 
@@ -558,6 +735,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        updateOverlayStatus();
         uiHandler.post(telemetryRunnable);
     }
 

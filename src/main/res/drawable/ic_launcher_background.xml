@@ -4,20 +4,26 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
-    <!-- Solid Base Layer -->
+    <!-- Obsidian Chassis Base Layer -->
     <path
-        android:fillColor="#140A0C"
+        android:fillColor="#090C10"
         android:pathData="M0,0h108v108h-108z" />
-    
-        <!-- Studio Monitor Elevation Frame -->
-        <path
-            android:fillColor="#241215"
-            android:pathData="M22,18h64a12,12 0 0 1 12,12v48a12,12 0 0 1 -12,12h-64a12,12 0 0 1 -12,-12v-48a12,12 0 0 1 12,-12z" />
-        <!-- Radio Transmission Broadcast Waves -->
-        <path
-            android:strokeColor="#572228"
-            android:strokeWidth="1.5"
-            android:strokeLineCap="round"
-            android:pathData="M34,36a28,28 0 0 1 40,0 M28,30a38,38 0 0 1 52,0" />
-        
+
+    <!-- Studio Console Elevation Geometry -->
+    <path
+        android:fillColor="#121724"
+        android:pathData="M20,18h68a10,10 0 0 1 10,10v52a10,10 0 0 1 -10,10h-68a10,10 0 0 1 -10,-10v-52a10,10 0 0 1 10,-10z" />
+
+    <!-- Chamfered Rack Edge Hairline -->
+    <path
+        android:strokeColor="#243046"
+        android:strokeWidth="1.2"
+        android:pathData="M20,18h68a10,10 0 0 1 10,10v52a10,10 0 0 1 -10,10h-68a10,10 0 0 1 -10,-10v-52a10,10 0 0 1 10,-10z" />
+
+    <!-- Radio Transmission Broadcast Waves (Laser Cyan Glow) -->
+    <path
+        android:strokeColor="#0EA5E9"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M34,36a28,28 0 0 1 40,0 M28,30a38,38 0 0 1 52,0" />
 </vector>

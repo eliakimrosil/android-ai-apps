@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="12dp"
+    android:height="12dp"
+    android:viewportWidth="12"
+    android:viewportHeight="12">
+    <!-- Outer Glow Ring -->
+    <path
+        android:fillColor="@color/studio_ruby"
+        android:fillAlpha="0.3"
+        android:pathData="M6,0a6,6 0 1,0 0,12a6,6 0 1,0 0,-12z" />
+    <!-- Core Bright Dot -->
+    <path
+        android:fillColor="@color/studio_ruby"
+        android:pathData="M6,3a3,3 0 1,0 0,6a3,3 0 1,0 0,-6z" />
+</vector>

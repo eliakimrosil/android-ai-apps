@@ -1,46 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Material 3 Expressive Dark Theme Color Tokens -->
-    <color name="colorPrimary">#FFB4AB</color>
-    <color name="colorPrimaryDark">#140C0D</color>
-    <color name="colorAccent">#FFB4AB</color>
-    <color name="windowBackground">#140C0D</color>
+    <!-- OmniStream Studio: Broadcast Master Console Palette (Dark Theme / Control Room Obsidian) -->
+    <color name="colorPrimary">#EF4444</color>
+    <color name="colorPrimaryDark">#090C10</color>
+    <color name="colorAccent">#00E5FF</color>
+    <color name="windowBackground">#090C10</color>
 
-    <color name="m3_primary">#FFB4AB</color>
-    <color name="m3_on_primary">#690005</color>
-    <color name="m3_primary_container">#93000A</color>
+    <!-- Bespoke Studio Semantic Tokens -->
+    <color name="studio_bg">#090C10</color>
+    <color name="studio_panel">#121620</color>
+    <color name="studio_panel_elevated">#171E2C</color>
+    <color name="studio_panel_recessed">#0B0F17</color>
+    <color name="studio_border">#232D3F</color>
+    <color name="studio_border_subtle">#1A2230</color>
+    <color name="studio_border_focus">#00E5FF</color>
+    <color name="studio_border_ruby">#EF4444</color>
+
+    <color name="studio_text_primary">#F8FAFC</color>
+    <color name="studio_text_secondary">#94A3B8</color>
+    <color name="studio_text_muted">#64748B</color>
+
+    <color name="studio_ruby">#EF4444</color>
+    <color name="studio_ruby_surface">#2A1316</color>
+    <color name="studio_cyan">#00E5FF</color>
+    <color name="studio_cyan_surface">#082333</color>
+    <color name="studio_green">#10B981</color>
+    <color name="studio_amber">#F59E0B</color>
+
+    <color name="studio_chip_bg">#151B27</color>
+    <color name="studio_chip_stroke">#27354B</color>
+    <color name="studio_chip_text">#E2E8F0</color>
+    <color name="studio_chip_active_bg">#DC2626</color>
+    <color name="studio_chip_active_text">#FFFFFF</color>
+
+    <color name="studio_vu_green">#10B981</color>
+    <color name="studio_vu_yellow">#F59E0B</color>
+    <color name="studio_vu_red">#EF4444</color>
+    <color name="studio_vu_off">#1E2638</color>
+
+    <!-- Material Compatibility Tokens -->
+    <color name="m3_primary">#EF4444</color>
+    <color name="m3_on_primary">#FFFFFF</color>
+    <color name="m3_primary_container">#3B1317</color>
     <color name="m3_on_primary_container">#FFDAD6</color>
 
-    <color name="m3_secondary">#E7BDB8</color>
-    <color name="m3_on_secondary">#442927</color>
-    <color name="m3_secondary_container">#5D3F3C</color>
-    <color name="m3_on_secondary_container">#FFDAD6</color>
+    <color name="m3_secondary">#94A3B8</color>
+    <color name="m3_on_secondary">#090C10</color>
+    <color name="m3_secondary_container">#1E2638</color>
+    <color name="m3_on_secondary_container">#F8FAFC</color>
 
-    <color name="m3_tertiary">#E0C38C</color>
-    <color name="m3_on_tertiary">#3F2E04</color>
-    <color name="m3_tertiary_container">#584419</color>
-    <color name="m3_on_tertiary_container">#FEDF96</color>
+    <color name="m3_tertiary">#00E5FF</color>
+    <color name="m3_on_tertiary">#090C10</color>
+    <color name="m3_tertiary_container">#082333</color>
+    <color name="m3_on_tertiary_container">#E0F2FE</color>
 
-    <color name="m3_surface">#140C0D</color>
-    <color name="m3_surface_container">#201616</color>
-    <color name="m3_surface_container_high">#2B2020</color>
-    <color name="m3_surface_container_highest">#362A2B</color>
+    <color name="m3_surface">#090C10</color>
+    <color name="m3_surface_container">#121620</color>
+    <color name="m3_surface_container_high">#171E2C</color>
+    <color name="m3_surface_container_highest">#1E2638</color>
 
-    <color name="m3_on_surface">#F1DFDC</color>
-    <color name="m3_on_surface_variant">#D8C2C0</color>
-    <color name="m3_outline">#A08C8A</color>
-    <color name="m3_outline_variant">#534342</color>
+    <color name="m3_on_surface">#F8FAFC</color>
+    <color name="m3_on_surface_variant">#94A3B8</color>
+    <color name="m3_outline">#232D3F</color>
+    <color name="m3_outline_variant">#1A2230</color>
 
-    <color name="m3_success">#7FDC95</color>
-    <color name="m3_on_success">#00391A</color>
-    <color name="m3_error">#FFB4AB</color>
-    <color name="m3_on_error">#690005</color>
+    <color name="m3_success">#10B981</color>
+    <color name="m3_on_success">#090C10</color>
+    <color name="m3_error">#EF4444</color>
+    <color name="m3_on_error">#FFFFFF</color>
 
     <!-- Legacy compatibility aliases -->
-    <color name="cardBackground">#201616</color>
-    <color name="cardStroke">#534342</color>
-    <color name="textPrimary">#F1DFDC</color>
-    <color name="textSecondary">#D8C2C0</color>
-    <color name="btnColor">#FFB4AB</color>
-    <color name="btnTextColor">#690005</color>
+    <color name="cardBackground">#121620</color>
+    <color name="cardStroke">#232D3F</color>
+    <color name="textPrimary">#F8FAFC</color>
+    <color name="textSecondary">#94A3B8</color>
+    <color name="btnColor">#EF4444</color>
+    <color name="btnTextColor">#FFFFFF</color>
 </resources>

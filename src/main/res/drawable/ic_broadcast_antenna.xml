@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Center Transmitter Dot -->
+    <path
+        android:fillColor="@color/studio_ruby"
+        android:pathData="M12,11a2.5,2.5 0 1,0 0,5a2.5,2.5 0 1,0 0,-5z" />
+    <!-- Radiating Waves Left & Right -->
+    <path
+        android:strokeColor="@color/studio_ruby"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M8.5,10.5a5,5 0 0,0 0,6 M15.5,10.5a5,5 0 0,1 0,6" />
+    <path
+        android:strokeColor="@color/studio_cyan"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:pathData="M5.5,7.5a9,9 0 0,0 0,12 M18.5,7.5a9,9 0 0,1 0,12" />
+    <!-- Tower Mast -->
+    <path
+        android:strokeColor="@color/studio_text_secondary"
+        android:strokeWidth="1.6"
+        android:strokeLineCap="round"
+        android:pathData="M12,16v6 M9.5,22h5" />
+</vector>
