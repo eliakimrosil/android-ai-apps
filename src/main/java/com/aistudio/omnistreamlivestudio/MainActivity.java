@@ -114,6 +114,24 @@ public class MainActivity extends Activity {
     private Button btnRes720p;
     private Button btnRes480p;
 
+    // Video Frame Cadence (FPS) Chips
+    private Button btnFps60;
+    private Button btnFps30;
+    private Button btnFps24;
+    private TextView tvFpsBadge;
+
+    // Stream Orientation Chips
+    private Button btnOrientLandscape;
+    private Button btnOrientPortrait;
+    private Button btnOrientAuto;
+    private TextView tvOrientationBadge;
+
+    public static final int ORIENT_LANDSCAPE = 0;
+    public static final int ORIENT_PORTRAIT = 1;
+    public static final int ORIENT_AUTO = 2;
+    private int selectedOrientation = ORIENT_LANDSCAPE;
+    private int selectedResPreset = 1080;
+
     // Bitrate Slider & Presets
     private SeekBar seekBitrate;
     private TextView tvBitrateValue;
@@ -148,6 +166,7 @@ public class MainActivity extends Activity {
     private SharedPreferences prefs;
     private int selectedWidth = 1280;
     private int selectedHeight = 720;
+    private int selectedFps = 30;
     private int targetBitrateKbps = 2500;
     private int selectedPlatformIndex = 0; // 0: YT, 1: FB, 2: Twitch, 3: TikTok, 4: Kick, 5: Custom
 
@@ -294,6 +313,16 @@ public class MainActivity extends Activity {
         btnRes720p = findViewById(R.id.btnRes720p);
         btnRes480p = findViewById(R.id.btnRes480p);
 
+        btnFps60 = findViewById(R.id.btnFps60);
+        btnFps30 = findViewById(R.id.btnFps30);
+        btnFps24 = findViewById(R.id.btnFps24);
+        tvFpsBadge = findViewById(R.id.tvFpsBadge);
+
+        btnOrientLandscape = findViewById(R.id.btnOrientLandscape);
+        btnOrientPortrait = findViewById(R.id.btnOrientPortrait);
+        btnOrientAuto = findViewById(R.id.btnOrientAuto);
+        tvOrientationBadge = findViewById(R.id.tvOrientationBadge);
+
         seekBitrate = findViewById(R.id.seekBitrate);
         tvBitrateValue = findViewById(R.id.tvBitrateValue);
         btnBitrate1500 = findViewById(R.id.btnBitrate1500);
@@ -367,8 +396,16 @@ public class MainActivity extends Activity {
         selectedPlatformIndex = prefs.getInt("pref_platform_index", 0);
         String savedKey = prefs.getString("pref_stream_key", "");
         String customUrl = prefs.getString("pref_custom_url", "");
-        selectedWidth = prefs.getInt("pref_width", 1280);
-        selectedHeight = prefs.getInt("pref_height", 720);
+        selectedOrientation = prefs.getInt("pref_orientation", ORIENT_LANDSCAPE);
+        selectedResPreset = prefs.getInt("pref_res_preset", 1080);
+        if (!prefs.contains("pref_res_preset")) {
+            int savedHeight = prefs.getInt("pref_height", 1080);
+            int savedWidth = prefs.getInt("pref_width", 1920);
+            int minDim = Math.min(savedHeight, savedWidth);
+            selectedResPreset = (minDim >= 1000) ? 1080 : ((minDim >= 700) ? 720 : 480);
+        }
+        computeResolutionDimensions();
+        selectedFps = prefs.getInt("pref_fps", 30);
         targetBitrateKbps = prefs.getInt("pref_bitrate_kbps", 2500);
         boolean micEnabled = prefs.getBoolean("pref_mic_enabled", true);
         boolean facecamEnabled = prefs.getBoolean("pref_facecam_enabled", false);
@@ -383,6 +420,8 @@ public class MainActivity extends Activity {
         tvBitrateValue.setText(String.format(Locale.US, "%,d kbps", targetBitrateKbps));
 
         updateResolutionButtons();
+        updateFpsButtons();
+        updateOrientationButtons();
         updateBitrateHint();
         switchMicAudio.setChecked(micEnabled);
         switchFacecam.setChecked(facecamEnabled);
@@ -401,8 +440,11 @@ public class MainActivity extends Activity {
         if (selectedPlatformIndex == 5) {
             editor.putString("pref_custom_url", etServerUrl.getText().toString().trim());
         }
+        editor.putInt("pref_orientation", selectedOrientation);
+        editor.putInt("pref_res_preset", selectedResPreset);
         editor.putInt("pref_width", selectedWidth);
         editor.putInt("pref_height", selectedHeight);
+        editor.putInt("pref_fps", selectedFps);
         editor.putInt("pref_bitrate_kbps", targetBitrateKbps);
         editor.putBoolean("pref_mic_enabled", switchMicAudio.isChecked());
         editor.putBoolean("pref_facecam_enabled", switchFacecam.isChecked());
@@ -449,25 +491,73 @@ public class MainActivity extends Activity {
 
         btnRes1080p.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            selectedWidth = 1920;
-            selectedHeight = 1080;
+            selectedResPreset = 1080;
+            computeResolutionDimensions();
             updateResolutionButtons();
             saveCurrentPreferences();
         });
 
         btnRes720p.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            selectedWidth = 1280;
-            selectedHeight = 720;
+            selectedResPreset = 720;
+            computeResolutionDimensions();
             updateResolutionButtons();
             saveCurrentPreferences();
         });
 
         btnRes480p.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
-            selectedWidth = 854;
-            selectedHeight = 480;
+            selectedResPreset = 480;
+            computeResolutionDimensions();
             updateResolutionButtons();
+            saveCurrentPreferences();
+        });
+
+        btnFps60.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            selectedFps = 60;
+            updateFpsButtons();
+            saveCurrentPreferences();
+        });
+
+        btnFps30.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            selectedFps = 30;
+            updateFpsButtons();
+            saveCurrentPreferences();
+        });
+
+        btnFps24.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            selectedFps = 24;
+            updateFpsButtons();
+            saveCurrentPreferences();
+        });
+
+        btnOrientLandscape.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            selectedOrientation = ORIENT_LANDSCAPE;
+            computeResolutionDimensions();
+            updateOrientationButtons();
+            updateBitrateHint();
+            saveCurrentPreferences();
+        });
+
+        btnOrientPortrait.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            selectedOrientation = ORIENT_PORTRAIT;
+            computeResolutionDimensions();
+            updateOrientationButtons();
+            updateBitrateHint();
+            saveCurrentPreferences();
+        });
+
+        btnOrientAuto.setOnClickListener(v -> {
+            v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+            selectedOrientation = ORIENT_AUTO;
+            computeResolutionDimensions();
+            updateOrientationButtons();
+            updateBitrateHint();
             saveCurrentPreferences();
         });
 
@@ -570,16 +660,82 @@ public class MainActivity extends Activity {
         }
     }
 
+    private void computeResolutionDimensions() {
+        boolean isPortrait;
+        if (selectedOrientation == ORIENT_PORTRAIT) {
+            isPortrait = true;
+        } else if (selectedOrientation == ORIENT_AUTO) {
+            int configOrientation = getResources().getConfiguration().orientation;
+            isPortrait = (configOrientation != Configuration.ORIENTATION_LANDSCAPE);
+        } else {
+            isPortrait = false;
+        }
+
+        if (selectedResPreset == 1080) {
+            selectedWidth = isPortrait ? 1080 : 1920;
+            selectedHeight = isPortrait ? 1920 : 1080;
+        } else if (selectedResPreset == 720) {
+            selectedWidth = isPortrait ? 720 : 1280;
+            selectedHeight = isPortrait ? 1280 : 720;
+        } else {
+            selectedWidth = isPortrait ? 480 : 854;
+            selectedHeight = isPortrait ? 854 : 480;
+        }
+    }
+
+    private void updateOrientationButtons() {
+        boolean isLand = (selectedOrientation == ORIENT_LANDSCAPE);
+        boolean isPort = (selectedOrientation == ORIENT_PORTRAIT);
+        boolean isAuto = (selectedOrientation == ORIENT_AUTO);
+
+        btnOrientLandscape.setBackgroundResource(isLand ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnOrientLandscape.setTextColor(getColor(isLand ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        btnOrientPortrait.setBackgroundResource(isPort ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnOrientPortrait.setTextColor(getColor(isPort ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        btnOrientAuto.setBackgroundResource(isAuto ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnOrientAuto.setTextColor(getColor(isAuto ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        if (tvOrientationBadge != null) {
+            if (isLand) {
+                tvOrientationBadge.setText("16:9 LANDSCAPE");
+                tvOrientationBadge.setTextColor(getColor(R.color.studio_cyan));
+            } else if (isPort) {
+                tvOrientationBadge.setText("9:16 PORTRAIT");
+                tvOrientationBadge.setTextColor(getColor(R.color.studio_ruby));
+            } else {
+                tvOrientationBadge.setText("AUTO SENSOR");
+                tvOrientationBadge.setTextColor(getColor(R.color.studio_green));
+            }
+        }
+    }
+
     private void updateBitrateHint() {
         if (tvBitrateHint == null) return;
-        if (targetBitrateKbps < 2000) {
-            tvBitrateHint.setText("Target: 480p SD • Low-bandwidth mobile profile");
-        } else if (targetBitrateKbps < 3500) {
-            tvBitrateHint.setText("Recommended: 2,500 kbps for crisp 720p 60fps streaming");
-        } else if (targetBitrateKbps < 5500) {
-            tvBitrateHint.setText("Recommended: 4,500 kbps for high-definition 1080p FHD");
+        String orientDesc;
+        if (selectedOrientation == ORIENT_PORTRAIT) {
+            orientDesc = "Portrait (9:16)";
+        } else if (selectedOrientation == ORIENT_AUTO) {
+            orientDesc = "Auto Canvas";
         } else {
-            tvBitrateHint.setText("Studio Master: 6,000+ kbps for high-motion gameplay");
+            orientDesc = "Landscape (16:9)";
+        }
+
+        if (selectedResPreset >= 1080) {
+            if (selectedFps == 60) {
+                tvBitrateHint.setText("Pro 1080p 60fps " + orientDesc + " • Recommended: 5,000–6,000 kbps for high-motion gaming");
+            } else {
+                tvBitrateHint.setText("Crisp 1080p " + selectedFps + "fps " + orientDesc + " • Recommended: 4,000–4,500 kbps for studio streams");
+            }
+        } else if (selectedResPreset >= 720) {
+            if (selectedFps == 60) {
+                tvBitrateHint.setText("Smooth 720p 60fps " + orientDesc + " • Recommended: 3,000–3,500 kbps for fast gameplay");
+            } else {
+                tvBitrateHint.setText("Balanced 720p " + selectedFps + "fps " + orientDesc + " • Recommended: 2,000–2,500 kbps standard profile");
+            }
+        } else {
+            tvBitrateHint.setText("Mobile 480p " + selectedFps + "fps " + orientDesc + " • Target: 1,000–1,500 kbps low-bandwidth profile");
         }
     }
 
@@ -600,6 +756,13 @@ public class MainActivity extends Activity {
             }
         }
 
+        if (index == 3) {
+            selectedOrientation = ORIENT_PORTRAIT;
+            computeResolutionDimensions();
+            updateOrientationButtons();
+            updateResolutionButtons();
+        }
+
         if (index < 5) {
             etServerUrl.setText(PRESET_URLS[index]);
             etServerUrl.setEnabled(false);
@@ -618,9 +781,9 @@ public class MainActivity extends Activity {
     }
 
     private void updateResolutionButtons() {
-        boolean is1080 = (selectedHeight == 1080);
-        boolean is720 = (selectedHeight == 720);
-        boolean is480 = (selectedHeight == 480);
+        boolean is1080 = (selectedResPreset == 1080);
+        boolean is720 = (selectedResPreset == 720);
+        boolean is480 = (selectedResPreset == 480);
 
         btnRes1080p.setBackgroundResource(is1080 ? R.drawable.chip_active : R.drawable.chip_inactive);
         btnRes1080p.setTextColor(getColor(is1080 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
@@ -630,6 +793,36 @@ public class MainActivity extends Activity {
 
         btnRes480p.setBackgroundResource(is480 ? R.drawable.chip_active : R.drawable.chip_inactive);
         btnRes480p.setTextColor(getColor(is480 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        updateBitrateHint();
+    }
+
+    private void updateFpsButtons() {
+        boolean is60 = (selectedFps == 60);
+        boolean is30 = (selectedFps == 30);
+        boolean is24 = (selectedFps == 24);
+
+        btnFps60.setBackgroundResource(is60 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnFps60.setTextColor(getColor(is60 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        btnFps30.setBackgroundResource(is30 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnFps30.setTextColor(getColor(is30 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        btnFps24.setBackgroundResource(is24 ? R.drawable.chip_active : R.drawable.chip_inactive);
+        btnFps24.setTextColor(getColor(is24 ? R.color.studio_chip_active_text : R.color.studio_chip_text));
+
+        if (tvFpsBadge != null) {
+            if (is60) {
+                tvFpsBadge.setText("60 FPS SMOOTH");
+                tvFpsBadge.setTextColor(getColor(R.color.studio_cyan));
+            } else if (is30) {
+                tvFpsBadge.setText("30 FPS STANDARD");
+                tvFpsBadge.setTextColor(getColor(R.color.studio_green));
+            } else {
+                tvFpsBadge.setText("24 FPS CINEMA");
+                tvFpsBadge.setTextColor(getColor(R.color.studio_amber));
+            }
+        }
 
         updateBitrateHint();
     }
@@ -697,6 +890,7 @@ public class MainActivity extends Activity {
             }
         } else if (requestCode == REQUEST_CODE_MEDIA_PROJECTION) {
             if (resultCode == RESULT_OK && data != null) {
+                computeResolutionDimensions();
                 Intent serviceIntent = new Intent(this, StreamService.class);
                 serviceIntent.setAction(StreamService.ACTION_START);
                 serviceIntent.putExtra("resultCode", resultCode);
@@ -705,6 +899,8 @@ public class MainActivity extends Activity {
                 serviceIntent.putExtra("streamKey", etStreamKey.getText().toString().trim());
                 serviceIntent.putExtra("videoWidth", selectedWidth);
                 serviceIntent.putExtra("videoHeight", selectedHeight);
+                serviceIntent.putExtra("videoFps", selectedFps);
+                serviceIntent.putExtra("videoOrientation", selectedOrientation);
                 serviceIntent.putExtra("bitrateKbps", targetBitrateKbps);
                 serviceIntent.putExtra("enableMic", switchMicAudio.isChecked());
                 serviceIntent.putExtra("enableFacecam", switchFacecam.isChecked());
@@ -821,6 +1017,11 @@ public class MainActivity extends Activity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         // Preserves layout without activity rebuild on desktop window resizing
+        if (selectedOrientation == ORIENT_AUTO) {
+            computeResolutionDimensions();
+            updateOrientationButtons();
+            updateBitrateHint();
+        }
     }
 
     @Override
@@ -850,7 +1051,7 @@ public class MainActivity extends Activity {
         private static volatile boolean isStreaming = false;
         private static volatile long streamStartTime = 0;
         private static volatile int currentBitrateKbps = 0;
-        private static volatile float currentFps = 0.0f;
+        static volatile float currentFps = 0.0f;
         private static volatile long droppedFrames = 0;
 
         private MediaProjection mediaProjection;
@@ -987,6 +1188,7 @@ public class MainActivity extends Activity {
             String streamKey = intent.getStringExtra("streamKey");
             int width = intent.getIntExtra("videoWidth", 1280);
             int height = intent.getIntExtra("videoHeight", 720);
+            int fps = intent.getIntExtra("videoFps", 30);
             int bitrate = intent.getIntExtra("bitrateKbps", 2500);
             boolean enableMic = intent.getBooleanExtra("enableMic", true);
             boolean enableFacecam = intent.getBooleanExtra("enableFacecam", false);
@@ -1001,7 +1203,7 @@ public class MainActivity extends Activity {
             streamStartTime = SystemClock.elapsedRealtime();
             droppedFrames = 0;
             currentBitrateKbps = bitrate;
-            currentFps = 30.0f;
+            currentFps = (float) fps;
 
             FloatingCamManager.getInstance(this).setLiveState(true);
             if (enableFacecam && Settings.canDrawOverlays(this)) {
@@ -1012,7 +1214,7 @@ public class MainActivity extends Activity {
             rtmpClient.start();
 
             DisplayMetrics metrics = getResources().getDisplayMetrics();
-            videoEncoder = new VideoEncoder(mediaProjection, width, height, bitrate, metrics.densityDpi, rtmpClient);
+            videoEncoder = new VideoEncoder(mediaProjection, width, height, fps, bitrate, metrics.densityDpi, rtmpClient);
             videoEncoder.start();
 
             if (enableMic) {
@@ -1057,20 +1259,24 @@ public class MainActivity extends Activity {
         private final MediaProjection projection;
         private final int width;
         private final int height;
+        private final int fps;
         private final int bitrate;
         private final int dpi;
         private final RtmpMuxerClient rtmp;
         private final AtomicBoolean isRunning = new AtomicBoolean(false);
+        private long frameCount = 0;
+        private long lastFpsCalcTime = 0;
 
         private MediaCodec mediaCodec;
         private Surface inputSurface;
         private android.hardware.display.VirtualDisplay virtualDisplay;
         private Thread thread;
 
-        public VideoEncoder(MediaProjection projection, int width, int height, int bitrateKbps, int dpi, RtmpMuxerClient rtmp) {
+        public VideoEncoder(MediaProjection projection, int width, int height, int fps, int bitrateKbps, int dpi, RtmpMuxerClient rtmp) {
             this.projection = projection;
             this.width = width;
             this.height = height;
+            this.fps = fps;
             this.bitrate = bitrateKbps * 1000;
             this.dpi = dpi;
             this.rtmp = rtmp;
@@ -1088,7 +1294,7 @@ public class MainActivity extends Activity {
                 MediaFormat format = MediaFormat.createVideoFormat(MediaFormat.MIMETYPE_VIDEO_AVC, width, height);
                 format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
                 format.setInteger(MediaFormat.KEY_BIT_RATE, bitrate);
-                format.setInteger(MediaFormat.KEY_FRAME_RATE, 30);
+                format.setInteger(MediaFormat.KEY_FRAME_RATE, fps);
                 format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 2);
 
                 mediaCodec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_VIDEO_AVC);
@@ -1141,6 +1347,15 @@ public class MainActivity extends Activity {
                                 }
                             } else {
                                 rtmp.sendVideoFrame(chunk, isKeyFrame, bufferInfo.presentationTimeUs / 1000);
+                                frameCount++;
+                                long now = SystemClock.elapsedRealtime();
+                                if (lastFpsCalcTime == 0) {
+                                    lastFpsCalcTime = now;
+                                } else if (now - lastFpsCalcTime >= 1000) {
+                                    StreamService.currentFps = (float) (frameCount * 1000.0 / (now - lastFpsCalcTime));
+                                    frameCount = 0;
+                                    lastFpsCalcTime = now;
+                                }
                             }
                         }
                         mediaCodec.releaseOutputBuffer(outputIndex, false);
