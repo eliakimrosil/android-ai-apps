@@ -5,74 +5,300 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Studio Apps | 100% Private Offline Android Utilities</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0E0E12; color: #FFFFFF; margin: 0; padding: 24px; }
-        .container { max-width: 760px; margin: 0 auto; }
-        h1 { color: #00E5FF; font-size: 28px; margin-bottom: 8px; }
-        p.subtitle { color: #A0A5BA; margin-top: 0; font-size: 15px; margin-bottom: 28px; }
-        .card { background: #1C1C24; border: 1px solid #2C2C3A; border-radius: 16px; padding: 22px; margin-bottom: 18px; display: flex; flex-direction: column; gap: 8px; }
-        .card h2 { margin: 0; font-size: 18px; color: #FFFFFF; }
-        .card p { margin: 0; color: #A0A5BA; font-size: 14px; line-height: 1.5; }
-        .tag { display: inline-block; font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 6px; align-self: flex-start; text-transform: uppercase; }
-        .btn-row { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
-        .btn { display: inline-block; background: #00E5FF; color: #0E0E12; font-weight: bold; padding: 9px 16px; border-radius: 10px; text-decoration: none; font-size: 13px; }
-        .btn-sec { background: #282836; color: #00E5FF; }
-        footer { margin-top: 48px; text-align: center; color: #606070; font-size: 12px; border-top: 1px solid #2C2C3A; padding-top: 20px; }
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0B0F19; color: #FFFFFF; margin: 0; padding: 24px; min-height: 100vh; }
+        .container { max-width: 820px; margin: 0 auto; }
+        header { margin-bottom: 24px; }
+        h1 { color: #00E5FF; font-size: 30px; margin: 0 0 8px 0; letter-spacing: -0.5px; }
+        p.subtitle { color: #94A3B8; margin-top: 0; font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+        .search-container { margin-bottom: 24px; position: sticky; top: 12px; z-index: 10; }
+        .search-input { width: 100%; padding: 14px 18px; border-radius: 14px; background: #131B2E; border: 1px solid #233152; color: #FFFFFF; font-size: 15px; outline: none; box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+        .search-input:focus { border-color: #00E5FF; }
+        .search-input::placeholder { color: #64748B; }
+        .stats-bar { display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap; }
+        .stat-chip { background: #131B2E; border: 1px solid #233152; padding: 6px 14px; border-radius: 20px; font-size: 12px; color: #94A3B8; font-weight: 600; }
+        .stat-chip span { color: #00E5FF; font-weight: bold; }
+        .cards-list { display: flex; flex-direction: column; gap: 16px; }
+        .card { background: #131B2E; border: 1px solid #233152; border-radius: 18px; padding: 22px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.2s, transform 0.2s; }
+        .card:hover { border-color: #38BDF8; transform: translateY(-1px); }
+        .card-meta { display: flex; align-items: center; justify-content: space-between; }
+        .card h2 { margin: 0; font-size: 19px; }
+        .app-title-link { color: #FFFFFF; text-decoration: none; }
+        .app-title-link:hover { color: #00E5FF; }
+        .card p.tagline { margin: 0; color: #94A3B8; font-size: 14px; line-height: 1.5; }
+        .tag { display: inline-block; font-size: 11px; font-weight: bold; padding: 4px 10px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-status { font-size: 11px; color: #10B981; font-weight: 600; background: rgba(16, 185, 129, 0.12); padding: 3px 8px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25); }
+        .btn-row { display: flex; gap: 10px; margin-top: 6px; flex-wrap: wrap; }
+        .btn { display: inline-block; background: #00E5FF; color: #0B0F19; font-weight: bold; padding: 9px 16px; border-radius: 10px; text-decoration: none; font-size: 13px; transition: opacity 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-sec { background: #1E293B; color: #38BDF8; border: 1px solid #334155; }
+        .btn-sec:hover { background: #283548; }
+        footer { margin-top: 56px; text-align: center; color: #64748B; font-size: 12px; border-top: 1px solid #233152; padding-top: 24px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚡ AI Studio Android Apps</h1>
-        <p class="subtitle">Production-grade, 100% offline Android applications built natively on ARM64 with zero ads, zero trackers, and zero cloud accounts.</p>
-        
-        
-        <div class="card">
-            <span class="tag" style="background: #00E5FF; color: #0E0E12;">FITNESS &amp; STRENGTH</span>
-            <h2>IronPulse: Offline Workout Program &amp; Gym Tracker</h2>
-            <p>Minimalist offline workout split tracker with progressive overload logging, haptic countdown rest timer, and zero bloat.</p>
+        <header>
+            <h1>⚡ AI Studio Android Apps</h1>
+            <p class="subtitle">Autonomous, production-grade, 100% offline Android applications built natively on ARM64 with zero ads, zero trackers, and zero cloud lock-in.</p>
+            <div class="stats-bar">
+                <div class="stat-chip">Total Apps: <span id="appCount">25</span></div>
+                <div class="stat-chip">Direct Releases: <span>GitHub Releases CDN</span></div>
+                <div class="stat-chip">Architecture: <span>Pure Native ARM64</span></div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search apps by title, keyword, or category..." oninput="filterApps()">
+        </div>
+
+        <div class="cards-list" id="cardsList">
+
+        <div class="card" data-slug="pan-flip-sear-timer" data-category="food & drink / utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #FF9100; color: #0E0E12;">FOOD & DRINK / UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="pan-flip-sear-timer/" class="app-title-link">PanFlip: Kitchen Sear & Flip Sentinel</a></h2>
+            <p class="tagline">Offline culinary flip and sear timer with Quick Settings 1-tap activation and hands-free lock-screen pacing for busy home cooks.</p>
             <div class="btn-row">
-                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-workout-program-tracker/workout-program-tracker.apk">⬇ Download APK (CDN)</a>
-                <a class="btn btn-sec" href="workout-program-tracker/">Landing Page</a>
-                <a class="btn btn-sec" href="workout-program-tracker/privacy.html">Privacy</a>
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-pan-flip-sear-timer/pan-flip-sear-timer.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="pan-flip-sear-timer/">Landing Page</a>
+                <a class="btn btn-sec" href="pan-flip-sear-timer/privacy.html">Privacy</a>
             </div>
         </div>
 
-        <div class="card">
-            <span class="tag" style="background: #00E5FF; color: #0E0E12;">HARDWARE & SYSTEM</span>
-            <h2>DevSys Monitor: Real-time Android Hardware Monitor</h2>
-            <p>Lightweight real-time CPU frequencies, RAM utilization, thermal sensors, and system processes monitor.</p>
+        <div class="card" data-slug="fast-track-intermittent-fasting-sentinel" data-category="health & fitness">
+            <div class="card-meta">
+                <span class="tag" style="background: #00E5FF; color: #0E0E12;">HEALTH & FITNESS</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="fast-track-intermittent-fasting-sentinel/" class="app-title-link">FastTrack: Offline Fasting Sentinel</a></h2>
+            <p class="tagline">Frictionless, offline-first intermittent fasting tracker driven by Quick Settings and persistent Lock Screen chronometer.</p>
             <div class="btn-row">
-                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-devsys-monitor/devsys-monitor.apk">⬇ Download APK (CDN)</a>
-                <a class="btn btn-sec" href="devsys-monitor/">Landing Page</a>
-                <a class="btn btn-sec" href="devsys-monitor/privacy.html">Privacy</a>
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-fast-track-intermittent-fasting-sentinel/fast-track-intermittent-fasting-sentinel.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="fast-track-intermittent-fasting-sentinel/">Landing Page</a>
+                <a class="btn btn-sec" href="fast-track-intermittent-fasting-sentinel/privacy.html">Privacy</a>
             </div>
         </div>
 
-        <div class="card">
-            <span class="tag" style="background: #00E676; color: #0E0E12;">FINANCE & TAX</span>
-            <h2>PH VAT Calculator: Philippine BIR Tax & Invoice Tool</h2>
-            <p>Fast offline 12% VAT (inclusive/exclusive), Expanded Withholding Tax (EWT), and invoice net/gross calculation tool.</p>
+        <div class="card" data-slug="snooze-guard-microsleep-commute" data-category="travel & local / utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #3B82F6; color: #FFFFFF;">TRAVEL & LOCAL / UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="snooze-guard-microsleep-commute/" class="app-title-link">SnoozeGuard Commute Vigil</a></h2>
+            <p class="tagline">Offline motion & dead-man vigilance timer that stops public transit riders from sleeping past their stop.</p>
             <div class="btn-row">
-                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-ph-vat-calculator/ph-vat-calculator.apk">⬇ Download APK (CDN)</a>
-                <a class="btn btn-sec" href="ph-vat-calculator/">Landing Page</a>
-                <a class="btn btn-sec" href="ph-vat-calculator/privacy.html">Privacy</a>
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-snooze-guard-microsleep-commute/snooze-guard-microsleep-commute.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="snooze-guard-microsleep-commute/">Landing Page</a>
+                <a class="btn btn-sec" href="snooze-guard-microsleep-commute/privacy.html">Privacy</a>
             </div>
         </div>
 
-        <div class="card">
-            <span class="tag" style="background: #FF9100; color: #0E0E12;">STREAMING & NETWORKING</span>
-            <h2>ScreenStream RTSP: Low-Latency Screen Broadcaster</h2>
-            <p>Low-latency local network RTSP live screen broadcasting server utilizing Android MediaProjection API.</p>
+        <div class="card" data-slug="steep-chill-ice-bath-timer" data-category="health & fitness / utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #00E5FF; color: #0E0E12;">HEALTH & FITNESS / UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="steep-chill-ice-bath-timer/" class="app-title-link">CryoPulse: Cold Plunge Sentinel</a></h2>
+            <p class="tagline">Frictionless offline cold plunge timer with Quick Settings 1-tap start, ongoing lock screen chronometer, and haptic breath pacing.</p>
             <div class="btn-row">
-                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-screenstream-rtsp/screenstream-rtsp.apk">⬇ Download APK (CDN)</a>
-                <a class="btn btn-sec" href="screenstream-rtsp/">Landing Page</a>
-                <a class="btn btn-sec" href="screenstream-rtsp/privacy.html">Privacy</a>
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-steep-chill-ice-bath-timer/steep-chill-ice-bath-timer.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="steep-chill-ice-bath-timer/">Landing Page</a>
+                <a class="btn btn-sec" href="steep-chill-ice-bath-timer/privacy.html">Privacy</a>
             </div>
         </div>
 
-        <div class="card">
-            <span class="tag" style="background: #D500F9; color: #0E0E12;">SYSTEM MOD & UTILITY</span>
-            <h2>Gemini Power Bridge: Lenovo ZUI Power Key Interceptor</h2>
-            <p>Hardware key interceptor configuring Lenovo ZUI power button long-press to launch Google Gemini directly.</p>
+        <div class="card" data-slug="aurafocus-minimalist-pomodoro-ambient-sound" data-category="productivity">
+            <div class="card-meta">
+                <span class="tag" style="background: #38BDF8; color: #0E0E12;">PRODUCTIVITY</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="aurafocus-minimalist-pomodoro-ambient-sound/" class="app-title-link">AuraFocus - Minimalist Pomodoro & Ambient Sound</a></h2>
+            <p class="tagline">Offline distraction-free timer with embedded ambient white noise & AMOLED dark theme.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-aurafocus-minimalist-pomodoro-ambient-sound/aurafocus-minimalist-pomodoro-ambient-sound.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="aurafocus-minimalist-pomodoro-ambient-sound/">Landing Page</a>
+                <a class="btn btn-sec" href="aurafocus-minimalist-pomodoro-ambient-sound/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="laundry-cycle-sentinel" data-category="utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #38BDF8; color: #0E0E12;">UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="laundry-cycle-sentinel/" class="app-title-link">CycleGuard: Laundry Sentinel</a></h2>
+            <p class="tagline">Zero-friction offline laundry timer with Quick Settings 1-tap start, ongoing lock-screen chronometer, and mold-prevention reminders.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-laundry-cycle-sentinel/laundry-cycle-sentinel.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="laundry-cycle-sentinel/">Landing Page</a>
+                <a class="btn btn-sec" href="laundry-cycle-sentinel/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="steep-brew-tea-timer" data-category="food & drink / utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #FF9100; color: #0E0E12;">FOOD & DRINK / UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="steep-brew-tea-timer/" class="app-title-link">SteepPulse: Offline Multi-Infusion Tea & Coffee Sentinel</a></h2>
+            <p class="tagline">Precision multi-step infusion timing with 1-tap Quick Settings logging, lock screen chronometer, and zero account friction.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-steep-brew-tea-timer/steep-brew-tea-timer.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="steep-brew-tea-timer/">Landing Page</a>
+                <a class="btn btn-sec" href="steep-brew-tea-timer/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="frost-thaw-prep-timer" data-category="tools & food safety">
+            <div class="card-meta">
+                <span class="tag" style="background: #FF9100; color: #0E0E12;">TOOLS & FOOD SAFETY</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="frost-thaw-prep-timer/" class="app-title-link">ThawGuard: Offline Food Defrost Sentinel</a></h2>
+            <p class="tagline">Safe, USDA-calibrated kitchen thaw timer with Quick Settings instant-log and lock screen live countdown.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-frost-thaw-prep-timer/frost-thaw-prep-timer.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="frost-thaw-prep-timer/">Landing Page</a>
+                <a class="btn btn-sec" href="frost-thaw-prep-timer/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="park-pin-offline-spot-finder" data-category="auto & vehicles / travel & local">
+            <div class="card-meta">
+                <span class="tag" style="background: #3B82F6; color: #FFFFFF;">AUTO & VEHICLES / TRAVEL & LOCAL</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="park-pin-offline-spot-finder/" class="app-title-link">ParkPin: Offline Spot Anchor</a></h2>
+            <p class="tagline">Instantly record parking spot level, pillar number, and photos with zero network connectivity or latency.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-park-pin-offline-spot-finder/park-pin-offline-spot-finder.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="park-pin-offline-spot-finder/">Landing Page</a>
+                <a class="btn btn-sec" href="park-pin-offline-spot-finder/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="omnistream-live-studio" data-category="video & broadcasting">
+            <div class="card-meta">
+                <span class="tag" style="background: #D500F9; color: #FFFFFF;">VIDEO & BROADCASTING</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="omnistream-live-studio/" class="app-title-link">OmniStream: Mobile Screen Live Studio</a></h2>
+            <p class="tagline">Live stream mobile screen to YouTube, Facebook, TikTok, Twitch & RTMP</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-omnistream-live-studio/omnistream-live-studio.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="omnistream-live-studio/">Landing Page</a>
+                <a class="btn btn-sec" href="omnistream-live-studio/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="stealth-drop-secret-pad" data-category="productivity & security">
+            <div class="card-meta">
+                <span class="tag" style="background: #10B981; color: #FFFFFF;">PRODUCTIVITY & SECURITY</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="stealth-drop-secret-pad/" class="app-title-link">StealthDrop: Offline Ephemeral Scratchpad</a></h2>
+            <p class="tagline">Instant zero-trace burner notes and sensitive snippets from your notification shade with auto-purge timers.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-stealth-drop-secret-pad/stealth-drop-secret-pad.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="stealth-drop-secret-pad/">Landing Page</a>
+                <a class="btn btn-sec" href="stealth-drop-secret-pad/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="tap-meter-parking-sentinel" data-category="auto & vehicles / productivity">
+            <div class="card-meta">
+                <span class="tag" style="background: #3B82F6; color: #FFFFFF;">AUTO & VEHICLES / PRODUCTIVITY</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="tap-meter-parking-sentinel/" class="app-title-link">MeterPulse - Offline Parking Sentinel</a></h2>
+            <p class="tagline">One-tap Quick Settings parking timer with interactive Glance countdown and GPS breadcrumb, completely offline.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-tap-meter-parking-sentinel/tap-meter-parking-sentinel.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="tap-meter-parking-sentinel/">Landing Page</a>
+                <a class="btn btn-sec" href="tap-meter-parking-sentinel/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="offline-prescription-pill-refill-sentinel" data-category="health & fitness">
+            <div class="card-meta">
+                <span class="tag" style="background: #00E5FF; color: #0E0E12;">HEALTH & FITNESS</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="offline-prescription-pill-refill-sentinel/" class="app-title-link">DoseGuard: Offline Med & Refill Sentinel</a></h2>
+            <p class="tagline">Frictionless offline medication compliance and zero-panic refill countdowns powered by Quick Settings and Glance widgets.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-offline-prescription-pill-refill-sentinel/offline-prescription-pill-refill-sentinel.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="offline-prescription-pill-refill-sentinel/">Landing Page</a>
+                <a class="btn btn-sec" href="offline-prescription-pill-refill-sentinel/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="offline-fuel-log-tracker" data-category="auto & vehicles / utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #3B82F6; color: #FFFFFF;">AUTO & VEHICLES / UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="offline-fuel-log-tracker/" class="app-title-link">TankPulse: Offline Fuel & Mileage Tracker</a></h2>
+            <p class="tagline">Instantly record fuel fill-ups and compute real-world mileage and cost-per-mile without accounts, ads, or internet connection.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-offline-fuel-log-tracker/offline-fuel-log-tracker.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="offline-fuel-log-tracker/">Landing Page</a>
+                <a class="btn btn-sec" href="offline-fuel-log-tracker/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="offline-audio-drop-transcribe" data-category="productivity / utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #38BDF8; color: #0E0E12;">PRODUCTIVITY / UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="offline-audio-drop-transcribe/" class="app-title-link">DropScribe</a></h2>
+            <p class="tagline">Offline WhatsApp & Telegram voice note transcription via local Whisper with zero cloud leakage.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-offline-audio-drop-transcribe/offline-audio-drop-transcribe.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="offline-audio-drop-transcribe/">Landing Page</a>
+                <a class="btn btn-sec" href="offline-audio-drop-transcribe/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="snip-shelf-receipt-ocr" data-category="productivity & utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #38BDF8; color: #0E0E12;">PRODUCTIVITY & UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="snip-shelf-receipt-ocr/" class="app-title-link">SnipShelf: Offline Warranty & Manual Vault</a></h2>
+            <p class="tagline">Instantly stash paper serial numbers, warranty barcodes, and appliance manuals directly from camera or share sheet with on-device text indexing.</p>
+            <div class="btn-row">
+                
+                <a class="btn btn-sec" href="snip-shelf-receipt-ocr/">Landing Page</a>
+                <a class="btn btn-sec" href="snip-shelf-receipt-ocr/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="clip-scrub-sanitize-share" data-category="productivity & privacy utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #10B981; color: #FFFFFF;">PRODUCTIVITY & PRIVACY UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="clip-scrub-sanitize-share/" class="app-title-link">ClipScrub: Private Share Sanitizer</a></h2>
+            <p class="tagline">Instantly strip tracking parameters, UTMs, referral bloat, and metadata from copied links and images before sharing.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-clip-scrub-sanitize-share/clip-scrub-sanitize-share.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="clip-scrub-sanitize-share/">Landing Page</a>
+                <a class="btn btn-sec" href="clip-scrub-sanitize-share/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="gemini-power-bridge" data-category="productivity & utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #38BDF8; color: #0E0E12;">PRODUCTIVITY & UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="gemini-power-bridge/" class="app-title-link">Gemini Power Bridge: Lenovo ZUI Power Key Interceptor</a></h2>
+            <p class="tagline">Hardware key interceptor configuring Lenovo ZUI power button long-press to launch Google Gemini directly.</p>
             <div class="btn-row">
                 <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-gemini-power-bridge/gemini-power-bridge.apk">⬇ Download APK (CDN)</a>
                 <a class="btn btn-sec" href="gemini-power-bridge/">Landing Page</a>
@@ -80,10 +306,127 @@
             </div>
         </div>
 
+        <div class="card" data-slug="screenstream-rtsp" data-category="multimedia & networking">
+            <div class="card-meta">
+                <span class="tag" style="background: #D500F9; color: #FFFFFF;">MULTIMEDIA & NETWORKING</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="screenstream-rtsp/" class="app-title-link">ScreenStream RTSP: Low-Latency Screen Broadcaster</a></h2>
+            <p class="tagline">Low-latency local network RTSP live screen broadcasting server utilizing Android MediaProjection API.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-screenstream-rtsp/screenstream-rtsp.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="screenstream-rtsp/">Landing Page</a>
+                <a class="btn btn-sec" href="screenstream-rtsp/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="ph-vat-calculator" data-category="finance & business">
+            <div class="card-meta">
+                <span class="tag" style="background: #00E676; color: #0E0E12;">FINANCE & BUSINESS</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="ph-vat-calculator/" class="app-title-link">PH VAT Calculator: Philippine BIR Tax & Invoice Tool</a></h2>
+            <p class="tagline">Fast offline 12% VAT (inclusive/exclusive), Expanded Withholding Tax (EWT), and invoice net/gross calculation tool.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-ph-vat-calculator/ph-vat-calculator.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="ph-vat-calculator/">Landing Page</a>
+                <a class="btn btn-sec" href="ph-vat-calculator/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="devsys-monitor" data-category="developer tools & system utilities">
+            <div class="card-meta">
+                <span class="tag" style="background: #F59E0B; color: #0E0E12;">DEVELOPER TOOLS & SYSTEM UTILITIES</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="devsys-monitor/" class="app-title-link">DevSys Monitor: Real-time Android Hardware Monitor</a></h2>
+            <p class="tagline">Lightweight real-time CPU frequencies, RAM utilization, thermal sensors, and system processes monitor.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-devsys-monitor/devsys-monitor.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="devsys-monitor/">Landing Page</a>
+                <a class="btn btn-sec" href="devsys-monitor/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="workout-program-tracker" data-category="health & fitness">
+            <div class="card-meta">
+                <span class="tag" style="background: #00E5FF; color: #0E0E12;">HEALTH & FITNESS</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="workout-program-tracker/" class="app-title-link">IronPulse: Offline Workout Program & Gym Tracker</a></h2>
+            <p class="tagline">Minimalist offline workout program tracker with progressive overload logging and auto rest timer.</p>
+            <div class="btn-row">
+                <a class="btn" href="https://github.com/eliakimrosil/android-ai-apps/releases/download/v1.0.0-workout-program-tracker/workout-program-tracker.apk">⬇ Download APK (CDN)</a>
+                <a class="btn btn-sec" href="workout-program-tracker/">Landing Page</a>
+                <a class="btn btn-sec" href="workout-program-tracker/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="who-has-my-tool-lending" data-category="home & community">
+            <div class="card-meta">
+                <span class="tag" style="background: #38BDF8; color: #0E0E12;">HOME & COMMUNITY</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="who-has-my-tool-lending/" class="app-title-link">WhoHasMy: Physical Tool & Gear Lending Tracker</a></h2>
+            <p class="tagline">Stop losing your tools, camping gear, books, and board games to neighbors and friends with friendly photo records and polite WhatsApp reminders.</p>
+            <div class="btn-row">
+                
+                <a class="btn btn-sec" href="who-has-my-tool-lending/">Landing Page</a>
+                <a class="btn btn-sec" href="who-has-my-tool-lending/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="size-vault-family-clothing" data-category="lifestyle & family">
+            <div class="card-meta">
+                <span class="tag" style="background: #EC4899; color: #FFFFFF;">LIFESTYLE & FAMILY</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="size-vault-family-clothing/" class="app-title-link">SizeVault: Family Clothing & Shoe Size Guide</a></h2>
+            <p class="tagline">The instant pocket size guide for parents, spouses, and gift shoppers browsing sales and thrift stores.</p>
+            <div class="btn-row">
+                
+                <a class="btn btn-sec" href="size-vault-family-clothing/">Landing Page</a>
+                <a class="btn btn-sec" href="size-vault-family-clothing/privacy.html">Privacy</a>
+            </div>
+        </div>
+
+        <div class="card" data-slug="return-guard-receipt-countdown" data-category="shopping & lifestyle">
+            <div class="card-meta">
+                <span class="tag" style="background: #EC4899; color: #FFFFFF;">SHOPPING & LIFESTYLE</span>
+                <span class="badge-status">100% Offline</span>
+            </div>
+            <h2><a href="return-guard-receipt-countdown/" class="app-title-link">ReturnGuard: Store Return Deadline & Receipt Viewer</a></h2>
+            <p class="tagline">Stop losing money on clothes and purchases you meant to return with visual deadline countdowns and cashier-ready receipt displays.</p>
+            <div class="btn-row">
+                
+                <a class="btn btn-sec" href="return-guard-receipt-countdown/">Landing Page</a>
+                <a class="btn btn-sec" href="return-guard-receipt-countdown/privacy.html">Privacy</a>
+            </div>
+        </div>
+        </div>
 
         <footer>
-            <p>Built locally by AI App Company on Lenovo Legion Y70 (Snapdragon 8+ Gen 1) &bull; Distributed via GitHub Pages &amp; Global Releases CDN</p>
+            <p>Built autonomously by AI App Company on Lenovo Legion Y70 (Snapdragon 8+ Gen 1) &bull; Distributed via GitHub Pages &amp; Global Releases CDN</p>
         </footer>
     </div>
+
+    <script>
+        function filterApps() {
+            const q = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            let visible = 0;
+            cards.forEach(c => {
+                const text = c.innerText.toLowerCase();
+                if (text.includes(q)) {
+                    c.style.display = 'flex';
+                    visible++;
+                } else {
+                    c.style.display = 'none';
+                }
+            });
+            const countEl = document.getElementById('appCount');
+            if (countEl) countEl.innerText = visible;
+        }
+    </script>
 </body>
 </html>
