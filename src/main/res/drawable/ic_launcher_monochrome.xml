@@ -4,9 +4,45 @@
     android:height="108dp"
     android:viewportWidth="108"
     android:viewportHeight="108">
+
     <group>
+        <!-- Broadcast Signal Waves -->
+        <path
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="3.2"
+            android:strokeLineCap="round"
+            android:pathData="M38,40 A20,20 0 0,0 38,64 M70,40 A20,20 0 0,1 70,64" />
+        <path
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2.6"
+            android:strokeLineCap="round"
+            android:pathData="M30,34 A30,30 0 0,0 30,70 M78,34 A30,30 0 0,1 78,70" />
+
+        <!-- Lens Bezel Ring -->
         <path
             android:fillColor="#FFFFFF"
-            android:pathData="M32,22h44a6,6 0 0 1 6,6v52a6,6 0 0 1 -6,6h-44a6,6 0 0 1 -6,-6v-52a6,6 0 0 1 6,-6z M54,34a5,5 0 1 1 0,10a5,5 0 1 1 0,-10z M52.5,44h3v16h-3z M48,60h12v2h-12z M38,64h32a3,3 0 0 1 3,3v3a3,3 0 0 1 -3,3h-32a3,3 0 0 1 -3,-3v-3a3,3 0 0 1 3,-3z" />
+            android:pathData="M54,34a18,18 0 1 0 0.001,0z M54,40a12,12 0 1 1 -0.001,0z" />
+
+        <!-- Sensor Core Pupil -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M54,46a6,6 0 1 0 0.001,0z" />
+
+        <!-- ON-AIR Tally Beacon -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M68,28a6,6 0 1 0 0.001,0z" />
+
+        <!-- Telemetry Dock & Bars -->
+        <path
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="1.5"
+            android:strokeLineCap="round"
+            android:pathData="M38,82h32" />
+        <path
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="2.2"
+            android:strokeLineCap="round"
+            android:pathData="M42,80v-4 M48,80v-6 M54,80v-8 M60,80v-6 M66,80v-4" />
     </group>
 </vector>

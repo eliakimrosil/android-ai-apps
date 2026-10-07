@@ -1,35 +1,115 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
-    <!-- Obsidian Chassis Base Layer -->
-    <rect width="108" height="108" rx="24" fill="#090C10" />
+    <defs>
+        <!-- Obsidian Carbon Gradient -->
+        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0F172A" />
+            <stop offset="50%" stop-color="#080C16" />
+            <stop offset="100%" stop-color="#03060A" />
+        </linearGradient>
 
-    <!-- Studio Console Elevation Frame -->
-    <rect x="20" y="18" width="68" height="72" rx="10" fill="#121724" stroke="#243046" stroke-width="1.2" />
+        <!-- Studio Plate Gradient -->
+        <linearGradient id="plateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1E293B" />
+            <stop offset="100%" stop-color="#0B1322" />
+        </linearGradient>
 
-    <!-- Radio Transmission Broadcast Waves (Laser Cyan) -->
-    <path stroke="#0EA5E9" stroke-width="1.2" stroke-linecap="round" fill="none" d="M34,36a28,28 0 0 1 40,0 M28,30a38,38 0 0 1 52,0" />
+        <!-- Electric Cyan Glow Gradient -->
+        <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#00F2FE" />
+            <stop offset="100%" stop-color="#00A8FF" />
+        </linearGradient>
 
-    <!-- Mobile Device Screen Frame -->
-    <rect x="32" y="22" width="44" height="64" rx="6" fill="#1E2638" stroke="#2F3C54" stroke-width="1.2" />
+        <!-- Azure Wave Gradient -->
+        <linearGradient id="azureGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38BDF8" />
+            <stop offset="100%" stop-color="#0284C7" />
+        </linearGradient>
 
-    <!-- Screen Glass Canvas -->
-    <rect x="35" y="26" width="38" height="50" rx="3" fill="#090C10" />
+        <!-- Ruby Tally Gradient -->
+        <linearGradient id="rubyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#FF3366" />
+            <stop offset="100%" stop-color="#DC2626" />
+        </linearGradient>
 
-    <!-- Broadcast Antenna Mast & Transmitter Core -->
-    <circle cx="54" cy="39" r="5" fill="#00E5FF" />
-    <rect x="52.5" y="44" width="3" height="16" fill="#00E5FF" />
-    <rect x="48" y="60" width="12" height="2" fill="#00E5FF" />
-    <path stroke="#00E5FF" stroke-width="1.5" stroke-linecap="round" fill="none" d="M44,35a12,12 0 0 1 20,0 M40,31a18,18 0 0 1 28,0" />
+        <!-- Lens Bezel Gradient -->
+        <linearGradient id="lensBezelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#22334F" />
+            <stop offset="100%" stop-color="#0E1624" />
+        </linearGradient>
+    </defs>
 
-    <!-- Live Recording Ruby Badge -->
-    <rect x="38" y="64" width="32" height="9" rx="3" fill="#EF4444" />
+    <!-- Base Canvas -->
+    <rect width="108" height="108" rx="24" fill="url(#bgGrad)" />
 
-    <!-- Live Pulsing Dot -->
-    <circle cx="43" cy="68.5" r="1.5" fill="#FFFFFF" />
+    <!-- Elevated Console Chassis Plate -->
+    <rect x="10" y="10" width="88" height="88" rx="20" fill="url(#plateGrad)" stroke="#273A56" stroke-width="1.2" />
 
-    <!-- Audio Spectrum EQ Bars -->
-    <rect x="52" y="68" width="1.5" height="4" fill="#10B981" />
-    <rect x="55" y="66" width="1.5" height="6" fill="#10B981" />
-    <rect x="58" y="67" width="1.5" height="5" fill="#F59E0B" />
-    <rect x="61" y="65" width="1.5" height="7" fill="#F59E0B" />
-    <rect x="64" y="68" width="1.5" height="4" fill="#FFFFFF" />
+    <!-- Studio Optical Alignment Radar Rings -->
+    <circle cx="54" cy="52" r="32" fill="none" stroke="#162338" stroke-width="1.2" />
+    <circle cx="54" cy="52" r="24" fill="none" stroke="#101B2B" stroke-width="1" />
+
+    <!-- Viewfinder Registration Corner Brackets -->
+    <path stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"
+          d="M18,25 v-7 h7 M90,25 v-7 h-7 M18,79 v7 h7 M90,79 v7 h-7" />
+
+    <!-- Telemetry Crosshair Micro-Markers -->
+    <path stroke="#1E2D44" stroke-width="1" stroke-linecap="round" fill="none"
+          d="M54,4 v6 M54,98 v6 M4,52 h6 M98,52 h6" />
+
+    <!-- ========================================================= -->
+    <!-- Broadcast Waves -->
+    <!-- ========================================================= -->
+    <!-- Left Inner Arc -->
+    <path stroke="url(#cyanGrad)" stroke-width="3.2" stroke-linecap="round" fill="none"
+          d="M38,40 A20,20 0 0,0 38,64" />
+    <!-- Left Outer Arc -->
+    <path stroke="url(#azureGrad)" stroke-width="2.8" stroke-linecap="round" fill="none"
+          d="M30,34 A30,30 0 0,0 30,70" />
+
+    <!-- Right Inner Arc -->
+    <path stroke="url(#cyanGrad)" stroke-width="3.2" stroke-linecap="round" fill="none"
+          d="M70,40 A20,20 0 0,1 70,64" />
+    <!-- Right Outer Arc -->
+    <path stroke="url(#azureGrad)" stroke-width="2.8" stroke-linecap="round" fill="none"
+          d="M78,34 A30,30 0 0,1 78,70" />
+
+    <!-- ========================================================= -->
+    <!-- Lens Core & Aperture -->
+    <!-- ========================================================= -->
+    <!-- Outer Lens Ring -->
+    <circle cx="54" cy="52" r="18" fill="url(#lensBezelGrad)" stroke="#334B6E" stroke-width="1.5" />
+
+    <!-- Cyan Inner Optical Rim -->
+    <circle cx="54" cy="52" r="14" fill="#080E18" stroke="url(#cyanGrad)" stroke-width="1.5" />
+
+    <!-- Aperture Blades Shutter Hairlines -->
+    <path stroke="#1B2E47" stroke-width="1" stroke-linecap="round" fill="none"
+          d="M61,52 h8 M47,52 h-8 M57.5,46 l4,-7 M50.5,58 l-4,7 M50.5,46 l-4,-7 M57.5,58 l4,7" />
+
+    <!-- Sensor Core Pupil -->
+    <circle cx="54" cy="52" r="7" fill="url(#cyanGrad)" />
+
+    <!-- Pinhole Center -->
+    <circle cx="54" cy="52" r="3.5" fill="#03070E" />
+
+    <!-- Specular White Glint -->
+    <path stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" fill="none"
+          d="M51,48 a4.5,4.5 0 0 1 5.5,-2" />
+
+    <!-- ========================================================= -->
+    <!-- ON-AIR Ruby Tally Light -->
+    <!-- ========================================================= -->
+    <circle cx="68" cy="34" r="6" fill="#3D0B12" stroke="#5E111C" stroke-width="1" />
+    <circle cx="68" cy="34" r="4.5" fill="url(#rubyGrad)" />
+    <circle cx="66.8" cy="32.8" r="1.5" fill="#FFFFFF" />
+
+    <!-- ========================================================= -->
+    <!-- Studio Telemetry Pedestal -->
+    <!-- ========================================================= -->
+    <path stroke="#273C5B" stroke-width="1.5" stroke-linecap="round" fill="none" d="M38,82 h32" />
+    <path stroke="#00E5FF" stroke-width="2.2" stroke-linecap="round" fill="none" d="M42,80 v-4" />
+    <path stroke="#10B981" stroke-width="2.2" stroke-linecap="round" fill="none" d="M48,80 v-6" />
+    <path stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round" fill="none" d="M54,80 v-8" />
+    <path stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round" fill="none" d="M60,80 v-6" />
+    <path stroke="#EF4444" stroke-width="2.2" stroke-linecap="round" fill="none" d="M66,80 v-4" />
 </svg>
