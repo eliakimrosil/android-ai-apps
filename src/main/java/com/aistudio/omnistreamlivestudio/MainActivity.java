@@ -146,6 +146,7 @@ public class MainActivity extends Activity {
     private TextView tvMicStatusHint;
     private Switch switchFacecam;
     private Button btnFlipCamera;
+    private Button btnRotateCamera;
     private TextView tvOverlayStatus;
 
     // Telemetry Display & VU Meter
@@ -250,6 +251,13 @@ public class MainActivity extends Activity {
             public void onCameraFlipped(boolean isFront) {
                 btnFlipCamera.setText(isFront ? "FLIP: FRONT" : "FLIP: REAR");
             }
+
+            @Override
+            public void onCameraRotated(int rotationDegrees) {
+                if (btnRotateCamera != null) {
+                    btnRotateCamera.setText("ROT: " + rotationDegrees + "°");
+                }
+            }
         });
     }
 
@@ -335,6 +343,7 @@ public class MainActivity extends Activity {
         tvMicStatusHint = findViewById(R.id.tvMicStatusHint);
         switchFacecam = findViewById(R.id.switchFacecam);
         btnFlipCamera = findViewById(R.id.btnFlipCamera);
+        btnRotateCamera = findViewById(R.id.btnRotateCamera);
         tvOverlayStatus = findViewById(R.id.tvOverlayStatus);
 
         ivLiveBeacon = findViewById(R.id.ivLiveBeacon);
@@ -613,6 +622,13 @@ public class MainActivity extends Activity {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             FloatingCamManager.getInstance(this).flipCamera();
         });
+
+        if (btnRotateCamera != null) {
+            btnRotateCamera.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                FloatingCamManager.getInstance(this).rotateCamera();
+            });
+        }
 
         btnStartStopStream.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);

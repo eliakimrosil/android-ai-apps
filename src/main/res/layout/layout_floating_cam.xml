@@ -16,7 +16,7 @@
         android:background="@drawable/bg_floating_cam_header"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingStart="8dp"
+        android:paddingStart="6dp"
         android:paddingEnd="6dp">
 
         <TextView
@@ -25,10 +25,11 @@
             android:layout_height="match_parent"
             android:gravity="center_vertical"
             android:letterSpacing="0.04"
-            android:paddingEnd="4dp"
-            android:text="● CAM"
+            android:paddingStart="2dp"
+            android:paddingEnd="2dp"
+            android:text="●"
             android:textColor="#00E5FF"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:textStyle="bold" />
 
         <View
@@ -37,28 +38,46 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+        <!-- Rotate Floating Camera (0° / 90° / 180° / 270°) -->
+        <TextView
+            android:id="@+id/pipBtnRotate"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:background="@drawable/btn_pip_action"
+            android:clickable="true"
+            android:contentDescription="Rotate Camera"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="↻"
+            android:textColor="#00E5FF"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
         <!-- Flip Front/Back Camera -->
         <TextView
             android:id="@+id/pipBtnFlip"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="4dp"
             android:background="@drawable/btn_pip_action"
             android:clickable="true"
+            android:contentDescription="Flip Camera"
             android:focusable="true"
             android:gravity="center"
-            android:text="⟲"
+            android:text="⇄"
             android:textColor="#FFFFFF"
-            android:textSize="14sp"
+            android:textSize="13sp"
             android:textStyle="bold" />
 
         <!-- Cycle Window Size (Compact / Studio / Large) -->
         <TextView
             android:id="@+id/pipBtnSize"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_marginStart="4dp"
             android:background="@drawable/btn_pip_action"
             android:clickable="true"
+            android:contentDescription="Cycle Window Size"
             android:focusable="true"
             android:gravity="center"
             android:text="⛶"
@@ -69,11 +88,12 @@
         <!-- Close / Hide Overlay -->
         <TextView
             android:id="@+id/pipBtnClose"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
             android:layout_marginStart="4dp"
             android:background="@drawable/btn_pip_action"
             android:clickable="true"
+            android:contentDescription="Close Facecam"
             android:focusable="true"
             android:gravity="center"
             android:text="✕"

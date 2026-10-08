@@ -43,6 +43,7 @@ public class FloatingCamManager {
     public interface StateListener {
         void onFacecamToggled(boolean isShowing);
         void onCameraFlipped(boolean isFront);
+        default void onCameraRotated(int rotationDegrees) {}
     }
 
     private static FloatingCamManager instance;
@@ -53,6 +54,7 @@ public class FloatingCamManager {
     private WindowManager.LayoutParams windowParams;
 
     private TextView tvPipBadge;
+    private TextView btnPipRotate;
     private TextView btnPipFlip;
     private TextView btnPipSize;
     private TextView btnPipClose;
@@ -69,12 +71,15 @@ public class FloatingCamManager {
     private boolean isOverlayShowing = false;
     private boolean isLiveBroadcasting = false;
 
+    // Camera Rotation: 0 = 0° (Portrait), 90 = 90° (Landscape), 180 = 180° (Inverted), 270 = 270° (Rev. Landscape)
+    private int currentRotationDegrees = 0;
+
     // Window Sizing: 0 = Compact, 1 = Studio Medium (Default), 2 = Large
     private int currentSizeIndex = 1;
     private static final int[][] SIZES_DP = {
-            {130, 170}, // Compact
-            {165, 220}, // Medium (Default)
-            {210, 280}  // Large
+            {140, 185}, // Compact
+            {175, 230}, // Medium (Default)
+            {220, 290}  // Large
     };
 
     private StateListener stateListener;
@@ -114,7 +119,7 @@ public class FloatingCamManager {
                     tvPipBadge.setTextColor(0xFFEF4444); // Studio Ruby
                 } else {
                     overlayView.setBackgroundResource(R.drawable.bg_floating_cam_standby);
-                    tvPipBadge.setText("● CAM");
+                    tvPipBadge.setText("●");
                     tvPipBadge.setTextColor(0xFF00E5FF); // Studio Cyan
                 }
             }
@@ -198,20 +203,46 @@ public class FloatingCamManager {
         }
     }
 
+    public void rotateCamera() {
+        currentRotationDegrees = (currentRotationDegrees + 90) % 360;
+        updateWindowDimensionsAndTransform();
+        String rotLabel = currentRotationDegrees == 0 ? "0° (Portrait)" :
+                          currentRotationDegrees == 90 ? "90° (Landscape)" :
+                          currentRotationDegrees == 180 ? "180° (Inverted)" : "270° (Rev. Landscape)";
+        Toast.makeText(appContext, "Floating Cam: " + rotLabel, Toast.LENGTH_SHORT).show();
+        if (stateListener != null) {
+            mainHandler.post(() -> stateListener.onCameraRotated(currentRotationDegrees));
+        }
+    }
+
+    public int getCameraRotationDegrees() {
+        return currentRotationDegrees;
+    }
+
     public void cycleSize() {
         currentSizeIndex = (currentSizeIndex + 1) % SIZES_DP.length;
-        if (isOverlayShowing && overlayView != null) {
+        updateWindowDimensionsAndTransform();
+    }
+
+    private void updateWindowDimensionsAndTransform() {
+        if (isOverlayShowing && overlayView != null && windowParams != null && windowManager != null) {
             float density = appContext.getResources().getDisplayMetrics().density;
-            windowParams.width = (int) (SIZES_DP[currentSizeIndex][0] * density);
-            windowParams.height = (int) (SIZES_DP[currentSizeIndex][1] * density);
+            boolean isLandscape = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
+            int baseW = isLandscape ? SIZES_DP[currentSizeIndex][1] : SIZES_DP[currentSizeIndex][0];
+            int baseH = isLandscape ? SIZES_DP[currentSizeIndex][0] : SIZES_DP[currentSizeIndex][1];
+
+            windowParams.width = (int) (baseW * density);
+            windowParams.height = (int) (baseH * density);
             clampPosition(windowParams);
             try {
                 windowManager.updateViewLayout(overlayView, windowParams);
             } catch (Exception ignored) {}
 
-            if (tvPipCamera != null && previewSize != null) {
-                configureTransform(tvPipCamera.getWidth(), tvPipCamera.getHeight());
-            }
+            overlayView.post(() -> {
+                if (tvPipCamera != null && tvPipCamera.getWidth() > 0 && tvPipCamera.getHeight() > 0) {
+                    configureTransform(tvPipCamera.getWidth(), tvPipCamera.getHeight());
+                }
+            });
         }
     }
 
@@ -220,14 +251,19 @@ public class FloatingCamManager {
         overlayView = inflater.inflate(R.layout.layout_floating_cam, null);
 
         tvPipBadge = overlayView.findViewById(R.id.pipBadge);
+        btnPipRotate = overlayView.findViewById(R.id.pipBtnRotate);
         btnPipFlip = overlayView.findViewById(R.id.pipBtnFlip);
         btnPipSize = overlayView.findViewById(R.id.pipBtnSize);
         btnPipClose = overlayView.findViewById(R.id.pipBtnClose);
         tvPipCamera = overlayView.findViewById(R.id.pipCameraView);
 
         float density = appContext.getResources().getDisplayMetrics().density;
-        int widthPx = (int) (SIZES_DP[currentSizeIndex][0] * density);
-        int heightPx = (int) (SIZES_DP[currentSizeIndex][1] * density);
+        boolean isLandscape = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
+        int baseW = isLandscape ? SIZES_DP[currentSizeIndex][1] : SIZES_DP[currentSizeIndex][0];
+        int baseH = isLandscape ? SIZES_DP[currentSizeIndex][0] : SIZES_DP[currentSizeIndex][1];
+
+        int widthPx = (int) (baseW * density);
+        int heightPx = (int) (baseH * density);
 
         int layoutType = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
                 ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -247,6 +283,13 @@ public class FloatingCamManager {
     }
 
     private void setupOverlayListeners() {
+        if (btnPipRotate != null) {
+            btnPipRotate.setOnClickListener(v -> {
+                v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
+                rotateCamera();
+            });
+        }
+
         btnPipFlip.setOnClickListener(v -> {
             v.performHapticFeedback(HapticFeedbackConstants.VIRTUAL_KEY);
             flipCamera();
@@ -463,18 +506,26 @@ public class FloatingCamManager {
             try {
                 Matrix matrix = new Matrix();
                 RectF viewRect = new RectF(0, 0, viewWidth, viewHeight);
-                RectF bufferRect = new RectF(0, 0, previewSize.getHeight(), previewSize.getWidth());
                 float centerX = viewRect.centerX();
                 float centerY = viewRect.centerY();
 
+                boolean isLandscape = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
+                float bufW = isLandscape ? previewSize.getWidth() : previewSize.getHeight();
+                float bufH = isLandscape ? previewSize.getHeight() : previewSize.getWidth();
+
+                RectF bufferRect = new RectF(0, 0, bufW, bufH);
                 bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY());
                 matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL);
 
                 float scale = Math.max(
-                        (float) viewHeight / previewSize.getWidth(),
-                        (float) viewWidth / previewSize.getHeight()
+                        (float) viewWidth / bufW,
+                        (float) viewHeight / bufH
                 );
                 matrix.postScale(scale, scale, centerX, centerY);
+
+                if (currentRotationDegrees != 0) {
+                    matrix.postRotate(currentRotationDegrees, centerX, centerY);
+                }
 
                 if (isFrontCamera) {
                     // Mirror horizontally for selfie orientation
