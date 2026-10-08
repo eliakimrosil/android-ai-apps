@@ -41,6 +41,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.HapticFeedbackConstants;
 import android.view.KeyEvent;
@@ -73,7 +74,9 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
@@ -965,18 +968,33 @@ public class MainActivity extends Activity {
             tvLiveFps.setText(String.format(Locale.US, "%.1f fps", StreamService.getCurrentFps()));
             tvDroppedFrames.setText(String.valueOf(StreamService.getDroppedFramesCount()));
 
-            int level = 5 + (int) (Math.abs(Math.sin(SystemClock.elapsedRealtime() / 250.0)) * 4);
-            updateVuMeter(level);
+            int peak = StreamService.getCurrentAudioPeak();
+            int level = 0;
+            if (peak > 80) {
+                double ratio = (double) peak / 32767.0;
+                double db = 20.0 * Math.log10(ratio);
+                if (db > -3.0) level = 10;
+                else if (db > -6.0) level = 9;
+                else if (db > -10.0) level = 8;
+                else if (db > -14.0) level = 7;
+                else if (db > -18.0) level = 6;
+                else if (db > -24.0) level = 5;
+                else if (db > -30.0) level = 4;
+                else if (db > -36.0) level = 3;
+                else if (db > -42.0) level = 2;
+                else level = 1;
+            }
+            updateVuMeter(level, peak);
         } else {
             tvUptime.setText("00:00:00");
             tvLiveBitrate.setText("0 kbps");
             tvLiveFps.setText("0.0 fps");
             tvDroppedFrames.setText("0");
-            updateVuMeter(0);
+            updateVuMeter(0, 0);
         }
     }
 
-    private void updateVuMeter(int level) {
+    private void updateVuMeter(int level, int peak) {
         if (vuSegments == null) return;
         int onGreen = getColor(R.color.studio_vu_green);
         int onYellow = getColor(R.color.studio_vu_yellow);
@@ -998,8 +1016,9 @@ public class MainActivity extends Activity {
             }
         }
         if (tvVuLevel != null) {
-            if (level > 0) {
-                tvVuLevel.setText(String.format(Locale.US, "-%d dB", Math.max(2, 22 - (level * 2))));
+            if (peak > 80) {
+                double db = 20.0 * Math.log10((double) peak / 32767.0);
+                tvVuLevel.setText(String.format(Locale.US, "%.0f dB", db));
             } else {
                 tvVuLevel.setText("-inf dB");
             }
@@ -1069,6 +1088,7 @@ public class MainActivity extends Activity {
         private static volatile int currentBitrateKbps = 0;
         static volatile float currentFps = 0.0f;
         private static volatile long droppedFrames = 0;
+        public static volatile int currentAudioPeak = 0;
 
         private MediaProjection mediaProjection;
         private VideoEncoder videoEncoder;
@@ -1093,6 +1113,10 @@ public class MainActivity extends Activity {
 
         public static long getDroppedFramesCount() {
             return droppedFrames;
+        }
+
+        public static int getCurrentAudioPeak() {
+            return currentAudioPeak;
         }
 
         @Override
@@ -1226,7 +1250,7 @@ public class MainActivity extends Activity {
                 FloatingCamManager.getInstance(this).showOverlay();
             }
 
-            rtmpClient = new RtmpMuxerClient(serverUrl, streamKey);
+            rtmpClient = new RtmpMuxerClient(serverUrl, streamKey, width, height, fps, bitrate);
             rtmpClient.start();
 
             DisplayMetrics metrics = getResources().getDisplayMetrics();
@@ -1241,6 +1265,7 @@ public class MainActivity extends Activity {
 
         private void stopStreamingPipeline() {
             isStreaming = false;
+            currentAudioPeak = 0;
             FloatingCamManager.getInstance(this).setLiveState(false);
 
             if (videoEncoder != null) {
@@ -1331,7 +1356,20 @@ public class MainActivity extends Activity {
 
                 while (isRunning.get()) {
                     int outputIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, 10000);
-                    if (outputIndex >= 0) {
+                    if (outputIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+                        MediaFormat newFormat = mediaCodec.getOutputFormat();
+                        ByteBuffer spsBuf = newFormat.getByteBuffer("csd-0");
+                        ByteBuffer ppsBuf = newFormat.getByteBuffer("csd-1");
+                        if (spsBuf != null && ppsBuf != null) {
+                            byte[] s = new byte[spsBuf.remaining()];
+                            spsBuf.get(s);
+                            byte[] p = new byte[ppsBuf.remaining()];
+                            ppsBuf.get(p);
+                            sps = stripStartCode(s);
+                            pps = stripStartCode(p);
+                            rtmp.sendAvcSequenceHeader(sps, pps);
+                        }
+                    } else if (outputIndex >= 0) {
                         ByteBuffer outputBuffer = mediaCodec.getOutputBuffer(outputIndex);
                         if (outputBuffer != null && bufferInfo.size > 0) {
                             byte[] chunk = new byte[bufferInfo.size];
@@ -1343,24 +1381,7 @@ public class MainActivity extends Activity {
                             boolean isKeyFrame = (bufferInfo.flags & MediaCodec.BUFFER_FLAG_KEY_FRAME) != 0;
 
                             if (isConfig) {
-                                // Extract SPS & PPS for AVCDecoderConfigurationRecord
-                                int ppsIndex = -1;
-                                for (int i = 0; i < chunk.length - 4; i++) {
-                                    if (chunk[i] == 0 && chunk[i + 1] == 0 && chunk[i + 2] == 0 && chunk[i + 3] == 1) {
-                                        int naluType = chunk[i + 4] & 0x1F;
-                                        if (naluType == 8) {
-                                            ppsIndex = i;
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (ppsIndex > 0) {
-                                    sps = new byte[ppsIndex - 4];
-                                    System.arraycopy(chunk, 4, sps, 0, sps.length);
-                                    pps = new byte[chunk.length - ppsIndex - 4];
-                                    System.arraycopy(chunk, ppsIndex + 4, pps, 0, pps.length);
-                                    rtmp.sendAvcSequenceHeader(sps, pps);
-                                }
+                                extractAndSendSpsPps(chunk);
                             } else {
                                 rtmp.sendVideoFrame(chunk, isKeyFrame, bufferInfo.presentationTimeUs / 1000);
                                 frameCount++;
@@ -1380,6 +1401,62 @@ public class MainActivity extends Activity {
             } catch (Exception ignored) {
             } finally {
                 release();
+            }
+        }
+
+        private static byte[] stripStartCode(byte[] data) {
+            if (data == null || data.length < 4) return data;
+            if (data[0] == 0 && data[1] == 0 && data[2] == 0 && data[3] == 1) {
+                byte[] res = new byte[data.length - 4];
+                System.arraycopy(data, 4, res, 0, res.length);
+                return res;
+            } else if (data[0] == 0 && data[1] == 0 && data[2] == 1) {
+                byte[] res = new byte[data.length - 3];
+                System.arraycopy(data, 3, res, 0, res.length);
+                return res;
+            }
+            return data;
+        }
+
+        private void extractAndSendSpsPps(byte[] data) {
+            if (data == null || data.length < 4) return;
+            List<Integer> starts = new ArrayList<>();
+            List<Integer> lengths = new ArrayList<>();
+            int i = 0;
+            while (i < data.length - 2) {
+                if (data[i] == 0 && data[i + 1] == 0) {
+                    if (data[i + 2] == 1) {
+                        starts.add(i);
+                        lengths.add(3);
+                        i += 3;
+                        continue;
+                    } else if (i < data.length - 3 && data[i + 2] == 0 && data[i + 3] == 1) {
+                        starts.add(i);
+                        lengths.add(4);
+                        i += 4;
+                        continue;
+                    }
+                }
+                i++;
+            }
+            byte[] foundSps = null;
+            byte[] foundPps = null;
+            for (int idx = 0; idx < starts.size(); idx++) {
+                int naluStart = starts.get(idx) + lengths.get(idx);
+                int naluEnd = (idx + 1 < starts.size()) ? starts.get(idx + 1) : data.length;
+                int len = naluEnd - naluStart;
+                if (len <= 0) continue;
+                int naluType = data[naluStart] & 0x1F;
+                if (naluType == 7) {
+                    foundSps = new byte[len];
+                    System.arraycopy(data, naluStart, foundSps, 0, len);
+                } else if (naluType == 8) {
+                    foundPps = new byte[len];
+                    System.arraycopy(data, naluStart, foundPps, 0, len);
+                }
+            }
+            if (foundSps != null && foundPps != null) {
+                rtmp.sendAvcSequenceHeader(foundSps, foundPps);
             }
         }
 
@@ -1414,15 +1491,16 @@ public class MainActivity extends Activity {
     // =========================================================================
     public static class AudioEncoder implements Runnable {
         private static final int SAMPLE_RATE = 44100;
-        private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
         private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
-        private static final int BITRATE = 64000;
+        private static final int BITRATE = 96000;
 
         private final RtmpMuxerClient rtmp;
         private final AtomicBoolean isRunning = new AtomicBoolean(false);
         private Thread thread;
         private AudioRecord audioRecord;
         private MediaCodec mediaCodec;
+        private int channelCount = 2;
+        private int channelConfig = AudioFormat.CHANNEL_IN_STEREO;
 
         public AudioEncoder(RtmpMuxerClient rtmp) {
             this.rtmp = rtmp;
@@ -1436,19 +1514,42 @@ public class MainActivity extends Activity {
 
         @Override
         public void run() {
-            int minBufSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
+            int minBufSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_STEREO, AUDIO_FORMAT);
+            if (minBufSize <= 0) {
+                channelConfig = AudioFormat.CHANNEL_IN_MONO;
+                channelCount = 1;
+                minBufSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AUDIO_FORMAT);
+            } else {
+                channelConfig = AudioFormat.CHANNEL_IN_STEREO;
+                channelCount = 2;
+            }
+
             try {
                 audioRecord = new AudioRecord(
                         MediaRecorder.AudioSource.MIC,
                         SAMPLE_RATE,
-                        CHANNEL_CONFIG,
+                        channelConfig,
                         AUDIO_FORMAT,
-                        minBufSize * 2
+                        Math.max(minBufSize * 2, 4096)
                 );
 
-                MediaFormat format = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, SAMPLE_RATE, 1);
+                if (audioRecord.getState() != AudioRecord.STATE_INITIALIZED) {
+                    channelConfig = AudioFormat.CHANNEL_IN_MONO;
+                    channelCount = 1;
+                    minBufSize = AudioRecord.getMinBufferSize(SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AUDIO_FORMAT);
+                    audioRecord = new AudioRecord(
+                            MediaRecorder.AudioSource.MIC,
+                            SAMPLE_RATE,
+                            channelConfig,
+                            AUDIO_FORMAT,
+                            Math.max(minBufSize * 2, 4096)
+                    );
+                }
+
+                MediaFormat format = MediaFormat.createAudioFormat(MediaFormat.MIMETYPE_AUDIO_AAC, SAMPLE_RATE, channelCount);
                 format.setInteger(MediaFormat.KEY_AAC_PROFILE, MediaCodecInfo.CodecProfileLevel.AACObjectLC);
                 format.setInteger(MediaFormat.KEY_BIT_RATE, BITRATE);
+                format.setInteger(MediaFormat.KEY_CHANNEL_COUNT, channelCount);
                 format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 8192);
 
                 mediaCodec = MediaCodec.createEncoderByType(MediaFormat.MIMETYPE_AUDIO_AAC);
@@ -1456,13 +1557,26 @@ public class MainActivity extends Activity {
                 mediaCodec.start();
                 audioRecord.startRecording();
 
+                // Proactive sequence header for AAC-LC 44.1kHz (Stereo: 0x12, 0x10; Mono: 0x12, 0x08)
+                byte[] defaultHeader = (channelCount == 2) ? new byte[]{0x12, 0x10} : new byte[]{0x12, 0x08};
+                rtmp.sendAacSequenceHeader(defaultHeader);
+
                 byte[] pcmBuffer = new byte[2048];
                 MediaCodec.BufferInfo bufferInfo = new MediaCodec.BufferInfo();
                 long pts = 0;
+                int bytesPerFrame = channelCount * 2;
 
                 while (isRunning.get()) {
                     int readBytes = audioRecord.read(pcmBuffer, 0, pcmBuffer.length);
                     if (readBytes > 0) {
+                        int maxAmp = 0;
+                        for (int i = 0; i < readBytes - 1; i += 2) {
+                            short sample = (short) ((pcmBuffer[i] & 0xFF) | (pcmBuffer[i + 1] << 8));
+                            int abs = Math.abs((int) sample);
+                            if (abs > maxAmp) maxAmp = abs;
+                        }
+                        StreamService.currentAudioPeak = maxAmp;
+
                         int inputIndex = mediaCodec.dequeueInputBuffer(10000);
                         if (inputIndex >= 0) {
                             ByteBuffer inBuf = mediaCodec.getInputBuffer(inputIndex);
@@ -1470,29 +1584,39 @@ public class MainActivity extends Activity {
                                 inBuf.clear();
                                 inBuf.put(pcmBuffer, 0, readBytes);
                                 mediaCodec.queueInputBuffer(inputIndex, 0, readBytes, pts, 0);
-                                pts += (readBytes * 1000000L) / (SAMPLE_RATE * 2);
+                                pts += (readBytes * 1000000L) / (SAMPLE_RATE * bytesPerFrame);
                             }
                         }
                     }
 
                     int outputIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, 10000);
-                    while (outputIndex >= 0) {
-                        ByteBuffer outBuf = mediaCodec.getOutputBuffer(outputIndex);
-                        if (outBuf != null && bufferInfo.size > 0) {
-                            byte[] chunk = new byte[bufferInfo.size];
-                            outBuf.position(bufferInfo.offset);
-                            outBuf.limit(bufferInfo.offset + bufferInfo.size);
-                            outBuf.get(chunk);
-
-                            boolean isConfig = (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0;
-                            if (isConfig) {
-                                rtmp.sendAacSequenceHeader(chunk);
-                            } else {
-                                rtmp.sendAudioFrame(chunk, bufferInfo.presentationTimeUs / 1000);
-                            }
+                    if (outputIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED) {
+                        MediaFormat outFmt = mediaCodec.getOutputFormat();
+                        ByteBuffer csd0 = outFmt.getByteBuffer("csd-0");
+                        if (csd0 != null) {
+                            byte[] config = new byte[csd0.remaining()];
+                            csd0.get(config);
+                            rtmp.sendAacSequenceHeader(config);
                         }
-                        mediaCodec.releaseOutputBuffer(outputIndex, false);
-                        outputIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, 0);
+                    } else {
+                        while (outputIndex >= 0) {
+                            ByteBuffer outBuf = mediaCodec.getOutputBuffer(outputIndex);
+                            if (outBuf != null && bufferInfo.size > 0) {
+                                byte[] chunk = new byte[bufferInfo.size];
+                                outBuf.position(bufferInfo.offset);
+                                outBuf.limit(bufferInfo.offset + bufferInfo.size);
+                                outBuf.get(chunk);
+
+                                boolean isConfig = (bufferInfo.flags & MediaCodec.BUFFER_FLAG_CODEC_CONFIG) != 0;
+                                if (isConfig) {
+                                    rtmp.sendAacSequenceHeader(chunk);
+                                } else {
+                                    rtmp.sendAudioFrame(chunk, bufferInfo.presentationTimeUs / 1000);
+                                }
+                            }
+                            mediaCodec.releaseOutputBuffer(outputIndex, false);
+                            outputIndex = mediaCodec.dequeueOutputBuffer(bufferInfo, 0);
+                        }
                     }
                 }
             } catch (Exception ignored) {
@@ -1509,6 +1633,7 @@ public class MainActivity extends Activity {
         }
 
         private void release() {
+            StreamService.currentAudioPeak = 0;
             try {
                 if (audioRecord != null) {
                     audioRecord.stop();
@@ -1531,13 +1656,19 @@ public class MainActivity extends Activity {
     public static class RtmpMuxerClient implements Runnable {
         private final String ingestUrl;
         private final String streamKey;
-        private final BlockingQueue<RtmpPacket> packetQueue = new LinkedBlockingQueue<>(100);
+        private final int videoWidth;
+        private final int videoHeight;
+        private final int videoFps;
+        private final int videoBitrateKbps;
+
+        private final BlockingQueue<RtmpPacket> packetQueue = new LinkedBlockingQueue<>(200);
         private final AtomicBoolean isRunning = new AtomicBoolean(false);
 
         private Socket socket;
         private OutputStream out;
         private InputStream in;
         private Thread thread;
+        private Thread readerThread;
 
         private byte[] aacHeader;
         private byte[] avcHeader;
@@ -1554,9 +1685,13 @@ public class MainActivity extends Activity {
             }
         }
 
-        public RtmpMuxerClient(String ingestUrl, String streamKey) {
+        public RtmpMuxerClient(String ingestUrl, String streamKey, int videoWidth, int videoHeight, int videoFps, int videoBitrateKbps) {
             this.ingestUrl = ingestUrl;
             this.streamKey = streamKey;
+            this.videoWidth = videoWidth;
+            this.videoHeight = videoHeight;
+            this.videoFps = videoFps;
+            this.videoBitrateKbps = videoBitrateKbps;
         }
 
         public void start() {
@@ -1566,10 +1701,11 @@ public class MainActivity extends Activity {
         }
 
         public void sendAvcSequenceHeader(byte[] sps, byte[] pps) {
+            if (sps == null || pps == null || sps.length < 4 || pps.length < 1) return;
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             baos.write(0x17); // Keyframe, AVC
             baos.write(0x00); // AVC sequence header
-            baos.write(0x00); // Composition time
+            baos.write(0x00); // Composition time (3 bytes)
             baos.write(0x00);
             baos.write(0x00);
 
@@ -1593,26 +1729,63 @@ public class MainActivity extends Activity {
             packetQueue.offer(new RtmpPacket(0x09, 0, avcHeader));
         }
 
-        public void sendVideoFrame(byte[] naluData, boolean isKeyFrame, long timestamp) {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        public void sendVideoFrame(byte[] data, boolean isKeyFrame, long timestamp) {
+            if (data == null || data.length < 4) return;
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(data.length + 64);
             baos.write(isKeyFrame ? 0x17 : 0x27);
             baos.write(0x01); // AVC NALU
-            baos.write(0x00); // Composition time
+            baos.write(0x00); // Composition time offset (3 bytes: 0)
             baos.write(0x00);
             baos.write(0x00);
 
-            // Format Annex-B to AVCC 4-byte length prefix
-            int length = naluData.length;
-            int offset = 0;
-            if (length >= 4 && naluData[0] == 0 && naluData[1] == 0 && naluData[2] == 0 && naluData[3] == 1) {
-                offset = 4;
-                length -= 4;
+            // Parse Annex-B start codes (3-byte: 00 00 01 or 4-byte: 00 00 00 01)
+            List<Integer> startCodeIndices = new ArrayList<>();
+            List<Integer> startCodeLengths = new ArrayList<>();
+            int i = 0;
+            while (i < data.length - 2) {
+                if (data[i] == 0 && data[i + 1] == 0) {
+                    if (data[i + 2] == 1) {
+                        startCodeIndices.add(i);
+                        startCodeLengths.add(3);
+                        i += 3;
+                        continue;
+                    } else if (i < data.length - 3 && data[i + 2] == 0 && data[i + 3] == 1) {
+                        startCodeIndices.add(i);
+                        startCodeLengths.add(4);
+                        i += 4;
+                        continue;
+                    }
+                }
+                i++;
             }
-            baos.write((length >> 24) & 0xFF);
-            baos.write((length >> 16) & 0xFF);
-            baos.write((length >> 8) & 0xFF);
-            baos.write(length & 0xFF);
-            baos.write(naluData, offset, length);
+
+            if (startCodeIndices.isEmpty()) {
+                baos.write((data.length >> 24) & 0xFF);
+                baos.write((data.length >> 16) & 0xFF);
+                baos.write((data.length >> 8) & 0xFF);
+                baos.write(data.length & 0xFF);
+                baos.write(data, 0, data.length);
+            } else {
+                for (int idx = 0; idx < startCodeIndices.size(); idx++) {
+                    int start = startCodeIndices.get(idx) + startCodeLengths.get(idx);
+                    int end = (idx + 1 < startCodeIndices.size()) ? startCodeIndices.get(idx + 1) : data.length;
+                    int naluLen = end - start;
+                    if (naluLen <= 0) continue;
+
+                    int naluType = data[start] & 0x1F;
+                    // If SPS (7) or PPS (8) is inside a keyframe buffer, extract for seq header if needed
+                    if (naluType == 7 || naluType == 8) {
+                        // Omit separate SPS/PPS from sample slice data in AVCC format
+                        continue;
+                    }
+
+                    baos.write((naluLen >> 24) & 0xFF);
+                    baos.write((naluLen >> 16) & 0xFF);
+                    baos.write((naluLen >> 8) & 0xFF);
+                    baos.write(naluLen & 0xFF);
+                    baos.write(data, start, naluLen);
+                }
+            }
 
             if (!packetQueue.offer(new RtmpPacket(0x09, timestamp, baos.toByteArray()))) {
                 StreamService.droppedFrames++;
@@ -1620,6 +1793,7 @@ public class MainActivity extends Activity {
         }
 
         public void sendAacSequenceHeader(byte[] configData) {
+            if (configData == null || configData.length == 0) return;
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             baos.write(0xAF); // 44kHz, 16-bit, stereo, AAC
             baos.write(0x00); // AAC sequence header
@@ -1630,10 +1804,22 @@ public class MainActivity extends Activity {
         }
 
         public void sendAudioFrame(byte[] audioData, long timestamp) {
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            if (audioData == null || audioData.length == 0) return;
+            int offset = 0;
+            int len = audioData.length;
+            // Strip ADTS header if present (7 or 9 bytes)
+            if (len >= 7 && (audioData[0] & 0xFF) == 0xFF && (audioData[1] & 0xF0) == 0xF0) {
+                int headerLen = ((audioData[1] & 0x01) == 0) ? 9 : 7;
+                if (len > headerLen) {
+                    offset = headerLen;
+                    len -= headerLen;
+                }
+            }
+
+            ByteArrayOutputStream baos = new ByteArrayOutputStream(len + 2);
             baos.write(0xAF); // 44kHz, 16-bit, stereo, AAC
             baos.write(0x01); // AAC raw data
-            baos.write(audioData, 0, audioData.length);
+            baos.write(audioData, offset, len);
 
             if (!packetQueue.offer(new RtmpPacket(0x08, timestamp, baos.toByteArray()))) {
                 StreamService.droppedFrames++;
@@ -1662,6 +1848,9 @@ public class MainActivity extends Activity {
                     host = host.substring(0, colonIdx);
                 }
 
+                app = app.replaceAll("/+$", "");
+
+                Log.i("KimLive-RTMP", "Connecting to " + host + ":" + port + " app=" + app + " (ssl=" + isSsl + ")...");
                 if (isSsl) {
                     SSLSocketFactory factory = (SSLSocketFactory) SSLSocketFactory.getDefault();
                     SSLSocket sslSocket = (SSLSocket) factory.createSocket();
@@ -1672,25 +1861,47 @@ public class MainActivity extends Activity {
                     socket = new Socket();
                     socket.connect(new InetSocketAddress(host, port), 10000);
                 }
+                Log.i("KimLive-RTMP", "Connected! Performing RTMP handshake...");
 
                 out = new BufferedOutputStream(socket.getOutputStream(), 64 * 1024);
                 in = new BufferedInputStream(socket.getInputStream(), 64 * 1024);
 
                 performRtmpHandshake();
+                Log.i("KimLive-RTMP", "RTMP Handshake successful! Sending commands...");
+                sendSetChunkSize(4096);
                 sendConnectCommand(app);
                 sendReleaseStream(streamKey);
                 sendFCPublish(streamKey);
                 sendCreateStream();
                 sendPublish(streamKey, app);
+                sendMetaData(videoWidth, videoHeight, videoFps, videoBitrateKbps);
+                Log.i("KimLive-RTMP", "Broadcast published! Streaming video & audio chunks...");
+
+                startReaderThread();
 
                 while (isRunning.get()) {
                     RtmpPacket packet = packetQueue.take();
                     writeChunk(packet.type, packet.timestamp, packet.data);
                 }
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                Log.e("KimLive-RTMP", "RTMP Streaming Exception: " + e.getMessage(), e);
             } finally {
                 stop();
             }
+        }
+
+        private void startReaderThread() {
+            readerThread = new Thread(() -> {
+                byte[] buf = new byte[8192];
+                try {
+                    while (isRunning.get() && in != null) {
+                        int r = in.read(buf);
+                        if (r < 0) break;
+                    }
+                } catch (Exception ignored) {}
+            }, "KimLive-RtmpReader");
+            readerThread.setDaemon(true);
+            readerThread.start();
         }
 
         private void performRtmpHandshake() throws Exception {
@@ -1715,6 +1926,19 @@ public class MainActivity extends Activity {
             byte[] c2 = new byte[1536];
             System.arraycopy(s0s1s2, 1, c2, 0, 1536);
             out.write(c2);
+            out.flush();
+        }
+
+        private void sendSetChunkSize(int chunkSize) throws Exception {
+            out.write(0x02); // CSID 2, Type 0
+            out.write(0x00); out.write(0x00); out.write(0x00); // Timestamp 0
+            out.write(0x00); out.write(0x00); out.write(0x04); // Length 4
+            out.write(0x01); // Message Type 1: Set Chunk Size
+            out.write(0x00); out.write(0x00); out.write(0x00); out.write(0x00); // Stream ID 0
+            out.write((chunkSize >> 24) & 0xFF);
+            out.write((chunkSize >> 16) & 0xFF);
+            out.write((chunkSize >> 8) & 0xFF);
+            out.write(chunkSize & 0xFF);
             out.flush();
         }
 
@@ -1777,15 +2001,50 @@ public class MainActivity extends Activity {
             writeChunk(0x14, 0, amf.toByteArray());
         }
 
+        private void sendMetaData(int width, int height, int fps, int bitrateKbps) throws Exception {
+            ByteArrayOutputStream amf = new ByteArrayOutputStream();
+            writeAmfString(amf, "@setDataFrame");
+            writeAmfString(amf, "onMetaData");
+
+            // ECMA Array (0x08)
+            amf.write(0x08);
+            // Array length = 7
+            amf.write(0x00); amf.write(0x00); amf.write(0x00); amf.write(0x07);
+
+            writeAmfProperty(amf, "width", (double) width);
+            writeAmfProperty(amf, "height", (double) height);
+            writeAmfProperty(amf, "framerate", (double) fps);
+            writeAmfProperty(amf, "videocodecid", 7.0); // AVC
+            writeAmfProperty(amf, "videodatarate", (double) bitrateKbps);
+            writeAmfProperty(amf, "audiocodecid", 10.0); // AAC
+            writeAmfProperty(amf, "audiodatarate", 96.0);
+            // End object marker: 00 00 09
+            amf.write(0x00); amf.write(0x00); amf.write(0x09);
+
+            writeChunk(0x12, 0, amf.toByteArray()); // Msg Type 0x12 = AMF0 Data
+        }
+
         private void writeChunk(int messageType, long timestamp, byte[] payload) throws Exception {
-            int csid = (messageType == 0x09) ? 0x06 : 0x04;
+            int csid;
+            if (messageType == 0x09) {
+                csid = 0x06; // Video
+            } else if (messageType == 0x08) {
+                csid = 0x04; // Audio
+            } else if (messageType == 0x12) {
+                csid = 0x05; // Data / Metadata
+            } else {
+                csid = 0x03; // AMF Command
+            }
             int length = payload.length;
+
+            boolean hasExtendedTs = timestamp >= 0xFFFFFF;
+            int tsField = hasExtendedTs ? 0xFFFFFF : (int) timestamp;
 
             // Chunk Header Type 0 (11 bytes)
             out.write((byte) (csid & 0x3F));
-            out.write((byte) ((timestamp >> 16) & 0xFF));
-            out.write((byte) ((timestamp >> 8) & 0xFF));
-            out.write((byte) (timestamp & 0xFF));
+            out.write((byte) ((tsField >> 16) & 0xFF));
+            out.write((byte) ((tsField >> 8) & 0xFF));
+            out.write((byte) (tsField & 0xFF));
 
             out.write((byte) ((length >> 16) & 0xFF));
             out.write((byte) ((length >> 8) & 0xFF));
@@ -1797,15 +2056,28 @@ public class MainActivity extends Activity {
             out.write(0x00);
             out.write(0x00);
 
-            // Chunk Body with Type 3 Continuation (Chunk size = 128)
+            if (hasExtendedTs) {
+                out.write((byte) ((timestamp >> 24) & 0xFF));
+                out.write((byte) ((timestamp >> 16) & 0xFF));
+                out.write((byte) ((timestamp >> 8) & 0xFF));
+                out.write((byte) (timestamp & 0xFF));
+            }
+
+            // Chunk Body with Type 3 Continuation (Chunk size = 4096)
             int offset = 0;
-            int chunkSize = 128;
+            int chunkSize = 4096;
             while (offset < length) {
                 int sendBytes = Math.min(chunkSize, length - offset);
                 out.write(payload, offset, sendBytes);
                 offset += sendBytes;
                 if (offset < length) {
                     out.write((byte) (0xC0 | (csid & 0x3F))); // Header Type 3
+                    if (hasExtendedTs) {
+                        out.write((byte) ((timestamp >> 24) & 0xFF));
+                        out.write((byte) ((timestamp >> 16) & 0xFF));
+                        out.write((byte) ((timestamp >> 8) & 0xFF));
+                        out.write((byte) (timestamp & 0xFF));
+                    }
                 }
             }
             out.flush();
@@ -1847,6 +2119,9 @@ public class MainActivity extends Activity {
             isRunning.set(false);
             if (thread != null) {
                 thread.interrupt();
+            }
+            if (readerThread != null) {
+                readerThread.interrupt();
             }
             try {
                 if (out != null) out.close();
