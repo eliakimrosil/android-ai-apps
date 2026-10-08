@@ -205,10 +205,10 @@ public class FloatingCamManager {
 
     public void rotateCamera() {
         currentRotationDegrees = (currentRotationDegrees + 90) % 360;
-        updateWindowDimensionsAndTransform();
-        String rotLabel = currentRotationDegrees == 0 ? "0° (Portrait)" :
-                          currentRotationDegrees == 90 ? "90° (Landscape)" :
-                          currentRotationDegrees == 180 ? "180° (Inverted)" : "270° (Rev. Landscape)";
+        if (tvPipCamera != null && tvPipCamera.getWidth() > 0 && tvPipCamera.getHeight() > 0) {
+            configureTransform(tvPipCamera.getWidth(), tvPipCamera.getHeight());
+        }
+        String rotLabel = currentRotationDegrees + "°";
         Toast.makeText(appContext, "Floating Cam: " + rotLabel, Toast.LENGTH_SHORT).show();
         if (stateListener != null) {
             mainHandler.post(() -> stateListener.onCameraRotated(currentRotationDegrees));
@@ -221,18 +221,10 @@ public class FloatingCamManager {
 
     public void cycleSize() {
         currentSizeIndex = (currentSizeIndex + 1) % SIZES_DP.length;
-        updateWindowDimensionsAndTransform();
-    }
-
-    private void updateWindowDimensionsAndTransform() {
         if (isOverlayShowing && overlayView != null && windowParams != null && windowManager != null) {
             float density = appContext.getResources().getDisplayMetrics().density;
-            boolean isLandscape = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
-            int baseW = isLandscape ? SIZES_DP[currentSizeIndex][1] : SIZES_DP[currentSizeIndex][0];
-            int baseH = isLandscape ? SIZES_DP[currentSizeIndex][0] : SIZES_DP[currentSizeIndex][1];
-
-            windowParams.width = (int) (baseW * density);
-            windowParams.height = (int) (baseH * density);
+            windowParams.width = (int) (SIZES_DP[currentSizeIndex][0] * density);
+            windowParams.height = (int) (SIZES_DP[currentSizeIndex][1] * density);
             clampPosition(windowParams);
             try {
                 windowManager.updateViewLayout(overlayView, windowParams);
@@ -258,12 +250,8 @@ public class FloatingCamManager {
         tvPipCamera = overlayView.findViewById(R.id.pipCameraView);
 
         float density = appContext.getResources().getDisplayMetrics().density;
-        boolean isLandscape = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
-        int baseW = isLandscape ? SIZES_DP[currentSizeIndex][1] : SIZES_DP[currentSizeIndex][0];
-        int baseH = isLandscape ? SIZES_DP[currentSizeIndex][0] : SIZES_DP[currentSizeIndex][1];
-
-        int widthPx = (int) (baseW * density);
-        int heightPx = (int) (baseH * density);
+        int widthPx = (int) (SIZES_DP[currentSizeIndex][0] * density);
+        int heightPx = (int) (SIZES_DP[currentSizeIndex][1] * density);
 
         int layoutType = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
                 ? WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
@@ -509,17 +497,20 @@ public class FloatingCamManager {
                 float centerX = viewRect.centerX();
                 float centerY = viewRect.centerY();
 
-                boolean isLandscape = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
-                float bufW = isLandscape ? previewSize.getWidth() : previewSize.getHeight();
-                float bufH = isLandscape ? previewSize.getHeight() : previewSize.getWidth();
+                boolean isRotated90or270 = (currentRotationDegrees == 90 || currentRotationDegrees == 270);
+                float naturalBufW = previewSize.getHeight(); // 480
+                float naturalBufH = previewSize.getWidth();  // 640
 
-                RectF bufferRect = new RectF(0, 0, bufW, bufH);
+                RectF bufferRect = new RectF(0, 0, naturalBufW, naturalBufH);
                 bufferRect.offset(centerX - bufferRect.centerX(), centerY - bufferRect.centerY());
                 matrix.setRectToRect(viewRect, bufferRect, Matrix.ScaleToFit.FILL);
 
+                float targetBufW = isRotated90or270 ? naturalBufH : naturalBufW;
+                float targetBufH = isRotated90or270 ? naturalBufW : naturalBufH;
+
                 float scale = Math.max(
-                        (float) viewWidth / bufW,
-                        (float) viewHeight / bufH
+                        (float) viewWidth / targetBufW,
+                        (float) viewHeight / targetBufH
                 );
                 matrix.postScale(scale, scale, centerX, centerY);
 
