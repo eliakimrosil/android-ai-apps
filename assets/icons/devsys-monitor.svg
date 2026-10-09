@@ -1,7 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
-    <rect width="108" height="108" rx="24" fill="#0B132B" />
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:android="http://schemas.android.com/apk/res/android" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B101E" />
     <!-- Background Decor -->
-    <path fill="#1C2541" d="M54,54m-42,0a42,42 0,1 1,84 0a42,42 0,1 1,-84 0"/><path fill="#141D35" d="M24,24h60v60h-60z" stroke="#243356" stroke-width="1"/><path stroke="#3A506B" stroke-width="0.75" android:strokeAlpha="0.4" d="M30,54h48M54,30v48M39,30v48M69,30v48M30,39h48M30,69h48"/>
+    
+        <path
+            fill="#131B30"
+            d="M20,18h68a12,12 0 0 1 12,12v50a12,12 0 0 1 -12,12h-68a12,12 0 0 1 -12,-12v-50a12,12 0 0 1 12,-12z" />
+        <path
+            stroke="#1F2D50"
+            stroke-width="1.2"
+            d="M24,36h60 M24,54h60 M24,72h60" />
+        
     <!-- Foreground Iconography -->
-    <path fill="#1E293B" stroke="#38BDF8" stroke-width="2" d="M28,32 c0,-3.3 2.7,-6 6,-6 h40 c3.3,0 6,2.7 6,6 v38 c0,3.3 -2.7,6 -6,6 h-40 c-3.3,0 -6,-2.7 -6,-6 Z"/><path fill="#0F172A" d="M32,35 h44 v30 h-44 Z"/><path stroke="#00F5D4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" d="M35,52 h7 l4,-8 l6,18 l5,-14 l4,7 h12"/><circle android:cx="73" android:cy="52" android:r="2" fill="#00F5D4"/><path stroke="#64748B" stroke-width="2.5" stroke-linecap="round" d="M48,76 v4 M60,76 v4 M42,80 h24"/><circle android:cx="36" android:cy="30" android:r="1.2" fill="#EF4444"/><circle android:cx="40" android:cy="30" android:r="1.2" fill="#F59E0B"/><circle android:cx="44" android:cy="30" android:r="1.2" fill="#10B981"/><path stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M36,40 l2,2 l-2,2"/><path stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" d="M40,44 h3"/>
+    
+        <!-- Microchip Body -->
+        <path
+            fill="#1E293B"
+            stroke="#38BDF8"
+            stroke-width="2"
+            d="M32,32h44a4,4 0 0 1 4,4v40a4,4 0 0 1 -4,4h-44a4,4 0 0 1 -4,-4v-40a4,4 0 0 1 4,-4z" />
+        <!-- Chip Pins Top & Bottom -->
+        <path
+            fill="#0284C7"
+            d="M38,26h4v6h-4z M48,26h4v6h-4z M58,26h4v6h-4z M66,26h4v6h-4z M38,80h4v6h-4z M48,80h4v6h-4z M58,80h4v6h-4z M66,80h4v6h-4z" />
+        <!-- Real-time Pulse Wave -->
+        <path
+            stroke="#22C55E"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M36,54h6l4,-10 6,22 6,-16 4,6h6" />
+        <!-- Status Core Glow -->
+        <path
+            fill="#38BDF8"
+            d="M66,38a3,3 0 1 1 0,6a3,3 0 1 1 0,-6" />
+        
 </svg>
