@@ -1,0 +1,1 @@
+Calculate safe meat thawing times using official food safety thresholds.

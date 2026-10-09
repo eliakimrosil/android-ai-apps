@@ -1,0 +1,1 @@
+Initial release of ChillThaw. Includes offline meat defrost calculations for refrigerator and cold-water methods, live notification tracking, and home screen widget support.
