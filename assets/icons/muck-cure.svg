@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:android="http://schemas.android.com/apk/res/android" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#1E2022" />
+    <!-- Background Decor -->
+    <path fill="#2A2E33" d="M0,0h108v108h-108z" /><path fill="#191C1E" d="M0,0L108,108L0,108Z" /><path stroke="#3E454D" stroke-width="1" d="M0,36h108M0,72h108M36,0v108M72,0v108" stroke-opacity="0.35" /><circle fill="#24282D" />
+    <!-- Foreground Iconography -->
+    <path fill="#1A1D20" d="M38,30L70,30C74.4,30 78,33.6 78,38L78,70C78,74.4 74.4,78 70,78L38,78C33.6,78 30,74.4 30,70L30,38C30,33.6 33.6,30 38,30Z" /><path fill="#2E343B" d="M36,28L72,28C75.3,28 78,30.7 78,34L78,70C78,73.3 75.3,76 72,76L36,76C32.7,76 30,73.3 30,70L30,34C30,30.7 32.7,28 36,28Z" /><path fill="#8E99A4" d="M42,34L66,34C67.1,34 68,34.9 68,36L68,46L40,46L40,36C40,34.9 40.9,34 42,34Z" /><path fill="#00BFA5" d="M40,50L68,50L68,68C68,70.2 66.2,72 64,72L44,72C41.8,72 40,70.2 40,68Z" /><path fill="#1DE9B6" d="M40,58Q47,54 54,58T68,58L68,68C68,70.2 66.2,72 64,72L44,72C41.8,72 40,70.2 40,68Z" /><path fill="#FFB300" d="M46,26L52,38L32,46L36,34Z" /><path stroke="#FFE082" stroke-width="2" stroke-linecap="round" d="M38,42L48,32" /><circle fill="#00E5FF" /><path fill="#00363A" d="M71,32h2v5h3v2h-5z" /><path fill="#FFD54F" d="M74,70l1.2,2.8L78,74l-2.8,1.2L74,78l-1.2,-2.8L70,74l2.8,-1.2z" />
+</svg>
