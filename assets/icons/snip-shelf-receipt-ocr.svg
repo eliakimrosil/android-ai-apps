@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B1528" />
+    <!-- Background Decor -->
+    
+        <!-- Vault Safe Chamber Card -->
+        <path
+            fill="#15243E"
+            d="M22,18h64a12,12 0 0 1 12,12v50a12,12 0 0 1 -12,12h-64a12,12 0 0 1 -12,-12v-50a12,12 0 0 1 12,-12z" />
+        <!-- Laser Alignment Mesh Guidelines -->
+        <path
+            stroke="#223961"
+            stroke-width="1.2"
+            d="M20,38h68 M20,54h68 M20,70h68" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Warranty Document / Receipt with Jagged Tear Edge -->
+        <path
+            fill="#F1F5F9"
+            d="M30,22h48v56l-4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3 -4,-3 -4,3z" />
+        <!-- Certificate Header Bar -->
+        <path
+            fill="#2563EB"
+            d="M36,28h22v4h-22z" />
+        <!-- OCR Scanned Text Skeletons -->
+        <path
+            fill="#94A3B8"
+            d="M36,36h34v2.5h-34z M36,42h28v2.5h-28z M36,48h30v2.5h-30z M36,54h22v2.5h-22z" />
+        <!-- Optical OCR Scanner Horizontal Beam -->
+        <path
+            fill="#EF4444"
+            d="M24,51h60v2.5h-60z" />
+        <!-- Corner Viewfinder Scanner Brackets -->
+        <path
+            stroke="#0284C7"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            d="M24,32v-8h8 M84,32v-8h-8 M24,66v8h8 M84,66v-8h-8" />
+        <!-- Golden Warranty Guarantee Rosette Seal -->
+        <path
+            fill="#F59E0B"
+            d="M66,54a10,10 0 1 1 0,20a10,10 0 1 1 0,-20" />
+        <path
+            fill="#D97706"
+            d="M62,71l2,8 3,-3 3,3 2,-8z" />
+        <path
+            fill="#FEF3C7"
+            d="M66,60l1.5,3 3.5,0.5 -2.5,2.5 0.5,3.5 -3,-1.5 -3,1.5 0.5,-3.5 -2.5,-2.5 3.5,-0.5z" />
+        
+</svg>

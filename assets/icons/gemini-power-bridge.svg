@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#090D16" />
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#C084FC" />
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" />
+      <stop offset="100%" stop-color="#F59E0B" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#38BDF8" flood-opacity="0.35" />
+    </filter>
+  </defs>
+
+  <!-- Background Base -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+
+  <!-- Outer Ring Accent -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#334155" stroke-width="4" stroke-dasharray="12 12" opacity="0.6" />
+
+  <!-- Power Key Arc Glow -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="url(#glow)" stroke-width="24" stroke-linecap="round" stroke-dasharray="660" stroke-dashoffset="180" filter="url(#shadow)" />
+
+  <!-- Vertical Power Bridge Stem -->
+  <rect x="242" y="100" width="28" height="120" rx="14" fill="url(#glow)" filter="url(#shadow)" />
+
+  <!-- Center Thunderbolt Energy Core -->
+  <polygon points="266,190 220,270 252,270 242,330 292,250 260,250" fill="url(#boltGrad)" />
+
+  <!-- Subtle Hardware Dots -->
+  <circle cx="150" cy="362" r="8" fill="#38BDF8" opacity="0.8" />
+  <circle cx="362" cy="362" r="8" fill="#818CF8" opacity="0.8" />
+  <circle cx="256" cy="406" r="6" fill="#94A3B8" opacity="0.5" />
+</svg>

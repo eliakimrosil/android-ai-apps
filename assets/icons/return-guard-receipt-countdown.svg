@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B1528" />
+    <!-- Background Decor -->
+    <path fill="#13223D" d="M54,12 A42,42 0 1,1 53.9,12 Z"/><path fill="#1C2E52" d="M54,20 A34,34 0 1,1 53.9,20 Z"/><path stroke="#253E6D" stroke-width="1.5" d="M24,54 L84,54 M54,24 L54,84" android:strokeAlpha="0.3"/>
+    <!-- Foreground Iconography -->
+    <path fill="#102A45" stroke="#1E4976" stroke-width="2" d="M54,23 L77,32 C77,53 66,73 54,83 C42,73 31,53 31,32 Z"/><path fill="#1E3A5F" d="M54,26 L74,34 C74,51 64,68 54,77 C44,68 34,51 34,34 Z"/><path fill="#FFFFFF" d="M41,33 L67,33 L67,65 L63,62 L59,65 L54,62 L49,65 L45,62 L41,65 Z"/><path fill="#E2E8F0" d="M46,39 L62,39 L62,41.5 L46,41.5 Z M46,44.5 L58,44.5 L58,47 L46,47 Z M46,50 L55,50 L55,52.5 L46,52.5 Z"/><path stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round" d="M62,49 A13,13 0 1,1 61.9,48.9"/><path fill="#00E5FF" d="M62,49 L65,45 L66,51 Z"/><path fill="#0D1B2A" d="M62,62 A10,10 0 1,1 61.9,62 Z"/><path stroke="#00E5FF" stroke-width="2" stroke-linecap="round" d="M62,62 A10,10 0 1,1 61.9,62 Z"/><path stroke="#00E5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M62,56.5 L62,62 L66,64"/><path fill="#10B981" d="M54,23 L54,83 C66,73 77,53 77,32 Z" android:fillAlpha="0.08"/><path fill="#00E5FF" d="M35,27 L36.5,29.5 L39,31 L36.5,32.5 L35,35 L33.5,32.5 L31,31 L33.5,29.5 Z"/><path fill="#FFD600" d="M73,24 L74.2,26 L76.2,27.2 L74.2,28.4 L73,30.4 L71.8,28.4 L69.8,27.2 L71.8,26 Z"/>
+</svg>

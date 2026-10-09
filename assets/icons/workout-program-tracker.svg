@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#180B0B" />
+    <!-- Background Decor -->
+    
+        <path
+            fill="#2D1212"
+            d="M54,16a38,38 0 1 1 0,76a38,38 0 1 1 0,-76" />
+        <path
+            stroke="#4E1A1A"
+            stroke-width="1.5"
+            d="M54,24a30,30 0 1 1 0,60a30,30 0 1 1 0,-60" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Heavy Dumbbell Barbell Center -->
+        <path
+            fill="#EF4444"
+            d="M30,51h48v6h-48z" />
+        <!-- Outer Weight Plates -->
+        <path
+            fill="#DC2626"
+            d="M24,38h6a2,2 0 0 1 2,2v28a2,2 0 0 1 -2,2h-6a2,2 0 0 1 -2,-2v-28a2,2 0 0 1 2,-2z M78,38h6a2,2 0 0 1 2,2v28a2,2 0 0 1 -2,2h-6a2,2 0 0 1 -2,-2v-28a2,2 0 0 1 2,-2z" />
+        <!-- Inner Weight Collars -->
+        <path
+            fill="#F87171"
+            d="M32,44h4v20h-4z M72,44h4v20h-4z" />
+        <!-- Electric Pulse / Heartbeat Line Across Bar -->
+        <path
+            stroke="#FFFFFF"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M38,72h8l3,-8 5,16 5,-12 3,4h8" />
+        
+</svg>

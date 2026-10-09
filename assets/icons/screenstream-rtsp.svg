@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B1528" />
+    <!-- Background Decor -->
+    <path fill="#13233D" d="M0,0 L108,0 L108,108 L0,108 Z"/><path fill="#1A3256" d="M0,0 L108,108 L0,108 Z"/><circle android:cx="54" android:cy="54" android:r="48" fill="#0F203B"/><path fill="#1E3D6B" android:fillAlpha="0.4" d="M24,24 h60 v60 h-60 Z"/>
+    <!-- Foreground Iconography -->
+    <!-- Device Screen Frame --><path fill="#1E293B" d="M32,28 h44 c3.31,0 6,2.69 6,6 v34 c0,3.31 -2.69,6 -6,6 h-44 c-3.31,0 -6,-2.69 -6,-6 v-34 c0,-3.31 2.69,-6 6,-6 Z"/><!-- Screen Display Area --><path fill="#0F172A" d="M34,31 h40 c1.66,0 3,1.34 3,3 v28 c0,1.66 -1.34,3 -3,3 h-40 c-1.66,0 -3,-1.34 -3,-3 v-28 c0,-1.66 1.34,-3 3,-3 Z"/><!-- Screen Base / Stand --><path fill="#475569" d="M48,74 h12 v4 h-12 Z M42,78 h24 v2 h-24 Z"/><!-- RTSP Streaming Waves / Antenna Beams --><path stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" d="M61,41 A10,10 0 0,1 61,55"/><path stroke="#0284C7" stroke-width="2.5" stroke-linecap="round" d="M66,36 A17,17 0 0,1 66,60"/><path stroke="#0369A1" stroke-width="2" stroke-linecap="round" d="M71,31 A24,24 0 0,1 71,65"/><!-- Play Triangle (Cast / Stream Source) --><path fill="#38BDF8" d="M43,41 L53,48 L43,55 Z"/><!-- Live Broadcast Indicator Dot --><circle android:cx="71" android:cy="33" android:r="2.5" fill="#EF4444"/><!-- Signal / Flash Accent --><path fill="#38BDF8" d="M76,24 L78,28 L82,30 L78,32 L76,36 L74,32 L70,30 L74,28 Z"/>
+</svg>
