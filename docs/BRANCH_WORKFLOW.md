@@ -26,7 +26,7 @@ The **kim-android-apps** repository serves as the **Official Public Distribution
 
 ### 2. `gh-pages` Branch
 - **Role**: Hosts the live GitHub Pages web store and HTTPS privacy policy endpoints for Google Play Developer Console compliance.
-- **URL**: [https://eliakimrosil.github.io/kim-android-apps/](https://eliakimrosil.github.io/kim-android-apps/)
+- **URL**: [https://apps.kimrosil.com/](https://apps.kimrosil.com/)
 
 ### 3. Source Code Isolation
 - Application source code is developed natively and securely stored on the local developer environment and private repositories.

@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: 🌐 Web Showcase & Live App Store
-    url: https://eliakimrosil.github.io/kim-android-apps/
+    url: https://apps.kimrosil.com/
     about: Browse and download all 28+ applications directly on the web.
   - name: 🔒 Report a Security Vulnerability
     url: mailto:eliakimrosil@gmail.com
