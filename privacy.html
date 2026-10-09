@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Privacy Policy - Eliakim Rosil (KIM Android Apps)</title>
+    <meta name="description" content="Master Developer Privacy Policy and Google Play Data Safety declaration for all mobile applications published by Eliakim Rosil under KIM Android Apps.">
+    <style>
+
+    :root {
+        --bg-main: #090D16;
+        --bg-surface: #111827;
+        --bg-card: #162032;
+        --border-color: #1F2937;
+        --border-highlight: #2A3850;
+        --text-primary: #F1F5F9;
+        --text-secondary: #94A3B8;
+        --text-muted: #64748B;
+        --accent-cyan: #00E5FF;
+        --accent-emerald: #10B981;
+        --accent-indigo: #818CF8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: var(--bg-main);
+        color: var(--text-primary);
+        line-height: 1.68;
+        padding: 36px 16px;
+        min-height: 100vh;
+    }
+    .container {
+        max-width: 840px;
+        margin: 0 auto;
+        background: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        padding: 42px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+    }
+    @media (max-width: 640px) {
+        body { padding: 16px 8px; }
+        .container { padding: 24px 18px; border-radius: 14px; }
+    }
+    .badge-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+    .badge-verified {
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #34D399;
+    }
+    .badge-cyan {
+        background: rgba(0, 229, 255, 0.1);
+        border: 1px solid rgba(0, 229, 255, 0.3);
+        color: var(--accent-cyan);
+    }
+    .badge-indigo {
+        background: rgba(129, 140, 248, 0.12);
+        border: 1px solid rgba(129, 140, 248, 0.35);
+        color: var(--accent-indigo);
+    }
+    .brand-link {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 8px;
+    }
+    h1 {
+        color: #FFFFFF;
+        font-size: 30px;
+        font-weight: 800;
+        margin-bottom: 6px;
+        letter-spacing: -0.6px;
+        line-height: 1.25;
+    }
+    .app-title-tag {
+        font-size: 16px;
+        color: var(--accent-cyan);
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+    .meta-date {
+        color: var(--text-muted);
+        font-size: 13px;
+        margin-bottom: 24px;
+    }
+    hr {
+        border: 0;
+        border-top: 1px solid var(--border-color);
+        margin: 24px 0;
+    }
+    h2 {
+        color: #FFFFFF;
+        font-size: 19px;
+        font-weight: 700;
+        margin: 32px 0 14px 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    h3 {
+        color: #E2E8F0;
+        font-size: 15px;
+        font-weight: 600;
+        margin: 18px 0 10px 0;
+    }
+    p {
+        color: var(--text-secondary);
+        font-size: 14.5px;
+        margin-bottom: 14px;
+    }
+    ul, ol {
+        color: var(--text-secondary);
+        font-size: 14.5px;
+        margin: 0 0 16px 22px;
+    }
+    li {
+        margin-bottom: 8px;
+    }
+    li strong, p strong {
+        color: var(--text-primary);
+    }
+    .card-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border-highlight);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 18px 0 22px 0;
+    }
+    .card-box p:last-child, .card-box ul:last-child {
+        margin-bottom: 0;
+    }
+    a {
+        color: var(--accent-cyan);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0 24px 0;
+        font-size: 13.5px;
+    }
+    th, td {
+        padding: 10px 14px;
+        border: 1px solid var(--border-color);
+        text-align: left;
+    }
+    th {
+        background: var(--bg-card);
+        color: #FFFFFF;
+        font-weight: 700;
+    }
+    td {
+        color: var(--text-secondary);
+    }
+    td strong {
+        color: var(--text-primary);
+    }
+    .nav-bar {
+        margin-top: 36px;
+        padding-top: 24px;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 14px;
+    }
+    footer {
+        margin-top: 32px;
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-muted);
+    }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="brand-link">← KIM Android Apps Showcase</a>
+        <div class="badge-row">
+            <span class="badge badge-verified">✓ Google Play Data Safety Certified</span>
+            <span class="badge badge-cyan">✓ Google AdMob Partner Disclosures</span>
+            <span class="badge badge-indigo">✓ 100% On-Device Local Sandbox</span>
+        </div>
+        <h1>Master Developer Privacy Policy</h1>
+        <p class="app-title-tag">Developer Profile: Eliakim Rosil &bull; apps.kimrosil.com</p>
+        <p class="meta-date">Effective Date: October 2, 2026 &bull; Last Updated: October 9, 2026</p>
+        <hr>
+
+        <h2>1. Scope &amp; Developer Identity</h2>
+        <p>This Master Developer Privacy Policy governs all mobile applications ("Applications") developed, published, and maintained by <strong>Eliakim Rosil</strong> ("we", "us", or "our") under the developer profile <strong>KIM Android Apps</strong>, accessible via our official developer portal at <a href="https://apps.kimrosil.com">https://apps.kimrosil.com</a> and distributed through the Google Play Store and official GitHub releases.</p>
+        <p>Our commitment is simple: <strong>User privacy by architecture</strong>. We design offline-first native Android applications where your personal files, calculations, timers, notes, and activity history remain entirely on your physical device.</p>
+
+        <h2>2. Offline-First Architecture &amp; Zero Proprietary Server Storage</h2>
+        <div class="card-box">
+            <p><strong>Zero Developer Server Tracking:</strong> We do NOT operate, own, or connect any proprietary remote servers, user tracking databases, or cloud accounts that harvest, store, or profile your personal data.</p>
+        </div>
+        <ul>
+            <li><strong>Local Sandboxing:</strong> All data entered into our Applications (such as workout logs, fasting timers, fuel entries, receipt scans, notes, and preferences) is stored exclusively in your device's private, sandboxed app directory using Android <code>SharedPreferences</code>, SQLite, or Room database components.</li>
+            <li><strong>No Data Brokering:</strong> We do not sell, rent, monetize, trade, or share your personal data with data brokers or marketing firms under any circumstances.</li>
+            <li><strong>Device Isolation:</strong> Your personal application records never leave your physical device unless you explicitly initiate an Android system share action (e.g. sharing a sanitized clipboard link).</li>
+        </ul>
+
+        <h2>3. Third-Party Advertising &amp; Monetization (Google AdMob)</h2>
+        <p>To support ongoing independent software development and make our utility applications free for everyone without paid subscriptions, select applications in our portfolio display digital advertisements provided by <strong>Google AdMob</strong> (a service provided by Google LLC).</p>
+        
+        <div class="card-box">
+            <p><strong>Data Processed by Google Mobile Ads SDK (AdMob):</strong></p>
+            <p>When you use an ad-supported application, Google AdMob may automatically collect and process certain pseudonymous device and diagnostic telemetry to serve, personalize, and measure advertisements, detect invalid traffic, and protect against fraud:</p>
+            <ul>
+                <li><strong>Device &amp; Advertising Identifiers:</strong> Google Advertising ID (AAID / GAID) for ad attribution, frequency capping, and ad personalization (when enabled by user).</li>
+                <li><strong>Approximate Location:</strong> Non-precise geographical location derived from your IP address (country or city level) to display regionally relevant advertisements.</li>
+                <li><strong>SDK Diagnostics &amp; Telemetry:</strong> Ad loading performance, crash reports, device model, Android OS version, and network connection characteristics.</li>
+            </ul>
+        </div>
+
+        <h3>Google's Privacy Policies &amp; Technologies</h3>
+        <p>To learn more about how Google processes and protects advertising data, please review Google's official policies:</p>
+        <ul>
+            <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
+            <li><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">How Google Uses Information From Sites or Apps That Use Our Services</a></li>
+            <li><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google Advertising Technologies</a></li>
+            <li><a href="app-ads.txt">Developer Authorized Sellers (app-ads.txt)</a></li>
+        </ul>
+
+        <h3>How to Control or Opt-Out of Personalized Advertising</h3>
+        <p>You have full autonomy over your advertising identifiers. You can reset your Google Advertising ID or opt out of personalized advertisements at any time directly through your Android device settings:</p>
+        <ol>
+            <li>Open your Android device <strong>Settings</strong>.</li>
+            <li>Navigate to <strong>Google</strong> &rarr; <strong>Ads</strong> (or on Android 12+, <strong>Security &amp; Privacy</strong> &rarr; <strong>Privacy</strong> &rarr; <strong>Ads</strong>).</li>
+            <li>Tap <strong>Delete advertising ID</strong> or turn on <strong>Opt out of Ads Personalization</strong>.</li>
+        </ol>
+        <p>When opted out, you will still see contextual advertisements, but they will not be tailored to your prior interests or browsing history.</p>
+
+        <h2>4. Android Platform Permissions &amp; Hardware Access</h2>
+        <p>Our applications request only the minimal Android platform permissions strictly necessary to execute their respective offline utility features:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Permission</th>
+                    <th>Purpose &amp; On-Device Processing Guarantee</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>POST_NOTIFICATIONS</code></td>
+                    <td>Delivers local countdown, timer expiration, and sentinel alerts. Notification content is never uploaded or shared remotely.</td>
+                </tr>
+                <tr>
+                    <td><code>VIBRATE</code></td>
+                    <td>Provides haptic tactile feedback when alarms fire or user actions complete.</td>
+                </tr>
+                <tr>
+                    <td><code>WAKE_LOCK</code></td>
+                    <td>Ensures timers and sensor monitors continue running accurately when the device display turns off.</td>
+                </tr>
+                <tr>
+                    <td><code>CAMERA</code></td>
+                    <td>Used only in specific utilities (e.g. SnipShelf) for on-device QR scanning or optical character recognition (OCR). Camera frames are analyzed in-memory and are never stored or transmitted.</td>
+                </tr>
+                <tr>
+                    <td><code>RECORD_AUDIO</code></td>
+                    <td>Used strictly for on-device speech transcription or real-time VU monitoring in dedicated media tools. Audio is never transmitted to proprietary servers.</td>
+                </tr>
+                <tr>
+                    <td><code>READ_MEDIA_IMAGES</code> / Storage</td>
+                    <td>Accessed only when you explicitly choose to import, export, or back up local records.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>5. User Data Retention &amp; Right to Erasure (Complete Deletion)</h2>
+        <div class="card-box">
+            <p><strong>100% User-Controlled Deletion:</strong> Because all application data resides strictly on your physical Android hardware, you have unconditional control over its retention.</p>
+            <ul>
+                <li><strong>Clear Application Storage:</strong> Open Android <strong>Settings</strong> &rarr; <strong>Apps</strong> &rarr; select the Application &rarr; <strong>Storage &amp; Cache</strong> &rarr; tap <strong>Clear Storage / Clear Data</strong>. This permanently and irrevocably deletes all local records, database entries, and preferences.</li>
+                <li><strong>Uninstall Application:</strong> Uninstalling the Application from your device automatically purges the application's sandboxed storage directory.</li>
+            </ul>
+        </div>
+
+        <h2>6. Children's Privacy (COPPA &amp; Families Policy)</h2>
+        <p>Our applications are designed as general-audience utilities and do not target or knowingly collect personal information from children under the age of 13 (or under 16 in the European Economic Area / UK). If you believe an application has inadvertently received personal data from a child, please contact us immediately at <a href="mailto:eliakimrosil@gmail.com">eliakimrosil@gmail.com</a> so we can take prompt corrective steps.</p>
+
+        <h2>7. International Privacy Rights (GDPR, UK GDPR, CCPA/CPRA)</h2>
+        <p>If you reside in the European Economic Area (EEA), the United Kingdom, California, or another jurisdiction with applicable privacy regulations:</p>
+        <ul>
+            <li><strong>Right to Access &amp; Portability:</strong> Since all data is stored locally in standard formats on your device, you have immediate access to your records at all times.</li>
+            <li><strong>Right to Erasure:</strong> You can erase all data instantly via Android Settings as described above.</li>
+            <li><strong>Consent for Advertising:</strong> Where required by the European Union General Data Protection Regulation (GDPR) and Google's EU User Consent Policy, our ad-supported applications present a certified Google User Messaging Platform (UMP) consent dialog allowing you to freely grant, refuse, or manage ad consent.</li>
+        </ul>
+
+        <h2>8. Security Safeguards</h2>
+        <p>Your local data is protected by Android's underlying Linux application sandboxing architecture, ensuring no other application on your device can access your private database or preference files. Any network communication required by third-party advertising SDKs (AdMob) is encrypted in transit using industry-standard Transport Layer Security (TLS / HTTPS).</p>
+
+        <h2>9. Application Portfolio Directory</h2>
+        <p>This master policy applies to all 29 applications in our portfolio. You can inspect each individual application's dedicated privacy policy below:</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Application</th>
+                    <th>Category</th>
+                    <th>Specific Privacy Policy</th>
+                </tr>
+            </thead>
+            <tbody>
+
+        <tr>
+            <td><strong><a href="aurafocus-minimalist-pomodoro-ambient-sound/">AuraFocus - Minimalist Pomodoro & Ambient Sound</a></strong></td>
+            <td>Productivity</td>
+            <td><a href="aurafocus-minimalist-pomodoro-ambient-sound/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="defrost-safe-meat-prep-sentinel/">ChillThaw - Meat Defrost Sentinel</a></strong></td>
+            <td>Food & Drink / Utilities</td>
+            <td><a href="defrost-safe-meat-prep-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="glue-set-clamp-sentinel/">ClampGuard: Offline Woodworking Glue & Epoxy Cure Sentinel</a></strong></td>
+            <td>Tools & Productivity</td>
+            <td><a href="glue-set-clamp-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="clip-scrub-sanitize-share/">ClipScrub: Private Share Sanitizer</a></strong></td>
+            <td>Productivity & Privacy Utilities</td>
+            <td><a href="clip-scrub-sanitize-share/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="sourdough-rise-ferment-sentinel/">CrumbWatch: Sourdough Ferment Sentinel</a></strong></td>
+            <td>Food & Drink / Utilities</td>
+            <td><a href="sourdough-rise-ferment-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="steep-chill-ice-bath-timer/">CryoPulse: Cold Plunge Sentinel</a></strong></td>
+            <td>Health & Fitness / Utilities</td>
+            <td><a href="steep-chill-ice-bath-timer/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="laundry-cycle-sentinel/">CycleGuard: Laundry Sentinel</a></strong></td>
+            <td>Utilities</td>
+            <td><a href="laundry-cycle-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="devsys-monitor/">DevSys Monitor: Real-time Android Hardware Monitor</a></strong></td>
+            <td>Developer Tools & System Utilities</td>
+            <td><a href="devsys-monitor/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="offline-prescription-pill-refill-sentinel/">DoseGuard: Offline Med & Refill Sentinel</a></strong></td>
+            <td>Health & Fitness</td>
+            <td><a href="offline-prescription-pill-refill-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="offline-audio-drop-transcribe/">DropScribe</a></strong></td>
+            <td>Productivity / Utilities</td>
+            <td><a href="offline-audio-drop-transcribe/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="fast-track-intermittent-fasting-sentinel/">FastTrack: Offline Fasting Sentinel</a></strong></td>
+            <td>Health & Fitness</td>
+            <td><a href="fast-track-intermittent-fasting-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="gemini-power-bridge/">Gemini Power Bridge: Lenovo ZUI Power Key Interceptor</a></strong></td>
+            <td>Productivity & Utilities</td>
+            <td><a href="gemini-power-bridge/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="workout-program-tracker/">IronPulse: Offline Workout Program & Gym Tracker</a></strong></td>
+            <td>Health & Fitness</td>
+            <td><a href="workout-program-tracker/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="kim-live-studio/">KIM Live Studio</a></strong></td>
+            <td>Video & Broadcasting</td>
+            <td><a href="kim-live-studio/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="tap-meter-parking-sentinel/">MeterPulse - Offline Parking Sentinel</a></strong></td>
+            <td>Auto & Vehicles / Productivity</td>
+            <td><a href="tap-meter-parking-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="ph-vat-calculator/">PH VAT Calculator: Philippine BIR Tax & Invoice Tool</a></strong></td>
+            <td>Finance & Business</td>
+            <td><a href="ph-vat-calculator/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="pan-flip-sear-timer/">PanFlip: Kitchen Sear & Flip Sentinel</a></strong></td>
+            <td>Food & Drink / Utilities</td>
+            <td><a href="pan-flip-sear-timer/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="park-pin-offline-spot-finder/">ParkPin: Offline Spot Anchor</a></strong></td>
+            <td>Auto & Vehicles / Travel & Local</td>
+            <td><a href="park-pin-offline-spot-finder/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="return-guard-receipt-countdown/">ReturnGuard: Store Return Deadline & Receipt Viewer</a></strong></td>
+            <td>Shopping & Lifestyle</td>
+            <td><a href="return-guard-receipt-countdown/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="roast-rest-meat-thermo-sentinel/">RoastRest: Carryover Meat Rest Sentinel</a></strong></td>
+            <td>Food & Drink / Utilities</td>
+            <td><a href="roast-rest-meat-thermo-sentinel/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="screenstream-rtsp/">ScreenStream RTSP: Low-Latency Screen Broadcaster</a></strong></td>
+            <td>Multimedia & Networking</td>
+            <td><a href="screenstream-rtsp/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="size-vault-family-clothing/">SizeVault: Family Clothing & Shoe Size Guide</a></strong></td>
+            <td>Lifestyle & Family</td>
+            <td><a href="size-vault-family-clothing/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="snip-shelf-receipt-ocr/">SnipShelf: Offline Warranty & Manual Vault</a></strong></td>
+            <td>Productivity & Utilities</td>
+            <td><a href="snip-shelf-receipt-ocr/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="snooze-guard-microsleep-commute/">SnoozeGuard Commute Vigil</a></strong></td>
+            <td>Travel & Local / Utilities</td>
+            <td><a href="snooze-guard-microsleep-commute/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="stealth-drop-secret-pad/">StealthDrop: Offline Ephemeral Scratchpad</a></strong></td>
+            <td>Productivity & Security</td>
+            <td><a href="stealth-drop-secret-pad/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="steep-brew-tea-timer/">SteepPulse: Offline Multi-Infusion Tea & Coffee Sentinel</a></strong></td>
+            <td>Food & Drink / Utilities</td>
+            <td><a href="steep-brew-tea-timer/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="offline-fuel-log-tracker/">TankPulse: Offline Fuel & Mileage Tracker</a></strong></td>
+            <td>Auto & Vehicles / Utilities</td>
+            <td><a href="offline-fuel-log-tracker/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="frost-thaw-prep-timer/">ThawGuard: Offline Food Defrost Sentinel</a></strong></td>
+            <td>Tools & Food Safety</td>
+            <td><a href="frost-thaw-prep-timer/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+
+        <tr>
+            <td><strong><a href="who-has-my-tool-lending/">WhoHasMy: Physical Tool & Gear Lending Tracker</a></strong></td>
+            <td>Home & Community</td>
+            <td><a href="who-has-my-tool-lending/privacy.html">View App Policy →</a></td>
+        </tr>
+    
+            </tbody>
+        </table>
+
+        <h2>10. Changes to This Privacy Policy</h2>
+        <p>We may update this Privacy Policy periodically to reflect new application releases, Android OS updates, or Google Play policy revisions. Any changes will be posted on this page with an updated "Last Updated" timestamp.</p>
+
+        <h2>11. Contact Information</h2>
+        <p>If you have any questions, feedback, or data privacy inquiries regarding our applications, please contact the developer directly:</p>
+        <div class="card-box">
+            <p><strong>Developer:</strong> Eliakim Rosil</p>
+            <p><strong>Email:</strong> <a href="mailto:eliakimrosil@gmail.com">eliakimrosil@gmail.com</a></p>
+            <p><strong>Official Developer Portal:</strong> <a href="https://apps.kimrosil.com">https://apps.kimrosil.com</a></p>
+            <p><strong>GitHub Portfolio:</strong> <a href="https://github.com/eliakimrosil/kim-android-apps">https://github.com/eliakimrosil/kim-android-apps</a></p>
+        </div>
+
+        <div class="nav-bar">
+            <a href="index.html">&larr; Back to Applications Catalog</a>
+            <a href="app-ads.txt">Google AdMob app-ads.txt &rarr;</a>
+        </div>
+
+        <footer>
+            <p>&copy; 2026 Eliakim Rosil &bull; KIM Android Apps &bull; All Rights Reserved.</p>
+        </footer>
+    </div>
+</body>
+</html>
