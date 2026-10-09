@@ -1,1 +1,0 @@
-Broadcast your mobile screen, camera, and audio to RTMP live platforms.
