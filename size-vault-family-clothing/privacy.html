@@ -2,307 +2,138 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - SizeVault: Family Clothing & Shoe Size Guide</title>
-    <meta name="description" content="Official Google Play Data Safety and AdMob Privacy Policy for SizeVault: Family Clothing & Shoe Size Guide by Eliakim Rosil.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>Privacy Policy - SizeVault: Family Size Tracker</title>
     <style>
-
-    :root {
-        --bg-main: #090D16;
-        --bg-surface: #111827;
-        --bg-card: #162032;
-        --border-color: #1F2937;
-        --border-highlight: #2A3850;
-        --text-primary: #F1F5F9;
-        --text-secondary: #94A3B8;
-        --text-muted: #64748B;
-        --accent-cyan: #00E5FF;
-        --accent-emerald: #10B981;
-        --accent-indigo: #818CF8;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        background: var(--bg-main);
-        color: var(--text-primary);
-        line-height: 1.68;
-        padding: 36px 16px;
-        min-height: 100vh;
-    }
-    .container {
-        max-width: 840px;
-        margin: 0 auto;
-        background: var(--bg-surface);
-        border: 1px solid var(--border-color);
-        border-radius: 20px;
-        padding: 42px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
-    }
-    @media (max-width: 640px) {
-        body { padding: 16px 8px; }
-        .container { padding: 24px 18px; border-radius: 14px; }
-    }
-    .badge-row {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 5px 12px;
-        border-radius: 20px;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-    }
-    .badge-verified {
-        background: rgba(16, 185, 129, 0.12);
-        border: 1px solid rgba(16, 185, 129, 0.35);
-        color: #34D399;
-    }
-    .badge-cyan {
-        background: rgba(0, 229, 255, 0.1);
-        border: 1px solid rgba(0, 229, 255, 0.3);
-        color: var(--accent-cyan);
-    }
-    .badge-indigo {
-        background: rgba(129, 140, 248, 0.12);
-        border: 1px solid rgba(129, 140, 248, 0.35);
-        color: var(--accent-indigo);
-    }
-    .brand-link {
-        color: var(--accent-cyan);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        display: inline-block;
-        margin-bottom: 8px;
-    }
-    h1 {
-        color: #FFFFFF;
-        font-size: 30px;
-        font-weight: 800;
-        margin-bottom: 6px;
-        letter-spacing: -0.6px;
-        line-height: 1.25;
-    }
-    .app-title-tag {
-        font-size: 16px;
-        color: var(--accent-cyan);
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .meta-date {
-        color: var(--text-muted);
-        font-size: 13px;
-        margin-bottom: 24px;
-    }
-    hr {
-        border: 0;
-        border-top: 1px solid var(--border-color);
-        margin: 24px 0;
-    }
-    h2 {
-        color: #FFFFFF;
-        font-size: 19px;
-        font-weight: 700;
-        margin: 32px 0 14px 0;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    h3 {
-        color: #E2E8F0;
-        font-size: 15px;
-        font-weight: 600;
-        margin: 18px 0 10px 0;
-    }
-    p {
-        color: var(--text-secondary);
-        font-size: 14.5px;
-        margin-bottom: 14px;
-    }
-    ul, ol {
-        color: var(--text-secondary);
-        font-size: 14.5px;
-        margin: 0 0 16px 22px;
-    }
-    li {
-        margin-bottom: 8px;
-    }
-    li strong, p strong {
-        color: var(--text-primary);
-    }
-    .card-box {
-        background: var(--bg-card);
-        border: 1px solid var(--border-highlight);
-        border-radius: 12px;
-        padding: 20px;
-        margin: 18px 0 22px 0;
-    }
-    .card-box p:last-child, .card-box ul:last-child {
-        margin-bottom: 0;
-    }
-    a {
-        color: var(--accent-cyan);
-        text-decoration: none;
-        transition: color 0.2s;
-    }
-    a:hover {
-        text-decoration: underline;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 16px 0 24px 0;
-        font-size: 13.5px;
-    }
-    th, td {
-        padding: 10px 14px;
-        border: 1px solid var(--border-color);
-        text-align: left;
-    }
-    th {
-        background: var(--bg-card);
-        color: #FFFFFF;
-        font-weight: 700;
-    }
-    td {
-        color: var(--text-secondary);
-    }
-    td strong {
-        color: var(--text-primary);
-    }
-    .nav-bar {
-        margin-top: 36px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border-color);
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 12px;
-        font-size: 14px;
-    }
-    footer {
-        margin-top: 32px;
-        text-align: center;
-        font-size: 12px;
-        color: var(--text-muted);
-    }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #090D16;
+            color: #E0E2EC;
+            margin: 0;
+            padding: 32px 16px;
+            line-height: 1.65;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 760px;
+            margin: 0 auto;
+            background: #111827;
+            padding: 36px 32px;
+            border-radius: 20px;
+            border: 1px solid #1F2937;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+            word-break: break-word;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34D399;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        h1, h2, h3 { color: #00E5FF; line-height: 1.3; }
+        h1 { font-size: clamp(22px, 5.5vw, 28px); margin-bottom: 8px; }
+        h2 { font-size: 18px; margin: 24px 0 10px 0; }
+        h3 { font-size: 15px; margin: 18px 0 8px 0; }
+        p, li { color: #94A3B8; font-size: 14px; line-height: 1.65; }
+        p { margin-bottom: 12px; }
+        ul, ol { margin: 0 0 16px 20px; }
+        li { margin-bottom: 6px; }
+        a { color: #00E5FF; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        hr { border: 0; border-top: 1px solid #1F2937; margin: 20px 0; }
+        .nav-back {
+            margin-top: 32px;
+            padding-top: 18px;
+            border-top: 1px solid #1F2937;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-size: 13.5px;
+        }
+        @media (max-width: 640px) {
+            body { padding: 12px 8px; }
+            .container { padding: 20px 14px; border-radius: 14px; }
+            h1 { font-size: 20px; }
+            h2 { font-size: 16px; }
+            h3 { font-size: 14.5px; }
+            p, li { font-size: 13.5px; }
+            .nav-back { flex-direction: column; text-align: center; gap: 8px; }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="index.html" class="brand-link">&larr; Back to SizeVault: Family Clothing & Shoe Size Guide Overview</a>
-        <div class="badge-row">
-            <span class="badge badge-verified">✓ Google Play Data Safety Certified</span>
-            <span class="badge badge-cyan">✓ Google AdMob Partner Disclosures</span>
-            <span class="badge badge-indigo">✓ 100% On-Device Local Sandbox</span>
-        </div>
+        <span class="badge">✓ Google Play Data Safety Certified</span>
         <h1>Privacy Policy</h1>
-        <p class="app-title-tag">SizeVault: Family Clothing & Shoe Size Guide</p>
-        <p class="meta-date">Category: Lifestyle & Family &bull; Effective Date: October 2, 2026 &bull; Last Updated: October 9, 2026</p>
+        <p><strong>SizeVault: Family Size Tracker</strong></p>
+        <p><em>Effective Date: October 2, 2026 &bull; Developer: Eliakim Rosil</em></p>
         <hr>
-
-        <h2>1. Introduction &amp; Application Scope</h2>
-        <p>This Privacy Policy applies to the Android mobile application <strong>SizeVault: Family Clothing & Shoe Size Guide</strong> (the "Application"), developed and published by <strong>Eliakim Rosil</strong> ("we", "us", or "our") under the <strong>KimRosil App Studio</strong> portfolio (<a href="https://apps.kimrosil.com">https://apps.kimrosil.com</a>).</p>
-        <p>The Application is designed as a standalone, offline-first mobile utility: <em>The instant pocket size guide for parents, spouses, and gift shoppers browsing sales and thrift stores.</em></p>
-        <p>This policy details how data is handled strictly on your Android device and outlines our adherence to Google Play Store Data Safety and Google AdMob monetization policies.</p>
-
-        <h2>2. Offline-First Architecture &amp; Local Device Storage</h2>
-        <div class="card-box">
-            <p><strong>Zero Server Data Collection:</strong> We do NOT operate, maintain, or communicate with any remote developer servers or databases to harvest, store, or transmit your personal data.</p>
+        <h1>Privacy Policy for SizeVault: Family Clothing & Shoe Size Guide</h1>
+<p><em>Last Updated: October 9, 2026</em></p>
+<p>This privacy policy applies to the Android mobile application <strong>SizeVault: Family Clothing & Shoe Size Guide</strong> (the "Application"), developed and published by Eliakim Rosil ("we", "us", or "our") under the KimRosil App Studio developer portfolio (https://apps.kimrosil.com).</p>
+<p>The Application is distributed via the Google Play Store, official APK releases, and https://apps.kimrosil.com/size-vault-family-clothing/.</p>
+<hr>
+<h3>1. Offline-First Architecture & Sandboxed Local Storage</h3>
+<p>The Application is engineered as an offline-first mobile utility: <em>The instant pocket size guide for parents, spouses, and gift shoppers browsing sales and thrift stores.</em></p>
+<ul>
+<li><strong>Personal Information:</strong> We do NOT collect, harvest, store, or transmit personal identity details (such as names, email addresses, phone numbers, contacts, or location history) to any proprietary developer servers.</li>
+<li><strong>Sandboxed Local Storage:</strong> Any user inputs, notes, item records, history logs, or user preferences are stored strictly on your local device within Android's sandboxed storage (`SharedPreferences`, Room, or local SQLite database). Your personal application records never leave your physical device.</li>
+<li><strong>Data Deletion:</strong> Uninstalling the Application or clearing its storage via Android Settings (`Settings > Apps > SizeVault: Family Clothing & Shoe Size Guide > Storage > Clear Data`) permanently and irreversibly deletes all locally saved records.</li>
+</ul>
+<h3>2. Advertising & Monetization (Google AdMob)</h3>
+<p>To support ongoing independent development and keep our utility applications free to users, the Application may display advertisements served by <strong>Google AdMob</strong> (a service provided by Google LLC).</p>
+<p>When advertisements are displayed, the Google Mobile Ads SDK may automatically process certain pseudonymous device information strictly for advertising delivery, contextual ad frequency capping, fraud prevention, and performance diagnostics:</p>
+<ul>
+<li><strong>Device & Advertising Identifiers:</strong> Google Advertising ID (AAID / GAID) for ad attribution and frequency capping.</li>
+<li><strong>Approximate Location:</strong> General, non-precise location inferred from your IP address (country or city level) to serve regionally relevant ads.</li>
+<li><strong>Diagnostics & SDK Performance:</strong> Ad interaction events, crash diagnostics, and device characteristics (e.g. device model, Android OS version).</li>
+</ul>
+<p>For more information on how Google processes and protects advertising data, please review:</p>
+<ul>
+<li><strong>Google Privacy Policy:</strong> https://policies.google.com/privacy</li>
+<li><strong>Google Advertising Technologies:</strong> https://policies.google.com/technologies/ads</li>
+<li><strong>How Google uses information from sites or apps that use our services:</strong> https://policies.google.com/technologies/partner-sites</li>
+</ul>
+<p>#### User Controls & Opting Out of Personalized Ads</p>
+<p>You can reset or delete your Google Advertising ID or opt out of personalized advertisements at any time directly through your Android device settings:</p>
+<p>1. Open Android <strong>Settings</strong>.</p>
+<p>2. Go to <strong>Google</strong> → <strong>Ads</strong> (or <strong>Security & Privacy</strong> → <strong>Privacy</strong> → <strong>Ads</strong> on Android 12+).</p>
+<p>3. Tap <strong>Delete advertising ID</strong> or enable <strong>Opt out of Ads Personalization</strong>.</p>
+<h3>3. Permissions & Device Access</h3>
+<p>The Application requests only minimal, standard Android platform permissions strictly required to perform local utility operations:</p>
+<ul>
+<li><strong>`POST_NOTIFICATIONS`</strong>: Display on-device alarm notifications and timer countdown alerts when timers expire. No alert content is transmitted remotely.</li>
+<li><strong>`VIBRATE`</strong>: Provide tactile haptic alarms and cue alerts upon timer completion.</li>
+</ul>
+<p>Any requested device permissions are executed strictly on-device to power the requested utility features. The Application never sells, brokers, or exfiltrates permission-derived data.</p>
+<h3>4. Children's Privacy (COPPA & Families Compliance)</h3>
+<p>The Application is designed as a general-audience utility and is not directed at children under the age of 13 (or under 16 in the European Union). We do not knowingly collect personal information from children. If you believe personal data has inadvertently been processed, please contact us immediately so we can promptly address the matter.</p>
+<h3>5. Master Privacy Policy & Developer Profile</h3>
+<p>This privacy policy is part of the unified KimRosil App Studio developer portfolio. For our developer-wide data safety commitments, please visit:</p>
+<ul>
+<li><strong>Master Developer Privacy Policy:</strong> https://apps.kimrosil.com/privacy.html</li>
+<li><strong>Official Showcase:</strong> https://apps.kimrosil.com/size-vault-family-clothing/</li>
+</ul>
+<h3>6. Contact Information</h3>
+<p>If you have any questions, inquiries, or support requests regarding this Privacy Policy or your data rights, please contact:</p>
+<ul>
+<li><strong>Developer:</strong> Eliakim Rosil</li>
+<li><strong>Email:</strong> eliakimrosil@gmail.com</li>
+<li><strong>Website:</strong> https://apps.kimrosil.com</li>
+<li><strong>Project Repository:</strong> https://github.com/eliakimrosil/kimrosil-app-studio</li>
+</ul>
+        <div class="nav-back">
+            <a href="index.html">← Back to App Overview</a>
+            <a href="../privacy.html">Master Developer Privacy Policy →</a>
         </div>
-        <ul>
-            <li><strong>Local Sandboxing:</strong> All application inputs, timer logs, calculations, user notes, and configuration settings are stored exclusively on your local device in Android's sandboxed storage (<code>SharedPreferences</code> or local SQLite database).</li>
-            <li><strong>Data Ownership:</strong> Your personal data never leaves your device. We do not track, profile, broker, or monetize your personal user records.</li>
-            <li><strong>Data Deletion:</strong> Uninstalling the Application or clearing its storage in Android Settings (<strong>Settings</strong> &rarr; <strong>Apps</strong> &rarr; <strong>SizeVault: Family Clothing & Shoe Size Guide</strong> &rarr; <strong>Storage &amp; Cache</strong> &rarr; <strong>Clear Storage</strong>) permanently and irreversibly deletes 100% of local application data.</li>
-        </ul>
-
-        <h2>3. Third-Party Advertising &amp; Monetization (Google AdMob)</h2>
-        <p>To support ongoing independent development and keep this utility completely free of charge, the Application may display digital advertisements served by <strong>Google AdMob</strong> (a service provided by Google LLC).</p>
-        
-        <div class="card-box">
-            <p><strong>Google Mobile Ads SDK Data Collection:</strong></p>
-            <p>When advertisements are loaded, the Google Mobile Ads SDK (AdMob) may automatically collect and process certain pseudonymous device and diagnostic telemetry strictly for advertising delivery, contextual frequency capping, fraud prevention, and performance diagnostics:</p>
-            <ul>
-                <li><strong>Device &amp; Advertising Identifiers:</strong> Google Advertising ID (AAID / GAID) for ad attribution and ad personalization (when enabled).</li>
-                <li><strong>Approximate Location:</strong> Non-precise location inferred from your IP address (country or city level) to serve regionally relevant ads.</li>
-                <li><strong>Diagnostics &amp; SDK Performance:</strong> Ad interaction events, crash diagnostics, and device characteristics (e.g. device model, Android OS version).</li>
-            </ul>
-        </div>
-
-        <h3>Google Privacy Policies &amp; Terms</h3>
-        <p>For complete details on how Google processes and safeguards advertising data, please consult:</p>
-        <ul>
-            <li><a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a></li>
-            <li><a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">How Google Uses Information From Sites or Apps That Use Our Services</a></li>
-            <li><a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google Advertising Technologies</a></li>
-            <li><a href="../app-ads.txt">Developer Authorized Sellers (app-ads.txt)</a></li>
-        </ul>
-
-        <h3>User Controls &amp; Opting Out of Personalized Ads</h3>
-        <p>You can reset or delete your Google Advertising ID or opt out of personalized advertisements at any time directly through your Android device settings:</p>
-        <ol>
-            <li>Open Android <strong>Settings</strong>.</li>
-            <li>Go to <strong>Google</strong> &rarr; <strong>Ads</strong> (or <strong>Security &amp; Privacy</strong> &rarr; <strong>Privacy</strong> &rarr; <strong>Ads</strong> on Android 12+).</li>
-            <li>Tap <strong>Delete advertising ID</strong> or turn on <strong>Opt out of Ads Personalization</strong>.</li>
-        </ol>
-
-        <h2>4. Device Permissions Requested by SizeVault: Family Clothing & Shoe Size Guide</h2>
-        <p>The Application requests only the minimal platform permissions necessary to execute its specific offline utility features on your device:</p>
-        <table>
-            <thead>
-                <tr>
-                    <th>Permission</th>
-                    <th>Reason &amp; On-Device Processing Guarantee</th>
-                </tr>
-            </thead>
-            <tbody>
-
-            <tr>
-                <td><code>POST_NOTIFICATIONS</code></td>
-                <td>Display on-device alarm notifications and timer countdown alerts when timers expire. No alert content is transmitted remotely.</td>
-            </tr>
-        
-
-            <tr>
-                <td><code>VIBRATE</code></td>
-                <td>Provide tactile haptic alarms and cue alerts upon timer completion.</td>
-            </tr>
-        
-            </tbody>
-        </table>
-        <p>All permission-gated features are executed strictly on your local hardware. No camera feeds, sensor signals, or notification texts are ever uploaded to remote servers.</p>
-
-        <h2>5. Children's Privacy (COPPA &amp; Families Compliance)</h2>
-        <p>The Application is designed as a general-audience utility and is not directed at children under the age of 13 (or under 16 in the European Union). We do not knowingly collect personal information from children. If you believe personal data has inadvertently been processed, please contact us immediately at <a href="mailto:eliakimrosil@gmail.com">eliakimrosil@gmail.com</a>.</p>
-
-        <h2>6. Master Privacy Policy Reference</h2>
-        <p>This privacy policy is part of the unified <strong>KimRosil App Studio</strong> portfolio. For developer-wide commitments, legal disclosures, and data safety guarantees, please review our <a href="../privacy.html"><strong>Master Developer Privacy Policy</strong></a>.</p>
-
-        <h2>7. Contact Information</h2>
-        <div class="card-box">
-            <p><strong>Developer:</strong> Eliakim Rosil</p>
-            <p><strong>Email:</strong> <a href="mailto:eliakimrosil@gmail.com">eliakimrosil@gmail.com</a></p>
-            <p><strong>Official Developer Portal:</strong> <a href="https://apps.kimrosil.com">https://apps.kimrosil.com</a></p>
-            <p><strong>GitHub Portfolio:</strong> <a href="https://github.com/eliakimrosil/kimrosil-app-studio">https://github.com/eliakimrosil/kimrosil-app-studio</a></p>
-        </div>
-
-        <div class="nav-bar">
-            <a href="index.html">&larr; Back to App Overview</a>
-            <a href="../privacy.html">Developer Master Privacy Policy &rarr;</a>
-        </div>
-
-        <footer>
-            <p>&copy; 2026 Eliakim Rosil &bull; <a href="../index.html">KimRosil App Studio</a></p>
-        </footer>
     </div>
 </body>
 </html>
