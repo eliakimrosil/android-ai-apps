@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:android="http://schemas.android.com/apk/res/android" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#102016" />
+    <!-- Background Decor -->
+    
+        <!-- Ancient Forest Runic Circle -->
+        <path
+            stroke="#1B3827"
+            stroke-width="1.8"
+            d="M54,16a38,38 0 1 1 0,76a38,38 0 1 1 0,-76" />
+        <path
+            stroke="#244B34"
+            stroke-width="1.2"
+            d="M54,24a30,30 0 1 1 0,60a30,30 0 1 1 0,-60" />
+        <!-- Floating Forest Sparkles -->
+        <path
+            fill="#4ADE80"
+            d="M28,32a2,2 0 1 0 4,0a2,2 0 1 0 -4,0z M80,36a2.5,2.5 0 1 0 5,0a2.5,2.5 0 1 0 -5,0z M76,72a2,2 0 1 0 4,0a2,2 0 1 0 -4,0z" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Knight Shield: Polished Acorn Crest -->
+        <path
+            fill="#78350F"
+            stroke="#92400E"
+            stroke-width="1.2"
+            d="M38,48 c0,-8 7,-14 16,-14 c9,0 16,6 16,14 c0,14 -16,26 -16,26 c0,0 -16,-12 -16,-26 z" />
+        <!-- Acorn Shield Cap Crosshatch -->
+        <path
+            fill="#451A03"
+            stroke="#78350F"
+            stroke-width="1"
+            d="M38,48 c0,-8 7,-14 16,-14 c9,0 16,6 16,14 c0,2 -1,4 -2,5 c-4,-2 -9,-3 -14,-3 c-5,0 -11,1 -14,3 c-1,-1 -2,-3 -2,-5 z" />
+        <!-- Hero Leaf Sprout Plume on Top -->
+        <path
+            fill="#22C55E"
+            stroke="#16A34A"
+            stroke-width="1.2"
+            d="M54,34 c-4,-12 4,-18 10,-20 c-2,6 2,12 -1,16 c-2,3 -6,4 -9,4 z" />
+        <path
+            fill="#86EFAC"
+            d="M54,34 c-1,-7 3,-11 7,-13 c-1,4 1,8 -1,10 c-1,2 -4,3 -6,3 z" />
+        <!-- Crossed Golden Sunblossom Blade -->
+        <path
+            fill="#FBBF24"
+            stroke="#D97706"
+            stroke-width="1.2"
+            d="M66,28 L74,36 L48,62 L44,64 L42,60 L66,28 Z" />
+        <path
+            fill="#FEF3C7"
+            d="M68,30 L72,34 L50,56 L47,54 Z" />
+        <!-- Sword Hilt & Guard -->
+        <path
+            fill="#92400E"
+            d="M70,38 L76,32 L78,34 L72,40 Z" />
+        <path
+            fill="#451A03"
+            d="M74,30 L80,24 L82,26 L76,32 Z" />
+        <!-- Glistening Cyan Dewdrop Gem in Shield Center -->
+        <path
+            fill="#38BDF8"
+            d="M54,48 c0,0 -4,5 -4,8 a4,4 0 0 0 8,0 c0,-3 -4,-8 -4,-8 z" />
+        <path
+            fill="#E0F2FE"
+            d="M54,51 a1.5,1.5 0 1 0 3,0 a1.5,1.5 0 1 0 -3,0 z" />
+        
+</svg>
