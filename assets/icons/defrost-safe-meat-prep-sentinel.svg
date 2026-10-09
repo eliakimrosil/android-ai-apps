@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B1528" />
+    <!-- Background Decor -->
+    <path fill="#12233D" d="M54,16 A38,38 0 1,0 92,54 A38,38 0 0,0 54,16 Z" /><path fill="#193256" d="M54,22 A32,32 0 1,0 86,54 A32,32 0 0,0 54,22 Z" /><path fill="#0F2847" d="M24,76 L84,76 A4,4 0 0,1 88,80 L88,82 A6,6 0 0,1 82,88 L26,88 A6,6 0 0,1 20,82 L20,80 A4,4 0 0,1 24,76 Z" />
+    <!-- Foreground Iconography -->
+    <path fill="#00E5FF" android:fillAlpha="0.18" d="M54,25 L75,34 L75,54 C75,68 66,79 54,84 C42,79 33,68 33,54 L33,34 Z" /><path stroke="#38BDF8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M54,25 L75,34 L75,54 C75,68 66,79 54,84 C42,79 33,68 33,54 L33,34 Z" /><path fill="#E11D48" d="M46,45 C41,45 38,49 38,54 C38,62 46,67 55,67 C64,67 70,62 70,55 C70,49 64,45 57,45 C54,45 52,47 50,49 C48,46 47,45 46,45 Z" /><path fill="#FB7185" d="M47,47 C43.5,47 41,50 41,54 C41,59.5 47,63.5 54,63.5 C60.5,63.5 65,59.5 65,54.5 C65,50.5 60.5,47.5 55.5,47.5 C53.2,47.5 51.5,49 50,51 C48.8,48.2 47.8,47 47,47 Z" /><path fill="#FFF1F2" d="M45,53 A3,3 0 1,0 45,59 A3,3 0 1,0 45,53 Z" /><path stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" d="M54,28 L54,34 M51,31 L57,31" /><path stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" d="M70,39 L66,43 M66,39 L70,43" /><path fill="#34D399" d="M60,63 L64,67 L74,57 L72.5,55.5 L64,64 L61.5,61.5 Z" />
+</svg>

@@ -1,0 +1,58 @@
+name: 💡 Feature Request
+description: Propose an idea or enhancement for an existing KIM Android App.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: app
+    attributes:
+      label: Target Application
+      options:
+        - KIM Live Studio (kim-live-studio)
+        - DevSys Monitor (devsys-monitor)
+        - ScreenStream RTSP (screenstream-rtsp)
+        - Gemini Power Bridge (gemini-power-bridge)
+        - ClipScrub Private Share (clip-scrub-sanitize-share)
+        - DropScribe Audio (offline-audio-drop-transcribe)
+        - IronPulse Workout (workout-program-tracker)
+        - FastTrack Fasting (fast-track-intermittent-fasting-sentinel)
+        - PanFlip Sear Timer (pan-flip-sear-timer)
+        - ChillThaw Meat Defrost (defrost-safe-meat-prep-sentinel)
+        - RoastRest Meat Rest (roast-rest-meat-thermo-sentinel)
+        - ClampGuard Glue & Epoxy (glue-set-clamp-sentinel)
+        - CryoPulse Cold Plunge (steep-chill-ice-bath-timer)
+        - SteepPulse Tea & Coffee (steep-brew-tea-timer)
+        - SnoozeGuard Commute Vigil (snooze-guard-microsleep-commute)
+        - CycleGuard Laundry (laundry-cycle-sentinel)
+        - AuraFocus Pomodoro (aurafocus-minimalist-pomodoro-ambient-sound)
+        - MeterPulse Parking (tap-meter-parking-sentinel)
+        - StealthDrop Ephemeral Pad (stealth-drop-secret-pad)
+        - ParkPin Offline Anchor (park-pin-offline-spot-finder)
+        - ThawGuard Food Defrost (frost-thaw-prep-timer)
+        - TankPulse Fuel Tracker (offline-fuel-log-tracker)
+        - DoseGuard Med Sentinel (offline-prescription-pill-refill-sentinel)
+        - PH VAT Calculator (ph-vat-calculator)
+        - Other / Global
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your feature request related to a problem?
+      description: A clear description of the pain point you are facing.
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: Describe the proposed solution
+      description: A clear explanation of what you want to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: offline_impact
+    attributes:
+      label: Offline & Privacy Impact
+      description: How does this feature adhere to our zero-cloud, 100% offline-first standard?
+    validations:
+      required: false

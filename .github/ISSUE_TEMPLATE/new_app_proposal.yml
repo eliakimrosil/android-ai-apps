@@ -1,0 +1,47 @@
+name: 🚀 New App Proposal
+description: Propose an entirely new offline utility or sentinel app for the KIM Android Apps suite.
+title: "[Proposal]: "
+labels: ["proposal", "new-app"]
+body:
+  - type: input
+    id: app_name
+    attributes:
+      label: Proposed App Name & Working Slug
+      placeholder: "e.g. BatteryGuard: Battery Aging Sentinel (battery-guard-aging-sentinel)"
+    validations:
+      required: true
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Target Domain / Category
+      options:
+        - Broadcasting & Streaming
+        - System & Hardware Diagnostics
+        - Food & Culinary Sentinels
+        - Health & Fitness
+        - Daily Utilities & Tools
+        - Privacy & Security
+        - Finance & Productivity
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem & Use Case
+      description: What specific offline pain point does this app solve?
+    validations:
+      required: true
+  - type: textarea
+    id: bespoke_design
+    attributes:
+      label: Bespoke UI & Aesthetics Concept
+      description: Describe the domain-specific aesthetic (color tokens, controls, tactile HUD or cards).
+    validations:
+      required: true
+  - type: textarea
+    id: native_tech
+    attributes:
+      label: Android Native Architecture
+      description: Which Android APIs (e.g. Camera2, MediaCodec, JobScheduler, TileService) will be used?
+    validations:
+      required: true

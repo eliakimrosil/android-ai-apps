@@ -1,0 +1,46 @@
+name: Validate Catalog & Quality
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validate apps.json Schema & Icons
+        run: |
+          python -c "
+          import json, os, sys
+          
+          if not os.path.exists('apps.json'):
+              print('Error: apps.json missing')
+              sys.exit(1)
+              
+          with open('apps.json', 'r') as f:
+              data = json.load(f)
+              
+          print(f'Total applications registered: {len(data)}')
+          missing_icons = []
+          for item in data:
+              slug = item.get('slug')
+              icon_path = item.get('icon', f'assets/icons/{slug}.svg')
+              if not os.path.exists(icon_path):
+                  missing_icons.append((slug, icon_path))
+                  
+          if missing_icons:
+              print(f'Missing icons detected: {missing_icons}')
+              sys.exit(1)
+              
+          print('All application manifests and icons validated successfully!')
+          "

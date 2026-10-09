@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B1528" />
+    <!-- Background Decor -->
+    <path fill="#132342" d="M54,18 C73.88,18 90,34.12 90,54 C90,73.88 73.88,90 54,90 C34.12,90 18,73.88 18,54 C18,34.12 34.12,18 54,18 Z" /><path fill="#1D3557" d="M54,26 C69.46,26 82,38.54 82,54 C82,69.46 69.46,82 54,82 C38.54,82 26,69.46 26,54 C26,38.54 38.54,26 54,26 Z" /><path stroke="#2A4A7A" stroke-width="1.5" d="M24,54 L84,54 M54,24 L54,84" />
+    <!-- Foreground Iconography -->
+    <path fill="#1B3358" stroke="#4CC9F0" stroke-width="2.5" stroke-linejoin="round" d="M54,23 L79,34 C79,57 68,73 54,83 C40,73 29,57 29,34 Z" /><path stroke="#72EFDD" stroke-width="2.2" stroke-linecap="round" d="M38,51 C43,44 49,41 54,41 C59,41 65,44 70,51 C65,58 59,61 54,61 C49,61 43,58 38,51 Z" /><path fill="#4CC9F0" d="M54,46 C56.76,46 59,48.24 59,51 C59,53.76 56.76,56 54,56 C51.24,56 49,53.76 49,51 C49,48.24 51.24,46 54,46 Z" /><path fill="#FFFFFF" d="M56,48.5 C56,49.88 54.88,51 53.5,51 C52.12,51 51,49.88 51,48.5 C51,47.12 52.12,46 53.5,46 C54.88,46 56,47.12 56,48.5 Z" /><path fill="#F72585" d="M55.5,29 L48.5,42 L53.5,42 L52.5,50 L59.5,37 L54.5,37 Z" /><path stroke="#F72585" stroke-width="2" stroke-linecap="round" d="M33,40 C30,44 28,49 28,54 M80,54 C80,49 78,44 75,40" />
+</svg>

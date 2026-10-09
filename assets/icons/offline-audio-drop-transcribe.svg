@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B132B" />
+    <!-- Background Decor -->
+    
+        <!-- Elevated Studio Soundstage Backdrop -->
+        <path
+            fill="#1C2541"
+            d="M24,18h60a14,14 0 0 1 14,14v44a14,14 0 0 1 -14,14h-60a14,14 0 0 1 -14,-14v-44a14,14 0 0 1 14,-14z" />
+        <!-- Acoustic Concentric Audio Radii (Subtle Soundwaves) -->
+        <path
+            stroke="#3A506B"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            d="M22,54a32,32 0 0 1 64,0 M28,54a26,26 0 0 1 52,0" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Primary Sound Droplet Silhouette (Drop) -->
+        <path
+            fill="#4F46E5"
+            d="M54,20 C54,20 34,44 34,57 A20,20 0 0 0 74,57 C74,44 54,20 54,20 Z" />
+        <!-- Inner Droplet Gradient / Depth Core -->
+        <path
+            fill="#6366F1"
+            d="M54,25 C54,25 38,46 38,57 A16,16 0 0 0 70,57 C70,46 54,25 54,25 Z" />
+        <!-- Audio Waveform Equalizer Bars (Speech / Sound Input) -->
+        <path
+            fill="#FFFFFF"
+            d="M42,52a2,2 0 0 1 2,2v6a2,2 0 0 1 -4,0v-6a2,2 0 0 1 2,-2z M48,46a2,2 0 0 1 2,2v18a2,2 0 0 1 -4,0v-18a2,2 0 0 1 2,-2z M54,41a2,2 0 0 1 2,2v26a2,2 0 0 1 -4,0v-26a2,2 0 0 1 2,-2z M60,46a2,2 0 0 1 2,2v18a2,2 0 0 1 -4,0v-18a2,2 0 0 1 2,-2z M66,52a2,2 0 0 1 2,2v6a2,2 0 0 1 -4,0v-6a2,2 0 0 1 2,-2z" />
+        <!-- Scribe Transcription Text Lines (Speech-to-Text Output) -->
+        <path
+            fill="#38BDF8"
+            d="M32,80h44a2,2 0 0 1 2,2v0a2,2 0 0 1 -2,2h-44a2,2 0 0 1 -2,-2v0a2,2 0 0 1 2,-2z" />
+        <path
+            fill="#818CF8"
+            d="M38,86h32a2,2 0 0 1 2,2v0a2,2 0 0 1 -2,2h-32a2,2 0 0 1 -2,-2v0a2,2 0 0 1 2,-2z" />
+        <!-- Terminal Transcription Cursor -->
+        <path
+            fill="#F43F5E"
+            d="M73,86h3a1.5,1.5 0 0 1 1.5,1.5v1a1.5,1.5 0 0 1 -1.5,1.5h-3a1.5,1.5 0 0 1 -1.5,-1.5v-1a1.5,1.5 0 0 1 1.5,-1.5z" />
+        
+</svg>

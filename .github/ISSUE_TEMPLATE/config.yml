@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🌐 Web Showcase & Live App Store
+    url: https://eliakimrosil.github.io/kim-android-apps/
+    about: Browse and download all 28+ applications directly on the web.
+  - name: 🔒 Report a Security Vulnerability
+    url: mailto:eliakimrosil@gmail.com
+    about: Privately disclose sensitive security or privacy concerns.
+  - name: 📚 Architecture & Craft Guidelines
+    url: https://github.com/eliakimrosil/kim-android-apps/tree/main/docs/ARCHITECTURE.md
+    about: Read the engineering and bespoke craftsmanship principles.

@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="512" height="512">
+    <rect width="108" height="108" rx="24" fill="#0B111D" />
+    <!-- Background Decor -->
+    
+        <!-- Elevated Gauge Cluster Dial -->
+        <path
+            fill="#151F33"
+            d="M54,16a38,38 0 1 1 0,76a38,38 0 1 1 0,-76" />
+        <!-- Calibration Dial Tick Marks -->
+        <path
+            stroke="#253554"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            d="M30,34l4,4 M54,22v6 M78,34l-4,4" />
+        <!-- Gauge Outer Tonal Ring -->
+        <path
+            stroke="#1E2C47"
+            stroke-width="1.2"
+            d="M54,20a34,34 0 1 1 0,68a34,34 0 1 1 0,-68" />
+        
+    <!-- Foreground Iconography -->
+    
+        <!-- Fuel Pump Housing Body -->
+        <path
+            fill="#1E293B"
+            stroke="#334155"
+            stroke-width="1.5"
+            d="M36,28h28a4,4 0 0 1 4,4v46a4,4 0 0 1 -4,4h-28a4,4 0 0 1 -4,-4v-46a4,4 0 0 1 4,-4z" />
+        <!-- Digital LCD Screen -->
+        <path
+            fill="#0A0E17"
+            stroke="#F59E0B"
+            stroke-width="1"
+            d="M40,34h20a2,2 0 0 1 2,2v10a2,2 0 0 1 -2,2h-20a2,2 0 0 1 -2,-2v-10a2,2 0 0 1 2,-2z" />
+        <!-- Digital Readout Digits -->
+        <path
+            fill="#FBBF24"
+            d="M44,38h12v2h-12z M44,42h8v1.5h-8z" />
+        <!-- Flexible Fuel Hose -->
+        <path
+            stroke="#F59E0B"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            d="M68,38c6,0 12,5 12,12v14c0,4 -3,7 -7,7c-4,0 -7,-3 -7,-7v-8" />
+        <!-- Fuel Nozzle Handle & Tip -->
+        <path
+            fill="#FBBF24"
+            d="M65,46l6,-8l3,2l-4,8z" />
+        <path
+            stroke="#FBBF24"
+            stroke-width="2"
+            stroke-linecap="round"
+            d="M73,39l4,-5" />
+        <!-- Real-time Fuel Pulse ECG / Heartbeat -->
+        <path
+            stroke="#10B981"
+            stroke-width="2.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M38,64h6l3,-7l4,14l4,-10l3,3h6" />
+        <!-- Golden Fuel Droplet Accent Badge -->
+        <path
+            fill="#F59E0B"
+            d="M32,20c0,0 -7,8 -7,12a7,7 0 0 0 14,0c0,-4 -7,-12 -7,-12z" />
+        <path
+            fill="#FEF3C7"
+            d="M32,23c0,0 -4,5 -4,8a4,4 0 0 0 8,0c0,-3 -4,-8 -4,-8z" />
+        
+</svg>
