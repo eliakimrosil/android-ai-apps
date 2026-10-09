@@ -1,0 +1,1 @@
+Initial release of RoastRest v1.0.0. Features carryover resting calculations, meat cut presets, high-contrast kitchen controls, and Quick Settings tile integration.
