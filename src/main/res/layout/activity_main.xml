@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/background_dark">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Header Bar & Dynamic Theme Controls -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvAppTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CLAMPGUARD"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:letterSpacing="0.08"
+                    android:textColor="#E5A65E" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Glue &amp; Epoxy Cure Sentinel"
+                    android:textSize="12sp"
+                    android:textColor="#A0A0A0" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnThemeToggle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Theme: Auto"
+                android:textSize="12sp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:backgroundTint="#2D3238"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <!-- Project Definition Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E232A"
+            android:padding="14dp"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ASSEMBLY SPECIFICATION"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#E5A65E"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="6dp" />
+
+            <EditText
+                android:id="@+id/etProjectName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Project Name (e.g., Walnut Table Top)"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#70757E"
+                android:background="#12161B"
+                android:padding="10dp"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <!-- Advisory Status Banner -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#282218"
+            android:padding="12dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:id="@+id/tvAdvisoryBadge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="OPTIMAL BOND CLIMATE"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#FFA726" />
+
+            <TextView
+                android:id="@+id/tvAdvisoryText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Polymer resin chain stability verified. Minimal clamp creep projected."
+                android:textSize="12sp"
+                android:textColor="#DFDFDF"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Calculated Readout Gauges -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:layout_marginBottom="14dp">
+
+            <!-- Safe Clamp Time -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#1E232A"
+                android:padding="10dp"
+                android:layout_marginEnd="4dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CLAMP TIME"
+                    android:textSize="10sp"
+                    android:textColor="#A0A0A0" />
+
+                <TextView
+                    android:id="@+id/tvCalcClampTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="35 Min"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#4CAF50"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Full Cure Time -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#1E232A"
+                android:padding="10dp"
+                android:layout_marginEnd="4dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="FULL CURE"
+                    android:textSize="10sp"
+                    android:textColor="#A0A0A0" />
+
+                <TextView
+                    android:id="@+id/tvCalcCureTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="24 Hours"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#64B5F6"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+
+            <!-- Open Working Time -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="#1E232A"
+                android:padding="10dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="OPEN TIME"
+                    android:textSize="10sp"
+                    android:textColor="#A0A0A0" />
+
+                <TextView
+                    android:id="@+id/tvCalcOpenTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8 Min"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFB74D"
+                    android:layout_marginTop="2dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Live Sentinel Countdown Timer Card -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#161B22"
+            android:padding="16dp"
+            android:layout_marginBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ACTIVE SENTINEL COUNTDOWN"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#64B5F6"
+                android:letterSpacing="0.05" />
+
+            <TextView
+                android:id="@+id/tvTimerCountdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="00:00:00"
+                android:textSize="36sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:fontFamily="monospace"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="6dp" />
+
+            <ProgressBar
+                android:id="@+id/pbTimerProgress"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="#4CAF50"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:id="@+id/tvTimerStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STANDBY • NO ACTIVE CLAMP SESSION"
+                android:textSize="11sp"
+                android:textColor="#9E9E9E"
+                android:layout_gravity="center"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Timer Action Buttons -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnStartTimer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ENGAGE"
+                    android:backgroundTint="#2E7D32"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnPauseTimer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="PAUSE"
+                    android:enabled="false"
+                    android:backgroundTint="#F57F17"
+                    android:textColor="#FFFFFF"
+                    android:layout_marginEnd="4dp" />
+
+                <Button
+                    android:id="@+id/btnResetTimer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="RESET"
+                    android:backgroundTint="#424242"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Shop Environmental Telemetry (Sliders) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E232A"
+            android:padding="14dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SHOP ENVIRONMENTAL TELEMETRY"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#E5A65E"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Temperature Slider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ambient Temperature:"
+                    android:textSize="13sp"
+                    android:textColor="#D0D0D0" />
+
+                <TextView
+                    android:id="@+id/tvTempDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="68°F (20°C)"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFA726" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbTemperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="70"
+                android:progress="33"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Relative Humidity Slider -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Relative Humidity:"
+                    android:textSize="13sp"
+                    android:textColor="#D0D0D0" />
+
+                <TextView
+                    android:id="@+id/tvHumidityDisplay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="50% RH"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#42A5F5" />
+            </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/sbHumidity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="50"
+                android:layout_marginTop="4dp" />
+        </LinearLayout>
+
+        <!-- Adhesive Selection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E232A"
+            android:padding="14dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ADHESIVE FORMULATION"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#E5A65E"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <RadioGroup
+                android:id="@+id/rgGlueType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbGlue0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="PVA Type I (Titebond III Ultimate / Waterproof)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGlue1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PVA Type II (Titebond II Premium / Shop Standard)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGlue2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Standard PVA (Titebond Original / White PVA)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGlue3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Standard 2-Part Epoxy (Slow Cure Marine Resin)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGlue4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5-Minute Quick Epoxy (Rapid Fixture)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGlue5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Polyurethane Glue (Gorilla Poly / Moisture Reactive)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbGlue6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Liquid Hide Glue (Reversible / Antiques)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Wood Species Porosity Selection -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E232A"
+            android:padding="14dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SUBSTRATE ABSORPTION &amp; SPECIES DENSITY"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#E5A65E"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <RadioGroup
+                android:id="@+id/rgWoodType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbWood0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dense / Oily Hardwood (Hard Maple, White Oak, Ipe, Teak)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbWood1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Medium Hardwood (Black Walnut, Cherry, Mahogany)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbWood2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Porous / Softwood (Eastern White Pine, Poplar, Cedar)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Joint Geometry & Mechanical Stress -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#1E232A"
+            android:padding="14dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="JOINT GEOMETRY &amp; MECHANICAL STRESS"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#E5A65E"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <RadioGroup
+                android:id="@+id/rgJointStress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/rbJoint0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Edge-to-Edge Panel Glue-Up (Minimal Spring-Back Stress)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbJoint1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Face Lamination / Bent-Lamination (Moderate Radial Spring)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+
+                <RadioButton
+                    android:id="@+id/rbJoint2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Structural Joinery / High Tension (Mortise &amp; Tenon, Scarf)"
+                    android:textColor="#E0E0E0"
+                    android:textSize="13sp" />
+            </RadioGroup>
+        </LinearLayout>
+
+        <!-- Batch Logging & Export Actions -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <Button
+                android:id="@+id/btnLogBatch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="LOG BATCH"
+                android:backgroundTint="#3E2723"
+                android:textColor="#FFCC80"
+                android:layout_marginEnd="6dp" />
+
+            <Button
+                android:id="@+id/btnShareTelemetry"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="EXPORT REPORT"
+                android:backgroundTint="#263238"
+                android:textColor="#80D8FF" />
+        </LinearLayout>
+
+        <!-- Audit Log History Container -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#161B22"
+            android:padding="14dp"
+            android:layout_marginBottom="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PERSISTENT SHOP AUDIT HISTORY"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:textColor="#A0A0A0"
+                android:letterSpacing="0.05"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:id="@+id/llHistoryContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

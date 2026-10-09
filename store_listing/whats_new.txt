@@ -1,0 +1,5 @@
+Initial release of ClampGuard v1.0.0.
+- Added temperature-adjusted cure calculation for PVA, polyurethane, and epoxy.
+- Added Quick Settings Tile for one-tap timer initiation.
+- Added lock screen chronometer notification support.
+- Built with full offline support and zero account requirement.
