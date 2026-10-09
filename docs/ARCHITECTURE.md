@@ -1,14 +1,14 @@
-# KIM Android Apps Architecture & Engineering Principles
+# KimRosil App Studio Architecture & Engineering Principles
 
-This document details the architectural decisions, design patterns, and engineering standards governing all applications within the **KIM Android Apps** ecosystem.
+This document details the architectural decisions, design patterns, and engineering standards governing all applications within the **KimRosil App Studio** ecosystem.
 
 ---
 
 ## 🏗️ 1. Zero-Bloat Pure Native Stack
 
-Modern mobile app development has become saturated with bloated runtimes, heavy multiplatform wrappers, and analytics spyware. KIM Android Apps rejects this bloat in favor of **pure native Android framework programming**:
+Modern mobile app development has become saturated with bloated runtimes, heavy multiplatform wrappers, and analytics spyware. KimRosil App Studio rejects this bloat in favor of **pure native Android framework programming**:
 
-| Metric | KIM Android Apps | Typical Modern App | Advantage |
+| Metric | KimRosil App Studio | Typical Modern App | Advantage |
 | :--- | :--- | :--- | :--- |
 | **APK Binary Size** | **350 KB - 2.5 MB** | 40 MB - 120 MB | **95%+ smaller download & storage** |
 | **Cold Launch Time** | **< 80 ms** | 800 ms - 2500 ms | **Instant interaction** |

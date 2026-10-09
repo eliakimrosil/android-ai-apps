@@ -1,20 +1,20 @@
 # Repository Architecture & Distribution Model
 
-The **kim-android-apps** repository serves as the **Official Public Distribution Hub & Showcase** for the Kim Android Apps ecosystem.
+The **kimrosil-app-studio** repository serves as the **Official Public Distribution Hub & Showcase** for the KimRosil App Studio ecosystem.
 
 ---
 
 ## 🏛️ Architecture Overview
 
 ```
-                                      kim-android-apps (Public Hub)
+                                      kimrosil-app-studio (Public Hub)
                                             |
          +----------------------------------+----------------------------------+
          |                                                                     |
      [ main ]                                                             [ gh-pages ]
  Public Showcase & Docs                                               Public Web Store Portal
  - Master README                                                      - eliakimrosil.github.io
- - apps.json Catalog                                                    /kim-android-apps/
+ - apps.json Catalog                                                    /kimrosil-app-studio/
  - assets/icons/                                                      - App Landing Pages
  - Proprietary Freeware EULA                                          - Privacy Policies
  - Issue & Feature Tracker                                            - 1-Tap APK Downloads
@@ -44,4 +44,4 @@ Every application release binary is published to GitHub Releases under an immuta
   - `v1.0.0-defrost-safe-meat-prep-sentinel`
   - `v1.0.0-glue-set-clamp-sentinel`
 - **Release Assets**: Direct CDN download URLs in the format:
-  `https://github.com/eliakimrosil/kim-android-apps/releases/download/v<version>-<slug>/<slug>.apk`
+  `https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v<version>-<slug>/<slug>.apk`

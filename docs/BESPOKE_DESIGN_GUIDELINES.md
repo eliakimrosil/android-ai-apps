@@ -1,12 +1,12 @@
 # Bespoke App Design & Adaptive Icon Standards
 
-This specification outlines the visual craft standards for all applications created or maintained within the **KIM Android Apps** suite.
+This specification outlines the visual craft standards for all applications created or maintained within the **KimRosil App Studio** suite.
 
 ---
 
 ## 🎨 Beyond Cookie-Cutter Templates
 
-Generic Android apps often suffer from monotone, interchangeable designs with pastel pill buttons and flat grey cards. In KIM Android Apps, every app is designed with **bespoke, domain-tailored craftsmanship**:
+Generic Android apps often suffer from monotone, interchangeable designs with pastel pill buttons and flat grey cards. In KimRosil App Studio, every app is designed with **bespoke, domain-tailored craftsmanship**:
 
 ### Aesthetic Archetypes by Domain
 
