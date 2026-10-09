@@ -362,5 +362,18 @@
     "landing_page": "https://apps.kimrosil.com/workout-program-tracker/",
     "privacy_policy": "https://apps.kimrosil.com/workout-program-tracker/privacy.html",
     "icon": "assets/icons/workout-program-tracker.svg"
+  },
+  {
+    "slug": "sourdough-rise-ferment-sentinel",
+    "title": "CrumbWatch: Sourdough Ferment Sentinel",
+    "category": "Food & Drink / Utilities",
+    "tagline": "Offline sourdough proofing timer, stretch calculator, and fermentation tracker.",
+    "status": "BUILT",
+    "branch": "app/sourdough-rise-ferment-sentinel",
+    "tag": "v1.0.0-sourdough-rise-ferment-sentinel",
+    "apk_url": "https://github.com/eliakimrosil/kim-android-apps/releases/download/v1.0.0-sourdough-rise-ferment-sentinel/sourdough-rise-ferment-sentinel.apk",
+    "landing_page": "https://apps.kimrosil.com/sourdough-rise-ferment-sentinel/",
+    "privacy_policy": "https://apps.kimrosil.com/sourdough-rise-ferment-sentinel/privacy.html",
+    "icon": "assets/icons/sourdough-rise-ferment-sentinel.svg"
   }
 ]

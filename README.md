@@ -26,7 +26,7 @@
 
 ## ⚡ Executive Summary
 
-**KIM Android Apps** is a curated suite of **28+ bespoke, privacy-first, ultra-lightweight Android applications**. Every utility is built natively using pure Android SDK 33 framework components (**Java + XML**) without heavyweight third-party runtime bloat, analytics spyware, or cloud lock-in.
+**KIM Android Apps** is a curated suite of **29+ bespoke, privacy-first, ultra-lightweight Android applications**. Every utility is built natively using pure Android SDK 33 framework components (**Java + XML**) without heavyweight third-party runtime bloat, analytics spyware, or cloud lock-in.
 
 This repository serves as the **Official Public Distribution Hub, Release Showcase, and Issue Tracker** for the ecosystem. All applications are distributed as **free-to-use proprietary freeware binaries** hosted globally via GitHub Releases CDN and GitHub Pages.
 
@@ -94,6 +94,7 @@ Explore the full directory of applications across 7 core functional domains:
 | <img src="assets/icons/pan-flip-sear-timer.svg" width="48" height="48"> | **PanFlip**<br>`pan-flip-sear-timer` | `v1.0.0` | **Kitchen Sear &amp; Flip Sentinel**<br>• Hands-free pacing timer for perfect crusts and steaks<br>• High-contrast ring visible across the kitchen<br>• Quick Settings 1-tap start for busy home cooks | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kim-android-apps/releases/download/v1.0.0-pan-flip-sear-timer/pan-flip-sear-timer.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/pan-flip-sear-timer/) |
 | <img src="assets/icons/steep-brew-tea-timer.svg" width="48" height="48"> | **SteepPulse**<br>`steep-brew-tea-timer` | `v1.0.0` | **Multi-Infusion Tea &amp; Coffee Sentinel**<br>• Gongfu tea multi-infusion stepped stopwatch<br>• Specialty pour-over coffee bloom pacing<br>• Customizable water temp and leaf ratio presets | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kim-android-apps/releases/download/v1.0.0-steep-brew-tea-timer/steep-brew-tea-timer.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/steep-brew-tea-timer/) |
 | <img src="assets/icons/frost-thaw-prep-timer.svg" width="48" height="48"> | **ThawGuard**<br>`frost-thaw-prep-timer` | `v1.0.0` | **Offline Food Defrost Sentinel**<br>• Precision weight-based thaw estimation<br>• Danger zone temperature alert warnings<br>• Reliable offline alarms via Android AlarmManager | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kim-android-apps/releases/download/v1.0.0-frost-thaw-prep-timer/frost-thaw-prep-timer.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/frost-thaw-prep-timer/) |
+| <img src="assets/icons/sourdough-rise-ferment-sentinel.svg" width="48" height="48"> | **CrumbWatch**<br>`sourdough-rise-ferment-sentinel` | `v1.0.0` | **Sourdough Fermentation Sentinel**<br>• Ambient dough rise and stretch/fold timer<br>• Baker's percentage and hydration calculator<br>• Reliable offline alarms via Android AlarmManager | [🌐 Web Page](https://apps.kimrosil.com/sourdough-rise-ferment-sentinel/) |
 
 ---
 
@@ -153,14 +154,15 @@ adb install -r <app-name>.apk
 
 ---
 
-## 🔒 Privacy & Security Charter
+## 🔒 Privacy & Data Safety Charter
 
 We believe that basic mobile utilities should respect user sovereignty:
 
-- **100% Offline by Default**: Applications do not phone home.
-- **No Third-Party Analytics**: Zero Google Firebase, zero Facebook Graph, zero AppsFlyer.
-- **Zero Ads**: No interstitial ads, no banner clutter, no sponsored tracking SDKs.
-- **Local Storage Only**: App configuration and state are stored strictly within the app's sandboxed storage.
+- **100% Offline-First Core**: Application utility computations, user records, and databases operate strictly on your device.
+- **Zero Proprietary Server Tracking**: We do not maintain remote user tracking databases or harvest personal information.
+- **Local Sandboxed Storage Only**: User configuration, files, logs, and state are stored strictly within Android's private app sandbox.
+- **Master Developer Privacy Policy**: For comprehensive Google Play Data Safety declarations and AdMob partner disclosures, visit the **[Master Developer Privacy Policy](https://apps.kimrosil.com/privacy.html)**.
+- **Google AdMob Authorized Sellers**: AdMob publisher verification is maintained at **[app-ads.txt](https://apps.kimrosil.com/app-ads.txt)**.
 
 For detailed security policies or to report a vulnerability, review our [Security Charter](SECURITY.md).
 
