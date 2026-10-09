@@ -1,0 +1,4 @@
+# Google AdMob Authorized Digital Sellers (app-ads.txt)
+# Developer Portal: https://apps.kimrosil.com
+# Replace pub-XXXXXXXXXXXXXXXX with your actual Google AdMob Publisher ID from your AdMob Dashboard:
+google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0
