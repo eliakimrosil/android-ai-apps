@@ -202,10 +202,10 @@
     "status": "BUILT",
     "branch": "app/kim-live-studio",
     "tag": "v1.2.0-kim-live-studio",
-    "apk_url": "https://github.com/eliakimrosil/kim-android-apps/releases/download/v1.2.0-kim-live-studio/kim-live-studio.apk",
+    "apk_url": "https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.2.0-kim-live-studio/kr-live-studio.apk",
     "landing_page": "https://apps.kimrosil.com/kim-live-studio/",
     "privacy_policy": "https://apps.kimrosil.com/kim-live-studio/privacy.html",
-    "icon": "assets/icons/kim-live-studio.svg"
+    "icon": "assets/icons/kr-live-studio.svg"
   },
   {
     "slug": "park-pin-offline-spot-finder",
