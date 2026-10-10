@@ -1,6 +1,6 @@
-# KIM Live Studio
+# KR Live Studio
 
-**KIM Live Studio** is a high-performance, studio-grade Android live streaming application engineered for mobile creators, streamers, and presenters. Broadcast your screen, camera overlay, and microphone audio directly to any standard RTMP or RTMPS server with zero third-party intermediaries.
+**KR Live Studio** is a high-performance, studio-grade Android live streaming application engineered for mobile creators, streamers, and presenters. Broadcast your screen, camera overlay, and microphone audio directly to any standard RTMP or RTMPS server with zero third-party intermediaries.
 
 ---
 

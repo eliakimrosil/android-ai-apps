@@ -1,7 +1,7 @@
-KIM Live Studio delivers direct live broadcasting from your Android device. Designed for content creators, mobile gamers, and live presenters, KIM Live Studio enables you to stream your display, camera overlay, and microphone audio directly to standard RTMP and RTMPS endpoints.
+KR Live Studio delivers direct live broadcasting from your Android device. Designed for content creators, mobile gamers, and live presenters, KR Live Studio enables you to stream your display, camera overlay, and microphone audio directly to standard RTMP and RTMPS endpoints.
 
 Direct Ingest Architecture
-KIM Live Studio connects straight to your specified streaming endpoint using hardware-accelerated MediaCodec H.264 video encoding and MediaProjection capture. Because streams transmit directly between your device and your chosen ingest server without third-party cloud intermediaries or relay proxies, your transmission latency is minimized and your broadcast credentials remain secure.
+KR Live Studio connects straight to your specified streaming endpoint using hardware-accelerated MediaCodec H.264 video encoding and MediaProjection capture. Because streams transmit directly between your device and your chosen ingest server without third-party cloud intermediaries or relay proxies, your transmission latency is minimized and your broadcast credentials remain secure.
 
 Core Features:
 • Hardware Video Encoding: MediaCodec H.264/AVC processing engineered for efficient real-time compression and battery balance.

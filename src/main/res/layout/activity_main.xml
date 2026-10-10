@@ -43,7 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:letterSpacing="0.04"
-                    android:text="KIM LIVE STUDIO"
+                    android:text="KR LIVE STUDIO"
                     android:textColor="@color/studio_text_primary"
                     android:textSize="18sp"
                     android:textStyle="bold" />

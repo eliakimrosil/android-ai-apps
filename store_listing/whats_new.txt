@@ -1,4 +1,4 @@
-Initial release of KIM Live Studio (v1.0.0).
+Initial release of KR Live Studio (v1.0.0).
 - Direct RTMP and RTMPS hardware-accelerated H.264 mobile broadcasting.
 - Configurable floating camera overlay with front/rear camera switching.
 - High-fidelity microphone capture with real-time VU telemetry.

@@ -91,6 +91,12 @@ task assembleDebug {
     }
 }
 
+task assembleRelease {
+    description = 'Builds release APK (alias for assembleDebug)'
+    group = 'build'
+    dependsOn assembleDebug
+}
+
 task installDebug(type: Exec) {
     description = 'Installs the debug APK onto the connected Android device'
     group = 'install'

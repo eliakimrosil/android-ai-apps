@@ -1139,12 +1139,12 @@ public class MainActivity extends Activity {
 
             if (ACTION_START.equals(action)) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                    startForeground(101, buildNotification("KIM Live Studio is ON AIR..."),
+                    startForeground(101, buildNotification("KR Live Studio is ON AIR..."),
                             ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PROJECTION |
                             ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA |
                             ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE);
                 } else {
-                    startForeground(101, buildNotification("KIM Live Studio is ON AIR..."));
+                    startForeground(101, buildNotification("KR Live Studio is ON AIR..."));
                 }
                 startStreamingPipeline(intent);
             } else if (ACTION_STOP.equals(action)) {
@@ -1154,17 +1154,17 @@ public class MainActivity extends Activity {
                     stopSelf();
                 } else {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        startForeground(101, buildNotification("KIM Live Studio Facecam Active"),
+                        startForeground(101, buildNotification("KR Live Studio Facecam Active"),
                                 ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA);
                     }
                 }
             } else if (ACTION_START_FACECAM.equals(action)) {
                 if (!isStreaming) {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        startForeground(101, buildNotification("KIM Live Studio Facecam Active"),
+                        startForeground(101, buildNotification("KR Live Studio Facecam Active"),
                                 ServiceInfo.FOREGROUND_SERVICE_TYPE_CAMERA);
                     } else {
-                        startForeground(101, buildNotification("KIM Live Studio Facecam Active"));
+                        startForeground(101, buildNotification("KR Live Studio Facecam Active"));
                     }
                 }
                 FloatingCamManager.getInstance(this).showOverlay();
@@ -1182,7 +1182,7 @@ public class MainActivity extends Activity {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 NotificationChannel channel = new NotificationChannel(
                         CHANNEL_ID,
-                        "KIM Live Studio Broadcast",
+                        "KR Live Studio Broadcast",
                         NotificationManager.IMPORTANCE_LOW
                 );
                 channel.setDescription("Shows active live streaming status & telemetry");
@@ -1212,7 +1212,7 @@ public class MainActivity extends Activity {
                 builder = new Notification.Builder(this);
             }
 
-            return builder.setContentTitle("KIM Live Studio")
+            return builder.setContentTitle("KR Live Studio")
                     .setContentText(contentText)
                     .setSmallIcon(android.R.drawable.presence_video_online)
                     .setContentIntent(pendingIntent)

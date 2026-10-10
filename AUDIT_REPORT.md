@@ -1,4 +1,4 @@
-# 🔍 Product Quality & UX Audit Report: KIM Live Studio
+# 🔍 Product Quality & UX Audit Report: KR Live Studio
 *Generated on 2026-10-03 12:42:00 by Autonomous ADB Auditor Agent*
 
 ---
