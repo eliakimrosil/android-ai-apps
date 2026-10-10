@@ -407,5 +407,21 @@
       "Zero Tracking",
       "Pure Native ARM64"
     ]
+  },
+  {
+    "slug": "sprout-knight-rpg",
+    "title": "SproutKnight: Cozy Forest RPG & Magic Forge",
+    "category": "Games / RPG / Adventure",
+    "tagline": "Embark on a charming 2D action fighting RPG quest—upgrade acorn blades, walnut armor, and dewdrop magic at the cozy forge.",
+    "version": "v1.3.0",
+    "status": "BUILT",
+    "apk_url": "https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.3.0-sprout-knight-rpg/sprout-knight-rpg.apk",
+    "icon_path": "assets/icons/sprout-knight-rpg.svg",
+    "web_url": "https://apps.kimrosil.com/sprout-knight-rpg/",
+    "features": [
+      "Real-Time 60 FPS Action Fighting",
+      "3-Hit Combo & Precision Parry",
+      "100% Offline & Pure Native"
+    ]
   }
 ]
