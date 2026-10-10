@@ -6,7 +6,7 @@ All applications in the **KIM Android Apps** suite are engineered with an uncomp
 
 1. **Zero Cloud Telemetry**: None of our utilities include analytics SDKs, trackers, performance beacons, or ad networks (no Firebase Analytics, no Google AdMob, no Facebook SDK, no AppsFlyer).
 2. **Local Sandboxing**: All user data, configuration, timers, history, and tokens are stored strictly within the private Android application sandbox (`/data/data/<package>/`).
-3. **No Unnecessary Permissions**: Applications only declare the minimum runtime permissions essential for their specific core function. Offline utilities do not request or use the `android.permission.INTERNET` permission unless explicitly required for network broadcast (e.g., streaming in KIM Live Studio or ScreenStream RTSP directly to user-specified local/remote servers).
+3. **No Unnecessary Permissions**: Applications only declare the minimum runtime permissions essential for their specific core function. Offline utilities do not request or use the `android.permission.INTERNET` permission unless explicitly required for network broadcast (e.g., streaming in KR Live Studio or ScreenStream RTSP directly to user-specified local/remote servers).
 4. **Zero Account Lock-in**: No account creation, login, or cloud sync is ever required.
 
 ---

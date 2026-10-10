@@ -8,7 +8,7 @@ body:
     attributes:
       label: Target Application
       options:
-        - KIM Live Studio (kim-live-studio)
+        - KR Live Studio (kim-live-studio)
         - DevSys Monitor (devsys-monitor)
         - ScreenStream RTSP (screenstream-rtsp)
         - Gemini Power Bridge (gemini-power-bridge)

@@ -10,7 +10,7 @@ Generic Android apps often suffer from monotone, interchangeable designs with pa
 
 ### Aesthetic Archetypes by Domain
 
-1. **Broadcasting & Live Streaming (e.g. KIM Live Studio, ScreenStream RTSP)**
+1. **Broadcasting & Live Streaming (e.g. KR Live Studio, ScreenStream RTSP)**
    - **Visuals**: Studio control-room aesthetic, deep obsidian (#0E0E12) surfaces, hairline border separation.
    - **Accents**: Studio Cyan (#00E5FF) and Live Ruby (#FF1744) tally glowing badges.
    - **Controls**: Tactile switches, monospace bitrate and FPS telemetry readouts, 5-segment LED VU audio meters.
