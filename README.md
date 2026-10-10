@@ -4,8 +4,8 @@
 
 <p align="center">
   <a href="https://android.com"><img src="https://img.shields.io/badge/Android-13%2B%20(API%2033)-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android 13+"></a>
-  <a href="docs/ARCHITECTURE.md"><img src="https://img.shields.io/badge/Architecture-Pure%20Native%20Java%2FXML-007396?style=for-the-badge&logo=openjdk&logoColor=white" alt="Pure Java/XML"></a>
-  <a href="https://apps.kimrosil.com/"><img src="https://img.shields.io/badge/Apps-31%20Native%20Utilities-00E5FF?style=for-the-badge" alt="31 Native Apps"></a>
+  <a href="docs/ARCHITECTURE.md"><img src="https://img.shields.io/badge/Architecture-Dual%20Java%20%2B%20Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" alt="Dual Java + Kotlin"></a>
+  <a href="https://apps.kimrosil.com/"><img src="https://img.shields.io/badge/Apps-34%20Native%20Utilities-00E5FF?style=for-the-badge" alt="34 Native Apps"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/Privacy-100%25%20Offline%20First-10B981?style=for-the-badge&logo=shield&logoColor=white" alt="100% Offline"></a>
   <a href="SECURITY.md"><img src="https://img.shields.io/badge/Trackers-0%20(Zero)-A855F7?style=for-the-badge" alt="Zero Trackers"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Proprietary%20Freeware-E11D48?style=for-the-badge" alt="Proprietary Freeware"></a>
@@ -26,7 +26,7 @@
 
 ## ⚡ Executive Summary
 
-**KimRosil App Studio** is a curated suite of **31+ bespoke, privacy-first, ultra-lightweight Android applications**. Every utility is built natively using pure Android SDK 33 framework components (**Java + XML**) without heavyweight third-party runtime bloat, analytics spyware, or cloud lock-in.
+**KimRosil App Studio** is a curated suite of **34+ bespoke, privacy-first, ultra-lightweight Android applications**. Every utility is built natively using a high-performance **Dual Java & Kotlin Engine** compiled via Android SDK 33 framework components without heavyweight third-party runtime bloat, analytics spyware, or cloud lock-in.
 
 This repository serves as the **Official Public Distribution Hub, Release Showcase, and Issue Tracker** for the ecosystem. All applications are distributed as **free-to-use proprietary freeware binaries** hosted globally via GitHub Releases CDN and GitHub Pages.
 
@@ -124,6 +124,8 @@ Explore the full directory of applications across 7 core functional domains:
 | <img src="assets/icons/who-has-my-tool-lending.svg" width="48" height="48"> | **WhoHasMy**<br>`who-has-my-tool-lending` | `v1.0.0` | **Tool &amp; Gear Lending Tracker**<br>• Keep track of who borrowed tools and workshop gear<br>• Return due date reminders and contact tags<br>• 100% offline local record | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-who-has-my-tool-lending/who-has-my-tool-lending.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/who-has-my-tool-lending/) |
 | <img src="assets/icons/epoxy-cure-pot-life-sentinel.svg" width="48" height="48"> | **PotLife**<br>`epoxy-cure-pot-life-sentinel` | `v1.0.0` | **Epoxy &amp; Resin Cure Sentinel**<br>• Real-time exothermic pot life countdowns<br>• Mixed mass &amp; workshop temperature compensation<br>• Demold and full mechanical cure tracking | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-epoxy-cure-pot-life-sentinel/epoxy-cure-pot-life-sentinel.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/epoxy-cure-pot-life-sentinel/) |
 | <img src="assets/icons/caulk-bead-skin-sentinel.svg" width="48" height="48"> | **Caulk Bead &amp; Skin Sentinel**<br>`caulk-bead-skin-sentinel` | `v1.0.0` | **Caulk Tooling &amp; Cure Sentinel**<br>• Silicone, acrylic, and polyurethane tooling windows<br>• Temperature and humidity skin-over estimator<br>• Paintable &amp; water-ready countdown alarms | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-caulk-bead-skin-sentinel/caulk-bead-skin-sentinel.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/caulk-bead-skin-sentinel/) |
+| <img src="assets/icons/volt-drop.svg" width="48" height="48"> | **VoltDrop** ⭐ *(Pure Kotlin)*<br>`volt-drop` | `v1.0.0` | **Wire Gauge &amp; Voltage Drop Aide**<br>• Real-time Ohm's law &amp; NEC ampacity engine<br>• Copper vs. Aluminum conductor calculation<br>• 100% offline, zero ads, pre-dex multidex optimized | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-volt-drop/volt-drop.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/volt-drop/) |
+| <img src="assets/icons/grainline.svg" width="48" height="48"> | **GrainLine**<br>`grainline` | `v1.0.0` | **Fabric Yardage &amp; Cut Aide**<br>• Textile yardage &amp; bolt remainder estimator<br>• Offline cutting counter presets<br>• 75 KB ultra-lightweight pure Java APK | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-grainline/grainline.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/grainline/) |
 | <img src="assets/icons/size-vault-family-clothing.svg" width="48" height="48"> | **SizeVault**<br>`size-vault-family-clothing` | `v1.0.0` | **Family Clothing &amp; Shoe Size Guide**<br>• Instant offline lookup for family shoe and clothing sizes<br>• US, UK, EU, and Asian size conversion charts<br>• Gift-shopping quick reference | [⬇ Download APK (CDN)](https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-size-vault-family-clothing/size-vault-family-clothing.apk)<br>[🌐 Web Page](https://apps.kimrosil.com/size-vault-family-clothing/) |
 
 ---

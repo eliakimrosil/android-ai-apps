@@ -412,7 +412,7 @@
     "slug": "sprout-knight-rpg",
     "title": "SproutKnight: Cozy Forest RPG & Magic Forge",
     "category": "Games / RPG / Adventure",
-    "tagline": "Embark on a charming 2D action fighting RPG quest—upgrade acorn blades, walnut armor, and dewdrop magic at the cozy forge.",
+    "tagline": "Embark on a charming 2D action fighting RPG quest\u2014upgrade acorn blades, walnut armor, and dewdrop magic at the cozy forge.",
     "version": "v1.3.0",
     "status": "BUILT",
     "apk_url": "https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.3.0-sprout-knight-rpg/sprout-knight-rpg.apk",
@@ -422,6 +422,40 @@
       "Real-Time 60 FPS Action Fighting",
       "3-Hit Combo & Precision Parry",
       "100% Offline & Pure Native"
+    ]
+  },
+  {
+    "slug": "grainline",
+    "title": "GrainLine: Fabric Yardage & Cut Aide",
+    "category": "Tools & Utilities",
+    "tagline": "Offline textile yardage calculator and pattern layout optimizer for fabric counters and sewing tables.",
+    "version": "v1.0.0",
+    "status": "BUILT",
+    "engine": "Java + XML",
+    "apk_url": "https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-grainline/grainline.apk",
+    "icon_path": "assets/icons/grainline.svg",
+    "web_url": "https://apps.kimrosil.com/grainline/",
+    "features": [
+      "100% Offline",
+      "Bolt Yardage Scanner & Presets",
+      "Pure Native ARM64"
+    ]
+  },
+  {
+    "slug": "volt-drop",
+    "title": "VoltDrop: Wire Gauge & Voltage Aide",
+    "category": "Tools & Utilities / Electrical",
+    "tagline": "Offline wire gauge sizing, continuous ampacity lookup, and voltage loss calculator for solar, RV, marine, and DIY wiring.",
+    "version": "v1.0.0",
+    "status": "BUILT",
+    "engine": "Kotlin + XML",
+    "apk_url": "https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.0.0-volt-drop/volt-drop.apk",
+    "icon_path": "assets/icons/volt-drop.svg",
+    "web_url": "https://apps.kimrosil.com/volt-drop/",
+    "features": [
+      "Pure Native Kotlin (Zero Bloat)",
+      "NEC Ampacity & Voltage Drop Engine",
+      "100% Offline & Instant Telemetry"
     ]
   }
 ]
