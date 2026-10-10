@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <title>KR Live Studio - 100% Offline Android Utility</title>
+    <meta name="description" content="Broadcast your mobile screen, camera, and audio to RTMP live platforms.">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #090D16;
+            color: #F1F5F9;
+            margin: 0;
+            padding: 32px 16px;
+            line-height: 1.65;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: #111827;
+            border: 1px solid #1F2937;
+            border-radius: 20px;
+            padding: 36px 32px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+        }
+        .nav-back {
+            margin-bottom: 20px;
+        }
+        .nav-back a {
+            color: #00E5FF;
+            text-decoration: none;
+            font-size: 13.5px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-back a:hover { text-decoration: underline; }
+        .app-header {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+        .icon-frame {
+            width: 72px;
+            height: 72px;
+            border-radius: 18px;
+            background: #162032;
+            padding: 8px;
+            border: 1px solid #233152;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+        }
+        .icon-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        .app-titles { flex: 1; min-width: 0; }
+        h1 {
+            color: #FFFFFF;
+            margin: 0 0 6px 0;
+            font-size: clamp(20px, 5vw, 26px);
+            font-weight: 800;
+            line-height: 1.25;
+            word-break: break-word;
+        }
+        .tagline {
+            color: #00E5FF;
+            font-weight: 700;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.45;
+        }
+        .badge-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34D399;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .badge-domain {
+            background: rgba(0, 229, 255, 0.1);
+            border: 1px solid rgba(0, 229, 255, 0.3);
+            color: #00E5FF;
+        }
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #00E5FF, #38BDF8);
+            color: #090D16;
+            font-weight: 800;
+            padding: 14px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 14.5px;
+            min-height: 48px;
+            transition: opacity 0.2s, transform 0.1s;
+            box-shadow: 0 4px 16px rgba(0, 229, 255, 0.25);
+            text-align: center;
+            touch-action: manipulation;
+        }
+        .btn:hover { opacity: 0.95; transform: scale(1.01); }
+        .meta-links {
+            display: flex;
+            gap: 16px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+            font-size: 13.5px;
+        }
+        .meta-links a {
+            color: #38BDF8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .meta-links a:hover { text-decoration: underline; color: #00E5FF; }
+        hr { border: 0; border-top: 1px solid #1F2937; margin: 24px 0; }
+        .desc {
+            color: #94A3B8;
+            font-size: 14.5px;
+            line-height: 1.7;
+            word-break: break-word;
+        }
+        .desc p { margin-bottom: 12px; }
+        .footer {
+            margin-top: 36px;
+            border-top: 1px solid #1F2937;
+            padding-top: 20px;
+            font-size: 12.5px;
+            color: #64748B;
+            text-align: center;
+            line-height: 1.8;
+        }
+        .footer a { color: #00E5FF; text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            body { padding: 12px 8px; }
+            .container { padding: 20px 14px; border-radius: 16px; }
+            .app-header { gap: 14px; margin-bottom: 16px; }
+            .icon-frame { width: 56px; height: 56px; border-radius: 14px; padding: 6px; }
+            h1 { font-size: 19px; }
+            .tagline { font-size: 13px; }
+            .btn { width: 100%; min-height: 46px; font-size: 14px; padding: 12px 18px; }
+            .meta-links { flex-direction: column; gap: 8px; text-align: center; }
+            .desc { font-size: 14px; line-height: 1.6; }
+            .footer { margin-top: 24px; padding-top: 16px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-back">
+            <a href="../index.html">← Master Application Catalog</a>
+        </div>
+        <div class="app-header">
+            <div class="icon-frame">
+                <img src="../assets/icons/kim-live-studio.svg" alt="KR Live Studio icon" onerror="this.style.opacity='0.2'">
+            </div>
+            <div class="app-titles">
+                <h1>KR Live Studio</h1>
+                <p class="tagline">Broadcast your mobile screen, camera, and audio to RTMP live platforms.</p>
+            </div>
+        </div>
+        <div class="badge-row">
+            <span class="badge">✓ Google Play Data Safety Certified</span>
+            <span class="badge badge-domain">✓ 100% Offline Native</span>
+        </div>
+        <a class="btn" href="https://github.com/eliakimrosil/kimrosil-app-studio/releases/download/v1.2.0-kim-live-studio/kr-live-studio.apk">⬇ Download APK (Direct CDN)</a>
+        <div class="meta-links">
+            <a href="privacy.html"><strong>🛡️ Verified Data Safety &amp; Privacy Policy →</strong></a>
+            <a href="../testers.html"><strong>🧪 Join 20-Tester Beta Track →</strong></a>
+        </div>
+        <hr>
+        <div class="desc"><p>KR Live Studio delivers direct live broadcasting from your Android device. Designed for content creators, mobile gamers, and live presenters, KR Live Studio enables you to stream your display, camera overlay, and microphone audio directly to standard RTMP and RTMPS endpoints.</p><p>Direct Ingest Architecture<br>KR Live Studio connects straight to your specified streaming endpoint using hardware-accelerated MediaCodec H.264 video encoding and MediaProjection capture. Because streams transmit directly between your device and your chosen ingest server without third-party cloud intermediaries or relay proxies, your transmission latency is minimized and your broadcast credentials remain secure.</p><p>Core Features:<br>• Hardware Video Encoding: MediaCodec H.264/AVC processing engineered for efficient real-time compression and battery balance.<br>• Direct RTMP & RTMPS Protocol: Native streaming engine supporting standard port 1935 and TLS-encrypted port 443 endpoints.<br>• Dual Video Presentation: Broadcast full-screen gameplay or mobile apps with an optional draggable camera overlay.<br>• Flexible Audio Capture: Clean microphone commentary recording with configurable audio parameters.<br>• Quick Preset Switching: Fast configuration profiles for major live platforms and custom RTMP endpoints.<br>• Real-Time Telemetry: On-screen monitoring of live uptime, current bitrate output, FPS, and dropped frames.<br>• Tactile Controls: Clear bitrate adjustments, resolution selection (1080p, 720p, 480p), and visual audio VU indicators.</p><p>Permissions & Usage:<br>• Screen Capture (MediaProjection): Required to capture display content during active broadcasts.<br>• Microphone (RECORD_AUDIO): Required to record microphone commentary for your stream.<br>• Camera (CAMERA): Optional permission used only when you enable the picture-in-picture facecam overlay.<br>• Display Over Other Apps: Optional permission used to show the floating camera preview while navigating other apps.</p><p>Privacy & Data Safety:<br>• Direct Connection Only: Video and audio packets flow directly to your designated RTMP server. No third-party proxy or intermediary server is used.<br>• Zero Data Harvesting: No personal identifiable information (PII), stream keys, or device identifiers are collected or tracked.<br>• No Account Required: Full functionality without accounts, sign-ups, or subscriptions.<br>• Sandboxed Local Storage: All preferences and stream settings are saved securely on your local device.</p></div>
+        <div class="footer">
+            <p>100% Offline Freeware &bull; Zero Trackers &bull; Pure Native Android</p>
+            <p><a href="../index.html">← View All Applications</a> &bull; <a href="../privacy.html">Developer Privacy Policy</a> &bull; <a href="https://github.com/eliakimrosil/kimrosil-app-studio">GitHub Repository</a></p>
+        </div>
+    </div>
+</body>
+</html>
